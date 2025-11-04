@@ -44,6 +44,7 @@
     "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "build:lib": "tsc -p tsconfig.lib.json",
+    "prepare": "npm run build:lib",
     "prepublishOnly": "npm run build:lib",
     "start": "next start",
     "lint": "next lint"
