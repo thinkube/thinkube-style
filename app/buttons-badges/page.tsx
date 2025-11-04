@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
 import { TkBadge, TkSuccessBadge, TkWarningBadge, TkErrorBadge } from "@/components/buttons-badges";
@@ -20,7 +20,7 @@ export default function ButtonsBadgesPage() {
   };
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Buttons & Badges"
       description="All button variants, sizes, and badge styles from your DaisyUI inventory"
     >
@@ -199,6 +199,6 @@ export default function ButtonsBadgesPage() {
           </div>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
 import { TkDropdownMenu, TkTabs, TkBreadcrumbs } from "@/components/navigation";
@@ -8,7 +8,7 @@ import { ChevronDown, User, Settings, LogOut, FileText, HelpCircle, Home, Refres
 
 export default function NavigationPage() {
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Navigation & Menus"
       description="Navigation patterns, dropdown menus, and tabs"
     >
@@ -284,6 +284,6 @@ export default function NavigationPage() {
           </TkCardContent>
         </TkCard>
       </div>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

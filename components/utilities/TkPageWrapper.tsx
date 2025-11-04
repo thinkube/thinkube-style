@@ -1,6 +1,11 @@
+/*
+ * Copyright 2025 Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { ReactNode } from "react";
 
-export function PageWrapper({
+export function TkPageWrapper({
   children,
   title,
   description,

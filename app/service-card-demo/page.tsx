@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge } from "@/components/buttons-badges";
 import { TkButton } from "@/components/buttons-badges";
@@ -16,7 +16,7 @@ export default function ServiceCardDemoPage() {
   const [redisEnabled, setRedisEnabled] = useState(false);
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Service TkCard Demo"
       description="Realistic service cards matching your current Thinkube applications"
     >
@@ -166,6 +166,6 @@ export default function ServiceCardDemoPage() {
           </div>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

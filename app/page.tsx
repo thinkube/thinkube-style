@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge } from "@/components/buttons-badges";
 import { CheckCircle2, Package, Palette, Zap } from "lucide-react";
@@ -37,7 +37,7 @@ export default function Home() {
   ];
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Thinkube Style Guide"
       description="React + shadcn/ui component showcase for migrating from Vue + DaisyUI"
     >
@@ -132,6 +132,6 @@ export default function Home() {
           </div>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

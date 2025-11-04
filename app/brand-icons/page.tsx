@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBrandIcon } from "@/components/brand-icons";
 import { useTheme } from "next-themes";
@@ -39,7 +39,7 @@ export default function BrandIconsPage() {
   ];
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Thinkube Brand Icons"
       description="Your custom brand iconography with light and dark mode support"
     >
@@ -169,6 +169,6 @@ export default function BrandIconsPage() {
           </div>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

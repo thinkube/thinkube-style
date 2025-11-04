@@ -1,6 +1,6 @@
 "use client"
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardFooter, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge, TkSuccessBadge, TkErrorBadge } from "@/components/buttons-badges";
 import { TkButton } from "@/components/buttons-badges";
@@ -12,7 +12,7 @@ import { Activity, Database, Cpu, HardDrive, Users, Server, Zap } from "lucide-r
 
 export default function CardsDataPage() {
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="TkCards & Data Display"
       description="TkCards, tables, stats, and data presentation components"
     >
@@ -321,6 +321,6 @@ export default function CardsDataPage() {
           </TkCardContent>
         </TkCard>
       </div>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

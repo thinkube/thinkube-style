@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardHeader, TkCardTitle, TkCardDescription } from "@/components/cards-data";
 import { TkProgress, TkInfoAlert, TkSuccessAlert, TkWarningAlert, TkErrorAlert } from "@/components/feedback";
 import { TkButton } from "@/components/buttons-badges";
@@ -27,7 +27,7 @@ export default function FeedbackPage() {
   };
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Feedback Components"
       description="Alerts, progress indicators, and loading states"
     >
@@ -269,6 +269,6 @@ export default function FeedbackPage() {
           </TkCard>
         </div>
       </div>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

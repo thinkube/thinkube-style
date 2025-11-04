@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
 import { Check, Loader2, Circle } from "lucide-react";
@@ -57,7 +57,7 @@ export default function InstallationProgressDemo() {
   const totalSteps = installationSteps.length;
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Installation Progress Indicators"
       description="Compact progress indicators for multi-step processes like Ansible playbook execution"
     >
@@ -329,6 +329,6 @@ export default function InstallationProgressDemo() {
           </div>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

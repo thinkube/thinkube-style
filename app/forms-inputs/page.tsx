@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkInput, TkTextarea, TkLabel, TkCheckbox, TkRadioGroup, TkRadioGroupItem, TkSwitch, TkPasswordInput } from "@/components/forms-inputs";
 import { TkSelect, TkSelectContent, TkSelectGroup, TkSelectItem, TkSelectLabel, TkSelectTrigger, TkSelectValue } from "@/components/forms-inputs";
@@ -12,7 +12,7 @@ export default function FormsInputsPage() {
   const [serviceEnabled, setServiceEnabled] = useState(true);
 
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Forms & TkInputs"
       description="All form controls, inputs, selects, checkboxes, and switches"
     >
@@ -358,6 +358,6 @@ export default function FormsInputsPage() {
           </form>
         </TkCardContent>
       </TkCard>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }

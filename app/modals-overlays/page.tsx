@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/page-wrapper";
+import { TkPageWrapper } from "@/components/TkTkPageWrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
 import { TkInput, TkLabel, TkTextarea } from "@/components/forms-inputs";
@@ -10,7 +10,7 @@ import { AlertCircle, HelpCircle, Info, Settings, Trash2, Eye } from "lucide-rea
 
 export default function ModalsOverlaysPage() {
   return (
-    <PageWrapper
+    <TkPageWrapper
       title="Modals & Overlays"
       description="Dialogs, modals, tooltips, and overlay components"
     >
@@ -302,6 +302,6 @@ export default function ModalsOverlaysPage() {
           </TkCard>
         </div>
       </div>
-    </PageWrapper>
+    </TkPageWrapper>
   );
 }
