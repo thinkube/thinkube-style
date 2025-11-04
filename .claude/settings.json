@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/alexmc/thinkube-style/.claude/hooks/post-tool-use.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/alexmc/thinkube-style/.claude/hooks/pre-commit.sh",
+            "timeout": 120000
+          }
+        ]
+      }
+    ]
+  }
+}
