@@ -3,5 +3,5 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export { TkSeparator } from "./TkSeparator"
-export { TkAvatar } from "./TkAvatar"
+export { TkSeparator, TkSeparatorRoot } from "./TkSeparator"
+export { TkAvatar, TkAvatarRoot, TkAvatarFallback, TkAvatarImage } from "./TkAvatar"

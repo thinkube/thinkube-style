@@ -14,4 +14,10 @@ export {
   TkDialogTitle,
   TkDialogTrigger
 } from "./TkDialog"
-export { TkTooltip } from "./TkTooltip"
+export {
+  TkTooltip,
+  TkTooltipRoot,
+  TkTooltipContent,
+  TkTooltipProvider,
+  TkTooltipTrigger
+} from "./TkTooltip"

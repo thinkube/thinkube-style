@@ -65,3 +65,12 @@ export function TkDropdownMenu({ trigger, groups, width = "w-56", className = ""
     </DropdownMenu>
   )
 }
+
+// Export DropdownMenu primitives with Tk prefix
+export { DropdownMenu as TkDropdownMenuRoot } from "@/components/ui/dropdown-menu"
+export { DropdownMenuContent as TkDropdownMenuContent } from "@/components/ui/dropdown-menu"
+export { DropdownMenuGroup as TkDropdownMenuGroup } from "@/components/ui/dropdown-menu"
+export { DropdownMenuItem as TkDropdownMenuItem } from "@/components/ui/dropdown-menu"
+export { DropdownMenuLabel as TkDropdownMenuLabel } from "@/components/ui/dropdown-menu"
+export { DropdownMenuSeparator as TkDropdownMenuSeparator } from "@/components/ui/dropdown-menu"
+export { DropdownMenuTrigger as TkDropdownMenuTrigger } from "@/components/ui/dropdown-menu"

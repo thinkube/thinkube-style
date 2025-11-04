@@ -41,3 +41,8 @@ export function TkInfoAlert({ title, children, className = "" }: TkInfoAlertProp
     </Alert>
   )
 }
+
+// Export Alert primitives with Tk prefix
+export { Alert as TkAlert } from "@/components/ui/alert"
+export { AlertDescription as TkAlertDescription } from "@/components/ui/alert"
+export { AlertTitle as TkAlertTitle } from "@/components/ui/alert"

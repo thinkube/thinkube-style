@@ -5,5 +5,20 @@
 
 export { TkVerticalNav } from "./TkVerticalNav"
 export { TkBreadcrumbs } from "./TkBreadcrumbs"
-export { TkDropdownMenu } from "./TkDropdownMenu"
-export { TkTabs } from "./TkTabs"
+export {
+  TkDropdownMenu,
+  TkDropdownMenuRoot,
+  TkDropdownMenuContent,
+  TkDropdownMenuGroup,
+  TkDropdownMenuItem,
+  TkDropdownMenuLabel,
+  TkDropdownMenuSeparator,
+  TkDropdownMenuTrigger
+} from "./TkDropdownMenu"
+export {
+  TkTabs,
+  TkTabsRoot,
+  TkTabsContent,
+  TkTabsList,
+  TkTabsTrigger
+} from "./TkTabs"

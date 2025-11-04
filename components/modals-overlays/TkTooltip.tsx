@@ -34,3 +34,9 @@ export function TkTooltip({ children, content, side = "top", className = "" }: T
     </TooltipProvider>
   )
 }
+
+// Export Tooltip primitives with Tk prefix
+export { Tooltip as TkTooltipRoot } from "@/components/ui/tooltip"
+export { TooltipContent as TkTooltipContent } from "@/components/ui/tooltip"
+export { TooltipProvider as TkTooltipProvider } from "@/components/ui/tooltip"
+export { TooltipTrigger as TkTooltipTrigger } from "@/components/ui/tooltip"

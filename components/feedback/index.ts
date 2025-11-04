@@ -5,7 +5,7 @@
 
 export { TkProgress } from "./TkProgress"
 export { TkLoader } from "./TkLoader"
-export { TkInfoAlert } from "./TkInfoAlert"
+export { TkInfoAlert, TkAlert, TkAlertDescription, TkAlertTitle } from "./TkInfoAlert"
 export { TkSuccessAlert } from "./TkSuccessAlert"
 export { TkWarningAlert } from "./TkWarningAlert"
 export { TkErrorAlert } from "./TkErrorAlert"

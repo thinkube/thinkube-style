@@ -47,3 +47,9 @@ export function TkTabs({ tabs, defaultValue, className = "" }: TkTabsProps) {
     </Tabs>
   )
 }
+
+// Export Tabs primitives with Tk prefix
+export { Tabs as TkTabsRoot } from "@/components/ui/tabs"
+export { TabsContent as TkTabsContent } from "@/components/ui/tabs"
+export { TabsList as TkTabsList } from "@/components/ui/tabs"
+export { TabsTrigger as TkTabsTrigger } from "@/components/ui/tabs"

@@ -15,3 +15,6 @@ type TkSeparatorProps = ComponentProps<typeof Separator>
 export function TkSeparator(props: TkSeparatorProps) {
   return <Separator {...props} />
 }
+
+// Export Separator primitive with Tk prefix
+export { Separator as TkSeparatorRoot } from "@/components/ui/separator"

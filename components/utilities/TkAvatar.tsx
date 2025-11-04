@@ -23,3 +23,8 @@ export function TkAvatar({ src, fallback, ...props }: TkAvatarProps) {
     </Avatar>
   )
 }
+
+// Export Avatar primitives with Tk prefix
+export { Avatar as TkAvatarRoot } from "@/components/ui/avatar"
+export { AvatarFallback as TkAvatarFallback } from "@/components/ui/avatar"
+export { AvatarImage as TkAvatarImage } from "@/components/ui/avatar"
