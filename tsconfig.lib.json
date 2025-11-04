@@ -17,11 +17,16 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "baseUrl": "."
   },
   "include": [
     "components/**/*",
-    "lib/**/*"
+    "lib/**/*",
+    "styles/**/*"
   ],
   "exclude": [
     "node_modules",
