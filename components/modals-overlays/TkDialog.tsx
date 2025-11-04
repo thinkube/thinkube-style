@@ -15,6 +15,15 @@ import {
 import { Button } from "@/components/ui/button"
 import { ReactNode } from "react"
 
+// Export Tk-prefixed primitives for direct use
+export { Dialog as TkDialogRoot } from "@/components/ui/dialog"
+export { DialogContent as TkDialogContent } from "@/components/ui/dialog"
+export { DialogDescription as TkDialogDescription } from "@/components/ui/dialog"
+export { DialogFooter as TkDialogFooter } from "@/components/ui/dialog"
+export { DialogHeader as TkDialogHeader } from "@/components/ui/dialog"
+export { DialogTitle as TkDialogTitle } from "@/components/ui/dialog"
+export { DialogTrigger as TkDialogTrigger } from "@/components/ui/dialog"
+
 interface TkDialogProps {
   trigger: ReactNode
   title: string

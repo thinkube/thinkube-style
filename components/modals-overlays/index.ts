@@ -3,5 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export { TkDialog, TkConfirmDialog } from "./TkDialog"
+export {
+  TkDialog,
+  TkConfirmDialog,
+  TkDialogRoot,
+  TkDialogContent,
+  TkDialogDescription,
+  TkDialogFooter,
+  TkDialogHeader,
+  TkDialogTitle,
+  TkDialogTrigger
+} from "./TkDialog"
 export { TkTooltip } from "./TkTooltip"
