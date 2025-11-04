@@ -1,3 +1,5 @@
+"use client"
+
 import { PageWrapper } from "@/components/page-wrapper";
 import { TkCard, TkCardContent, TkCardDescription, TkCardFooter, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge, TkSuccessBadge, TkErrorBadge } from "@/components/buttons-badges";
@@ -5,8 +7,8 @@ import { TkButton } from "@/components/buttons-badges";
 import { TkSeparator } from "@/components/utilities";
 import { TkTable, TkTableBody, TkTableCell, TkTableHead, TkTableHeader, TkTableRow } from "@/components/tables";
 import { TkAvatar } from "@/components/utilities";
-import { TkStatsCard, TkHighlightCard } from "@/components/cards-data";
-import { Activity, Database, Cpu, HardDrive } from "lucide-react";
+import { TkStatsCard, TkStatCard, TkHighlightCard } from "@/components/cards-data";
+import { Activity, Database, Cpu, HardDrive, Users, Server, Zap } from "lucide-react";
 
 export default function CardsDataPage() {
   return (
@@ -83,6 +85,65 @@ export default function CardsDataPage() {
             value="156"
             description="+8 in last hour"
             icon={Activity}
+          />
+        </div>
+      </div>
+
+      {/* TkStatCard with Trends */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-heading font-semibold mb-4">TkStatCard with Trends</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <TkStatCard
+            title="Active Users"
+            value="2,543"
+            description="Total registered users"
+            icon={Users}
+            trend={{ value: 12, direction: "up", label: "vs last month" }}
+            variant="success"
+          />
+
+          <TkStatCard
+            title="Server Load"
+            value="45%"
+            description="Current capacity"
+            icon={Server}
+            trend={{ value: 8, direction: "down", label: "reduced from peak" }}
+            variant="primary"
+          />
+
+          <TkStatCard
+            title="Response Time"
+            value="124ms"
+            description="Average latency"
+            icon={Zap}
+            trend={{ value: 3, direction: "up", label: "slight increase" }}
+            variant="warning"
+          />
+
+          <TkStatCard
+            title="Error Rate"
+            value="0.03%"
+            description="Last 24 hours"
+            icon={Activity}
+            trend={{ value: 45, direction: "down", label: "major improvement" }}
+            variant="destructive"
+          />
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4 mt-4">
+          <TkStatCard
+            title="Database Size"
+            value="847 GB"
+            description="PostgreSQL primary"
+            icon={Database}
+            badge={<TkBadge variant="outline">Growing</TkBadge>}
+          />
+
+          <TkStatCard
+            title="API Calls"
+            value="1.2M"
+            description="This month"
+            trend={{ value: 0, direction: "neutral" }}
           />
         </div>
       </div>
