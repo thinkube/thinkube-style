@@ -1,6 +1,6 @@
 "use client";
 
-import { TkPageWrapper } from "@/components/TkTkPageWrapper";
+import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardHeader, TkCardTitle, TkCardDescription } from "@/components/cards-data";
 import { TkProgress, TkInfoAlert, TkSuccessAlert, TkWarningAlert, TkErrorAlert } from "@/components/feedback";
 import { TkButton } from "@/components/buttons-badges";

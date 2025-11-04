@@ -1,4 +1,4 @@
-import { TkPageWrapper } from "@/components/TkTkPageWrapper";
+import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge } from "@/components/buttons-badges";
 import { CheckCircle2, Package, Palette, Zap } from "lucide-react";

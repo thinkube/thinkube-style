@@ -1,6 +1,6 @@
 "use client";
 
-import { TkPageWrapper } from "@/components/TkTkPageWrapper";
+import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBrandIcon } from "@/components/brand-icons";
 import { useTheme } from "next-themes";

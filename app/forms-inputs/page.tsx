@@ -1,6 +1,6 @@
 "use client";
 
-import { TkPageWrapper } from "@/components/TkTkPageWrapper";
+import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkInput, TkTextarea, TkLabel, TkCheckbox, TkRadioGroup, TkRadioGroupItem, TkSwitch, TkPasswordInput } from "@/components/forms-inputs";
 import { TkSelect, TkSelectContent, TkSelectGroup, TkSelectItem, TkSelectLabel, TkSelectTrigger, TkSelectValue } from "@/components/forms-inputs";
