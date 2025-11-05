@@ -15,7 +15,7 @@ export function TkPageWrapper({
   description?: string;
 }) {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8">
+    <div className="container mx-auto px-6 py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-heading font-bold mb-2">{title}</h1>
         {description && (
