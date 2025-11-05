@@ -9,3 +9,5 @@ export { TkInfoAlert, TkAlert, TkAlertDescription, TkAlertTitle } from "./TkInfo
 export { TkSuccessAlert } from "./TkSuccessAlert"
 export { TkWarningAlert } from "./TkWarningAlert"
 export { TkErrorAlert } from "./TkErrorAlert"
+export { TkToaster } from "./TkToaster"
+export { toast } from "./toast"
