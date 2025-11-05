@@ -3,50 +3,21 @@
 import { useState, ReactNode } from "react";
 import { TkVerticalNav } from "./navigation/TkVerticalNav";
 import { ThemeToggle } from "./theme-toggle";
-import { LayoutDashboard, Server, Container, Key, Puzzle, Settings } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-const defaultNavigationItems = [
-  {
-    id: "dashboard",
-    label: "Dashboard",
-    lucideIcon: LayoutDashboard,
-    href: "/dashboard",
-  },
-  {
-    id: "services",
-    label: "Services",
-    lucideIcon: Server,
-    href: "/services",
-  },
-  {
-    id: "harbor",
-    label: "Harbor Images",
-    lucideIcon: Container,
-    href: "/harbor",
-  },
-  {
-    id: "tokens",
-    label: "API Tokens",
-    lucideIcon: Key,
-    href: "/tokens",
-  },
-  {
-    id: "components",
-    label: "Optional Components",
-    lucideIcon: Puzzle,
-    href: "/components",
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    lucideIcon: Settings,
-    href: "/settings",
-  },
-];
+export interface TkNavItem {
+  id: string;
+  label: string;
+  lucideIcon?: LucideIcon;
+  brandIcon?: string;
+  href?: string;
+  isGroup?: boolean;
+  children?: TkNavItem[];
+}
 
 interface TkAppLayoutProps {
   children: ReactNode;
-  navigationItems?: typeof defaultNavigationItems;
+  navigationItems: TkNavItem[];
   activeItem?: string;
   onItemClick?: (id: string) => void;
   logoIcon?: string;
@@ -61,12 +32,12 @@ interface TkAppLayoutProps {
  */
 export function TkAppLayout({
   children,
-  navigationItems = defaultNavigationItems,
+  navigationItems,
   activeItem,
   onItemClick,
   logoIcon = "/icons/tk_logo.svg",
-  logoText = "Thinkube Control",
-  topBarTitle = "Thinkube Control",
+  logoText = "Thinkube",
+  topBarTitle = "Thinkube",
   topBarContent,
 }: TkAppLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
