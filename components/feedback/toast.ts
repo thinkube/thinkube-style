@@ -3,4 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export { toast } from "sonner"
+import { toast } from "sonner"
+
+export const tkToast = toast
