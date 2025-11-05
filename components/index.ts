@@ -42,6 +42,9 @@ export { TkDialog, TkConfirmDialog, TkTooltip } from "./modals-overlays"
 // Navigation - Complex components that don't have circular dependencies
 export { TkVerticalNav, TkBreadcrumbs, TkDropdownMenu, TkTabs } from "./navigation"
 
+// Layout - Application layout wrapper
+export { TkAppLayout } from "./TkAppLayout"
+
 /*
  * COMMENTED OUT: Wrapper components causing circular dependency issues
  * These must be imported directly from their files or category barrel exports
