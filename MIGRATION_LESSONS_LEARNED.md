@@ -317,6 +317,252 @@ useEffect(() => {
 
 ---
 
+### 12. ❌ CRITICAL: Incomplete Feature Migration - Only 3/23 Playbooks Implemented
+**Problem**: Deploy page was migrated with only 3 playbooks out of 23 total playbooks, with the rest as placeholders.
+
+**Impact**:
+- Deploy appeared to work but executed only 13% of required steps
+- No error messages - silent failure
+- User thought deployment was complete
+- Entire installation system broken
+
+**Root Cause**: Didn't check Vue implementation completeness before marking migration "done"
+
+**Example of Incomplete Code**:
+```typescript
+// ❌ INCOMPLETE MIGRATION
+const buildQueue = async (): Promise<Playbook[]> => {
+  const queue: Playbook[] = []
+
+  queue.push({ id: 'env-setup', title: 'Setting up Environment', ... })
+  queue.push({ id: 'python-setup', title: 'Setting up Python', ... })
+  queue.push({ id: 'k8s', title: 'Installing Kubernetes', ... })
+
+  // TODO: Add remaining 20 playbooks
+
+  return queue
+}
+```
+
+**What Was Missing**:
+- Network overlay playbooks (ZeroTier/Tailscale)
+- Worker node join playbooks
+- GPU operator playbooks
+- DNS, CoreDNS, certificates, ingress
+- All core services (PostgreSQL, Keycloak, Harbor, etc.)
+- 20 critical playbooks left as "TODO"
+
+**Fix**: Compare Vue source line-by-line and migrate ALL functionality
+```typescript
+// ✅ COMPLETE MIGRATION
+const buildQueue = async (): Promise<Playbook[]> => {
+  const queue: Playbook[] = []
+
+  // Phase 1: Initial Setup (3 playbooks)
+  queue.push({ id: 'env-setup', ... })
+  queue.push({ id: 'python-setup', ... })
+  queue.push({ id: 'github-cli', ... })
+
+  // Phase 2: Networking (conditional, 1-2 playbooks)
+  if (networkMode === 'overlay') {
+    if (overlayProvider === 'zerotier') {
+      queue.push({ id: 'zerotier-setup', ... })
+    } else if (overlayProvider === 'tailscale') {
+      queue.push({ id: 'tailscale-setup', ... })
+    }
+  }
+
+  // Phase 3: Kubernetes Infrastructure
+  queue.push({ id: 'setup-python-k8s', ... })
+  queue.push({ id: 'k8s', ... })
+
+  // Conditional: Worker nodes
+  if (hasWorkers) {
+    queue.push({ id: 'k8s-join-workers', ... })
+  }
+
+  // Conditional: GPU operator
+  if (needsGPUOperator) {
+    queue.push({ id: 'gpu-operator', ... })
+  }
+
+  // Core infrastructure (9 playbooks)
+  queue.push({ id: 'dns-server', ... })
+  queue.push({ id: 'coredns', ... })
+  queue.push({ id: 'coredns-configure-nodes', ... })
+  queue.push({ id: 'acme-certificates', ... })
+  queue.push({ id: 'ingress', ... })
+  queue.push({ id: 'postgresql', ... })
+  queue.push({ id: 'keycloak', ... })
+  queue.push({ id: 'harbor', ... })
+  // ... ALL remaining playbooks
+
+  return queue  // Total: 23 playbooks
+}
+```
+
+**Files Affected**:
+- `app/deploy/page.tsx:118-324` - buildQueue function
+
+**Prevention**:
+1. Compare line counts (Vue: 450 lines, React: 200 lines ❌ TOO SMALL)
+2. Count array items (Vue: 23 playbooks, React: 3 playbooks ❌ INCOMPLETE)
+3. Check all conditional branches migrated
+4. Search for TODO/FIXME/PLACEHOLDER - should be ZERO
+5. Test all code paths (GPU, workers, network modes)
+
+**Lesson**: NEVER use placeholders or skip features. Incomplete migration creates the illusion of working code that fails silently. Always verify 100% functionality migration. See MIGRATION_COMPLETENESS_RULES.md for detailed checklist.
+
+---
+
+### 13. ❌ CRITICAL: Component Creation in Applications Instead of thinkube-style
+**Problem**: Tendency to create custom UI components directly in applications instead of using or extending thinkube-style components.
+
+**Impact**:
+- Component proliferation across apps
+- Inconsistent design system
+- Lost reusability
+- Each app has different custom components
+- Maintenance nightmare (bug fixes needed in 3 places)
+
+**Examples**:
+```typescript
+// ❌ WRONG - Creating custom component in app
+// frontend/components/CustomModal.tsx
+export function CustomModal({ result }) {
+  return (
+    <div className="fixed inset-0 bg-black/50">
+      <div className="modal-content">
+        {/* Custom modal implementation */}
+      </div>
+    </div>
+  )
+}
+
+// ❌ WRONG - Creating custom button variant in app
+// frontend/components/DestructiveButton.tsx
+export function DestructiveButton({ children, onClick }) {
+  return (
+    <button className="bg-red-500 text-white px-4 py-2" onClick={onClick}>
+      {children}
+    </button>
+  )
+}
+```
+
+**Correct Process**:
+1. Need component → Document requirements
+2. Get approval from project owner
+3. Implement in thinkube-style FIRST
+4. Publish to npm
+5. THEN use in application
+
+```typescript
+// ✅ CORRECT - Use existing thinkube-style component
+import { TkDialog } from "thinkube-style/components/modals-overlays"
+
+<TkDialog open={showResult}>
+  {/* Use existing component */}
+</TkDialog>
+
+// ✅ CORRECT - Use existing button with variant
+import { TkButton } from "thinkube-style/components/buttons-badges"
+
+<TkButton variant="destructive">Delete</TkButton>
+```
+
+**Why This Rule Exists**:
+- **Single source of truth**: One component, not 3 variations
+- **Consistency**: All apps look and behave the same
+- **Maintainability**: Fix bugs in one place
+- **Reusability**: Component available to all apps
+- **Design system integrity**: Enforces design decisions centrally
+
+**Enforcement**:
+- Pre-commit hook checks for new component files in `frontend/components/`
+- Code review must verify all UI uses thinkube-style components
+- No custom className strings that reinvent existing components
+
+**Lesson**: NEVER create UI components in applications. Always implement in thinkube-style first, get approval, publish, then use. See COMPONENT_CREATION_RULES.md for detailed process.
+
+---
+
+### 14. ❌ CRITICAL: Skipping Commented Code During Migration
+**Problem**: Deleting or skipping commented code instead of migrating it with comments preserved.
+
+**Impact**:
+- Lost functionality that will be needed later
+- Have to re-migrate commented code when feature is re-enabled
+- Loss of migration context and intent
+
+**Example from thinkube-control**:
+
+```python
+# Vue backend
+optional_components = [
+    {"name": "jupyterhub", "enabled": True},
+    {"name": "mlflow", "enabled": True},
+    # {"name": "cvat", "enabled": True},  # Temporarily disabled for ARM64 support
+]
+```
+
+**❌ WRONG - Deleting commented code**:
+```python
+# React migration - CVAT code deleted
+optional_components = [
+    {"name": "jupyterhub", "enabled": True},
+    {"name": "mlflow", "enabled": True},
+]
+```
+
+**Impact**:
+- When ARM64 solution is found, cannot easily re-enable CVAT
+- Lost context about why it was disabled
+- Need to re-migrate CVAT component later
+- Wasted effort
+
+**✅ CORRECT - Migrating commented code**:
+```python
+# React migration - Comments and disabled code preserved
+optional_components = [
+    {"name": "jupyterhub", "enabled": True},
+    {"name": "mlflow", "enabled": True},
+    # {"name": "cvat", "enabled": True},  # Temporarily disabled for ARM64 support
+]
+```
+
+**Why Commented Code Must Be Migrated**:
+1. **Platform-specific code**: Linux vs Windows vs macOS features
+2. **Temporary disablement**: ARM64 support, GPU features, experimental features
+3. **Conditional features**: Enterprise vs community, paid vs free
+4. **Future features**: Marked with TODO but implementation exists
+
+**When ARM64 Solution Found**:
+```python
+# Simply uncomment - no re-migration needed!
+optional_components = [
+    {"name": "jupyterhub", "enabled": True},
+    {"name": "mlflow", "enabled": True},
+    {"name": "cvat", "enabled": True},  # Re-enabled with ARM64 support
+]
+```
+
+**How to Identify Commented Code**:
+```bash
+# Find all commented logic in Vue files
+grep -n "/\*.*disabled\|//.*temporary\|//.*TODO\|//.*exclude" src/
+```
+
+**Categories to Migrate**:
+- Temporarily disabled features (CVAT, experimental features)
+- Platform-specific code (GPU, ARM64, x86)
+- Optional features (workers, overlay network, GPU operator)
+- Future features with existing implementation
+
+**Lesson**: Migrate ALL code, including comments and disabled features. They will be uncommented when solutions are available. See MIGRATION_COMPLETENESS_RULES.md Rule #2.
+
+---
+
 ## Checklist for Future Migrations
 
 ### Pre-Migration

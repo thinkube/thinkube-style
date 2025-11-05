@@ -336,6 +336,293 @@ Before declaring migration "complete" for a component:
 
 ---
 
+## Migration Completeness Checks
+
+### Pre-Commit Hook for Completeness
+
+Add to `.git/hooks/pre-commit`:
+
+```bash
+#!/bin/bash
+
+echo "🔍 Checking migration completeness..."
+
+# 1. Check for placeholders
+PLACEHOLDERS=$(grep -rn "TODO\|FIXME\|PLACEHOLDER" app/ components/ lib/ 2>/dev/null | grep -v node_modules || true)
+if [ -n "$PLACEHOLDERS" ]; then
+  echo "❌ Found placeholders in code:"
+  echo "$PLACEHOLDERS"
+  echo ""
+  echo "Remove placeholders and implement complete functionality."
+  echo "See MIGRATION_COMPLETENESS_RULES.md"
+  exit 1
+fi
+
+# 2. Check for custom component files (should use thinkube-style)
+CUSTOM_COMPONENTS=$(find components/ -name "*.tsx" 2>/dev/null | grep -v "index.ts" | grep -v node_modules || true)
+if [ -n "$CUSTOM_COMPONENTS" ]; then
+  echo "⚠️  Found custom component files:"
+  echo "$CUSTOM_COMPONENTS"
+  echo ""
+  echo "UI components should be in thinkube-style, not in app."
+  echo "See COMPONENT_CREATION_RULES.md"
+  echo ""
+  read -p "Are these page-specific utilities (not UI components)? [y/N] " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+  fi
+fi
+
+# 3. Check for commented code deletions (warn only)
+COMMENTED_IN_VUE=$(find ../frontend-vue-backup/src/views -name "*.vue" -exec grep -l "//.*disabled\|//.*temporary\|//.*exclude" {} \; 2>/dev/null | wc -l || echo "0")
+COMMENTED_IN_REACT=$(find app/ -name "*.tsx" -exec grep -l "//.*disabled\|//.*temporary\|//.*exclude" {} \; 2>/dev/null | wc -l || echo "0")
+
+if [ "$COMMENTED_IN_VUE" -gt 0 ] && [ "$COMMENTED_IN_REACT" -eq 0 ]; then
+  echo "⚠️  Warning: Vue source has commented code, but React doesn't"
+  echo "Vue commented files: $COMMENTED_IN_VUE"
+  echo "React commented files: $COMMENTED_IN_REACT"
+  echo ""
+  echo "Did you migrate commented code? (e.g., CVAT for ARM64)"
+  echo "See MIGRATION_COMPLETENESS_RULES.md Rule #2"
+  echo ""
+fi
+
+echo "✅ Completeness checks passed"
+```
+
+Make executable:
+```bash
+chmod +x .git/hooks/pre-commit
+```
+
+### Line Count Comparison Script
+
+Create `scripts/compare-migration.sh`:
+
+```bash
+#!/bin/bash
+
+echo "📊 Migration Completeness Report"
+echo "================================"
+echo ""
+
+VUE_DIR="../frontend-vue-backup/src/views"
+REACT_DIR="app"
+
+if [ ! -d "$VUE_DIR" ]; then
+  echo "❌ Vue source not found at $VUE_DIR"
+  exit 1
+fi
+
+echo "Component Line Count Comparison:"
+echo ""
+printf "%-30s %10s %10s %10s\n" "Component" "Vue" "React" "Diff %"
+printf "%-30s %10s %10s %10s\n" "----------" "----" "-----" "------"
+
+for vue_file in "$VUE_DIR"/*.vue; do
+  filename=$(basename "$vue_file" .vue)
+  vue_lines=$(wc -l < "$vue_file")
+
+  # Try to find corresponding React file
+  react_file=""
+  for pattern in "$filename" "$(echo $filename | tr '[:upper:]' '[:lower:]')" "$(echo $filename | sed 's/\([A-Z]\)/-\1/g' | tr '[:upper:]' '[:lower:]' | sed 's/^-//')"; do
+    if [ -f "$REACT_DIR/$pattern/page.tsx" ]; then
+      react_file="$REACT_DIR/$pattern/page.tsx"
+      break
+    fi
+  done
+
+  if [ -n "$react_file" ] && [ -f "$react_file" ]; then
+    react_lines=$(wc -l < "$react_file")
+    diff_percent=$(echo "scale=1; ($react_lines - $vue_lines) * 100 / $vue_lines" | bc)
+
+    # Color code based on difference
+    if [ $(echo "$diff_percent < -30 || $diff_percent > 30" | bc) -eq 1 ]; then
+      status="⚠️"
+    else
+      status="✅"
+    fi
+
+    printf "%s %-28s %10d %10d %9s%%\n" "$status" "$filename" "$vue_lines" "$react_lines" "$diff_percent"
+  else
+    printf "❌ %-28s %10d %10s %10s\n" "$filename" "$vue_lines" "NOT FOUND" "N/A"
+  fi
+done
+
+echo ""
+echo "Legend:"
+echo "  ✅ Within ±30% (acceptable)"
+echo "  ⚠️  Outside ±30% (review needed)"
+echo "  ❌ Not migrated yet"
+```
+
+Run before marking migration complete:
+```bash
+chmod +x scripts/compare-migration.sh
+./scripts/compare-migration.sh
+```
+
+### Conditional Logic Verification Script
+
+Create `scripts/check-conditionals.sh`:
+
+```bash
+#!/bin/bash
+
+echo "🔀 Checking conditional logic migration..."
+echo ""
+
+VUE_FILE="$1"
+REACT_FILE="$2"
+
+if [ -z "$VUE_FILE" ] || [ -z "$REACT_FILE" ]; then
+  echo "Usage: $0 <vue-file> <react-file>"
+  echo "Example: $0 ../frontend-vue-backup/src/views/Deploy.vue app/deploy/page.tsx"
+  exit 1
+fi
+
+# Count if statements
+vue_ifs=$(grep -c "if.*{" "$VUE_FILE")
+react_ifs=$(grep -c "if.*{" "$REACT_FILE")
+
+echo "Conditional branches:"
+echo "  Vue:   $vue_ifs"
+echo "  React: $react_ifs"
+
+if [ "$vue_ifs" -ne "$react_ifs" ]; then
+  echo "  ⚠️  Counts don't match - review conditional logic"
+else
+  echo "  ✅ Counts match"
+fi
+
+# Count array items (for lists like playbooks, components)
+echo ""
+echo "Checking for array completeness..."
+
+# Find array definitions in Vue
+vue_arrays=$(grep -o "const.*\[" "$VUE_FILE" | grep -v "//" | wc -l)
+echo "  Vue arrays found: $vue_arrays"
+
+# Common patterns to check
+for pattern in "playbooks" "components" "options" "items"; do
+  vue_count=$(grep -c "$pattern.*push\|$pattern\\.push" "$VUE_FILE" 2>/dev/null || echo "0")
+  react_count=$(grep -c "$pattern.*push\|$pattern\\.push" "$REACT_FILE" 2>/dev/null || echo "0")
+
+  if [ "$vue_count" -gt 0 ] || [ "$react_count" -gt 0 ]; then
+    echo ""
+    echo "  Array: $pattern"
+    echo "    Vue:   $vue_count items"
+    echo "    React: $react_count items"
+
+    if [ "$vue_count" -ne "$react_count" ]; then
+      echo "    ⚠️  Counts don't match!"
+    else
+      echo "    ✅ Match"
+    fi
+  fi
+done
+```
+
+Usage:
+```bash
+chmod +x scripts/check-conditionals.sh
+./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/Deploy.vue app/deploy/page.tsx
+```
+
+### Commented Code Verification Script
+
+Create `scripts/check-comments.sh`:
+
+```bash
+#!/bin/bash
+
+echo "💬 Checking commented code migration..."
+echo ""
+
+VUE_DIR="../frontend-vue-backup/src/views"
+REACT_DIR="app"
+
+echo "Files with commented code:"
+echo ""
+printf "%-30s %8s %8s\n" "File" "Vue" "React"
+printf "%-30s %8s %8s\n" "----" "---" "-----"
+
+for vue_file in "$VUE_DIR"/*.vue; do
+  filename=$(basename "$vue_file" .vue)
+
+  # Count commented lines in Vue
+  vue_comments=$(grep -c "//.*disabled\|//.*temporary\|//.*exclude\|/\*.*disabled" "$vue_file" 2>/dev/null || echo "0")
+
+  if [ "$vue_comments" -gt 0 ]; then
+    # Find React file
+    react_file=""
+    for pattern in "$filename" "$(echo $filename | tr '[:upper:]' '[:lower:]')" "$(echo $filename | sed 's/\([A-Z]\)/-\1/g' | tr '[:upper:]' '[:lower:]' | sed 's/^-//')"; do
+      if [ -f "$REACT_DIR/$pattern/page.tsx" ]; then
+        react_file="$REACT_DIR/$pattern/page.tsx"
+        break
+      fi
+    done
+
+    if [ -n "$react_file" ] && [ -f "$react_file" ]; then
+      react_comments=$(grep -c "//.*disabled\|//.*temporary\|//.*exclude\|/\*.*disabled" "$react_file" 2>/dev/null || echo "0")
+
+      if [ "$react_comments" -eq 0 ]; then
+        status="❌ MISSING"
+      elif [ "$react_comments" -lt "$vue_comments" ]; then
+        status="⚠️  PARTIAL"
+      else
+        status="✅"
+      fi
+
+      printf "%s %-28s %8d %8d\n" "$status" "$filename" "$vue_comments" "$react_comments"
+    fi
+  fi
+done
+
+echo ""
+echo "Legend:"
+echo "  ✅ All commented code migrated"
+echo "  ⚠️  Some commented code missing"
+echo "  ❌ No commented code in React (but exists in Vue)"
+echo ""
+echo "See MIGRATION_COMPLETENESS_RULES.md Rule #2"
+```
+
+Usage:
+```bash
+chmod +x scripts/check-comments.sh
+./scripts/check-comments.sh
+```
+
+### Complete Verification Workflow
+
+Run before marking any component "complete":
+
+```bash
+# 1. Line count comparison
+./scripts/compare-migration.sh
+
+# 2. Conditional logic check (for each migrated file)
+./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/YourComponent.vue app/your-component/page.tsx
+
+# 3. Commented code verification
+./scripts/check-comments.sh
+
+# 4. Placeholder check
+grep -rn "TODO\|FIXME\|PLACEHOLDER" app/ components/ lib/
+
+# 5. TypeScript check
+npm run type-check
+
+# 6. Lint check
+npm run lint
+```
+
+All checks must pass before marking component complete.
+
+---
+
 ## Tools to Install
 
 ```bash
