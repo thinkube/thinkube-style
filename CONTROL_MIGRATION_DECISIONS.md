@@ -216,7 +216,60 @@ This document tracks all decisions made during the Control migration planning ph
 
 ---
 
-## 7. Questions for User
+## 7. Deployment Strategy
+
+### Decision: Work in main repository with backup worktree (Option A)
+
+**Context:**
+thinkube-control has complex deployment architecture:
+```
+Copier Template → Gitea → Argo Workflow → Harbor → Webhook → ArgoCD → K8s
+```
+
+Repository name "thinkube-control" is embedded throughout this chain.
+
+**Options Considered:**
+- **Option A:** Backup worktree + work in main repo ✅
+- **Option B:** Branch strategy
+
+**Decision:** Option A - Create backup worktree for reference, migrate in main repo
+
+**Rationale:**
+1. ✅ No deployment pipeline changes needed (keep repo name)
+2. ✅ Easy reference to Vue code during migration (filesystem access)
+3. ✅ Same workflow as installer migration (proven approach)
+4. ✅ Simple cleanup when done (remove worktree)
+5. ✅ Zero risk of breaking Gitea/Argo/Harbor/ArgoCD configuration
+
+**Implementation:**
+```bash
+# Create backup
+git worktree add ../thinkube-control-vue-backup main
+
+# Work in main
+cd /path/to/thinkube-control
+# ... migrate to React ...
+
+# Cleanup when confident
+git worktree remove ../thinkube-control-vue-backup
+```
+
+**Deployment Playbook:**
+- Use `12_deploy_dev.yaml` (incremental update, preserves data)
+- NOT `12_deploy.yaml` (full deployment, drops databases)
+- React migration is frontend-only - no DB changes
+
+**Detailed Documentation:** See `CONTROL_DEPLOYMENT.md`
+
+**Action Items:**
+- [x] Document deployment architecture
+- [x] Document deployment playbooks (12_deploy.yaml vs 12_deploy_dev.yaml)
+- [x] Create deployment checklist
+- [ ] Create backup worktree when ready to start migration
+
+---
+
+## 8. Questions for User
 
 ### Open Questions
 1. What is the realistic timeline expectation for Control migration?
