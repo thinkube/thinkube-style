@@ -91,7 +91,7 @@ frontend/src/
 
 ```
 backend/
-├── app/
+├── src/
 │   ├── api/           (21 endpoints)
 │   ├── services/      (10 service modules)
 │   ├── models/        (11 database models)
@@ -968,7 +968,7 @@ import draggable from 'vuedraggable'
 
 **Migration Impact:**
 - **MEDIUM** - Pattern exists in installer
-- Reference: `/home/alexmc/thinkube-installer-react/frontend/app/components/deploy/package-sections/PackagePriorityList.tsx`
+- Reference: `/home/alexmc/thinkube-installer-react/frontend/src/components/deploy/package-sections/PackagePriorityList.tsx`
 
 ---
 
@@ -1030,7 +1030,7 @@ import { Chart } from 'chart.js'
 | **Heroicons** | ~50+ usages | @heroicons/react | LOW | ✅ YES |
 | **vue-i18n** | ~20 usages | Remove (hardcode) | MEDIUM | ❌ NO |
 | **Pinia** | 6 stores | Zustand | HIGH | ✅ YES |
-| **vue-router** | ~10 routes | Next.js App Router | HIGH | ✅ YES |
+| **vue-router** | ~10 routes | Vite React Router | HIGH | ✅ YES |
 
 ---
 
@@ -1298,7 +1298,7 @@ import { Chart } from 'chart.js'
 
 | Task | Hours |
 |------|-------|
-| Next.js project setup | 4-6 |
+| Vite project setup | 4-6 |
 | shadcn/ui setup | 2-3 |
 | Zustand setup | 2-3 |
 | Routing configuration | 3-4 |
@@ -1378,7 +1378,7 @@ This assumes:
 
 ```
 Priority 1: Setup & Infrastructure
-├── Next.js project scaffolding
+├── Vite project scaffolding
 ├── shadcn/ui setup
 ├── Zustand store configuration
 ├── API client setup
@@ -1825,7 +1825,7 @@ For each Pinia store:
 
 ### Week 1: Foundation Setup (40 hours)
 **Mon-Tue:** Project scaffolding
-- Next.js setup
+- Vite setup
 - shadcn/ui installation
 - Zustand configuration
 - TypeScript configuration

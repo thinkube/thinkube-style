@@ -31,13 +31,11 @@
 ❌ **Don't migrate:**
 - `/node_modules/` (obviously)
 - `.env.local` files (regenerate fresh)
-- Build artifacts (`dist/`, `.next/`, etc.)
+- Build artifacts (`dist/`, etc.)
 - IDE files (`.vscode/`, `.idea/`)
 - Vue-specific files:
-  - `vite.config.js` (create new for Next.js)
   - `vue.config.js`
   - `.vue` files (convert to `.tsx`, then delete originals)
-  - `router/` directory (use Next.js routing)
   - `pinia/stores/` (convert to Zustand, then delete)
 
 ✅ **Do migrate:**
@@ -210,10 +208,10 @@ After migration, manually verify:
 - [ ] No unused Python dependencies
 - [ ] No debug print statements
 - [ ] No hardcoded credentials (use .env)
-- [ ] Remove any frontend-serving code (Next.js handles this now)
+- [ ] Remove any frontend-serving code (Vite handles this now)
 
 ### Configuration Cleanup
-- [ ] `.gitignore` updated for Next.js (`.next/`, etc.)
+- [ ] `.gitignore` updated for Vite (`dist/`, etc.)
 - [ ] `package.json` cleaned (no Vue deps)
 - [ ] `tsconfig.json` for React, not Vue
 - [ ] ESLint config for React, not Vue
@@ -221,7 +219,7 @@ After migration, manually verify:
 
 ### Asset Cleanup
 - [ ] Remove unused icons/images
-- [ ] Optimize large images (use Next.js Image component)
+- [ ] Optimize large images
 - [ ] Remove Vue-specific SVGs if any
 
 ---
@@ -348,7 +346,7 @@ Add to `.git/hooks/pre-commit`:
 echo "🔍 Checking migration completeness..."
 
 # 1. Check for placeholders
-PLACEHOLDERS=$(grep -rn "TODO\|FIXME\|PLACEHOLDER" app/ components/ lib/ 2>/dev/null | grep -v node_modules || true)
+PLACEHOLDERS=$(grep -rn "TODO\|FIXME\|PLACEHOLDER" src/ components/ lib/ 2>/dev/null | grep -v node_modules || true)
 if [ -n "$PLACEHOLDERS" ]; then
   echo "❌ Found placeholders in code:"
   echo "$PLACEHOLDERS"
@@ -376,7 +374,7 @@ fi
 
 # 3. Check for commented code deletions (warn only)
 COMMENTED_IN_VUE=$(find ../frontend-vue-backup/src/views -name "*.vue" -exec grep -l "//.*disabled\|//.*temporary\|//.*exclude" {} \; 2>/dev/null | wc -l || echo "0")
-COMMENTED_IN_REACT=$(find app/ -name "*.tsx" -exec grep -l "//.*disabled\|//.*temporary\|//.*exclude" {} \; 2>/dev/null | wc -l || echo "0")
+COMMENTED_IN_REACT=$(find src/ -name "*.tsx" -exec grep -l "//.*disabled\|//.*temporary\|//.*exclude" {} \; 2>/dev/null | wc -l || echo "0")
 
 if [ "$COMMENTED_IN_VUE" -gt 0 ] && [ "$COMMENTED_IN_REACT" -eq 0 ]; then
   echo "⚠️  Warning: Vue source has commented code, but React doesn't"
@@ -408,7 +406,7 @@ echo "================================"
 echo ""
 
 VUE_DIR="../frontend-vue-backup/src/views"
-REACT_DIR="app"
+REACT_DIR="src"
 
 if [ ! -d "$VUE_DIR" ]; then
   echo "❌ Vue source not found at $VUE_DIR"
@@ -427,8 +425,8 @@ for vue_file in "$VUE_DIR"/*.vue; do
   # Try to find corresponding React file
   react_file=""
   for pattern in "$filename" "$(echo $filename | tr '[:upper:]' '[:lower:]')" "$(echo $filename | sed 's/\([A-Z]\)/-\1/g' | tr '[:upper:]' '[:lower:]' | sed 's/^-//')"; do
-    if [ -f "$REACT_DIR/$pattern/page.tsx" ]; then
-      react_file="$REACT_DIR/$pattern/page.tsx"
+    if [ -f "$REACT_DIR/$pattern.tsx" ]; then
+      react_file="$REACT_DIR/$pattern.tsx"
       break
     fi
   done
@@ -478,7 +476,7 @@ REACT_FILE="$2"
 
 if [ -z "$VUE_FILE" ] || [ -z "$REACT_FILE" ]; then
   echo "Usage: $0 <vue-file> <react-file>"
-  echo "Example: $0 ../frontend-vue-backup/src/views/Deploy.vue app/deploy/page.tsx"
+  echo "Example: $0 ../frontend-vue-backup/src/views/Deploy.vue src/Deploy.tsx"
   exit 1
 fi
 
@@ -527,7 +525,7 @@ done
 Usage:
 ```bash
 chmod +x scripts/check-conditionals.sh
-./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/Deploy.vue app/deploy/page.tsx
+./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/Deploy.vue src/Deploy.tsx
 ```
 
 ### Commented Code Verification Script
@@ -541,7 +539,7 @@ echo "💬 Checking commented code migration..."
 echo ""
 
 VUE_DIR="../frontend-vue-backup/src/views"
-REACT_DIR="app"
+REACT_DIR="src"
 
 echo "Files with commented code:"
 echo ""
@@ -558,8 +556,8 @@ for vue_file in "$VUE_DIR"/*.vue; do
     # Find React file
     react_file=""
     for pattern in "$filename" "$(echo $filename | tr '[:upper:]' '[:lower:]')" "$(echo $filename | sed 's/\([A-Z]\)/-\1/g' | tr '[:upper:]' '[:lower:]' | sed 's/^-//')"; do
-      if [ -f "$REACT_DIR/$pattern/page.tsx" ]; then
-        react_file="$REACT_DIR/$pattern/page.tsx"
+      if [ -f "$REACT_DIR/$pattern.tsx" ]; then
+        react_file="$REACT_DIR/$pattern.tsx"
         break
       fi
     done
@@ -604,13 +602,13 @@ Run before marking any component "complete":
 ./scripts/compare-migration.sh
 
 # 2. Conditional logic check (for each migrated file)
-./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/YourComponent.vue app/your-component/page.tsx
+./scripts/check-conditionals.sh ../frontend-vue-backup/src/views/YourComponent.vue src/YourComponent.tsx
 
 # 3. Commented code verification
 ./scripts/check-comments.sh
 
 # 4. Placeholder check
-grep -rn "TODO\|FIXME\|PLACEHOLDER" app/ components/ lib/
+grep -rn "TODO\|FIXME\|PLACEHOLDER" src/ components/ lib/
 
 # 5. TypeScript check
 npm run type-check

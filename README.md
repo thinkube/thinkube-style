@@ -1,6 +1,6 @@
 # Thinkube Style
 
-A comprehensive React component library and style guide for Thinkube applications, built with Next.js 16 and shadcn/ui.
+A comprehensive React component library and style guide for Thinkube applications, built with Vite 5 and shadcn/ui.
 
 ## 🎯 Purpose
 
@@ -129,7 +129,7 @@ Open [http://localhost:3000](http://localhost:3000) to see all components in act
 
 ## 🏗️ Tech Stack
 
-- **Next.js 16.0.1** - React framework with Turbopack
+- **Vite 5.0.1** - React framework with Turbopack
 - **React 19.2.0** - UI library
 - **Tailwind CSS 4.1** - Utility-first CSS
 - **shadcn/ui** - Component primitives
@@ -140,8 +140,8 @@ Open [http://localhost:3000](http://localhost:3000) to see all components in act
 
 ```
 thinkube-style/
-├── app/                    # Demo application pages
-│   ├── page.tsx           # Homepage
+├── src/                    # Demo application pages
+│   ├── [ComponentName].tsx           # Homepage
 │   ├── buttons-badges/    # Button demos
 │   ├── cards-data/        # Card demos
 │   └── ...                # Other demo pages

@@ -125,7 +125,7 @@ This document maps every DaisyUI component used in thinkube-installer and thinku
 
 | DaisyUI Class | Usage | shadcn/ui Equivalent | Status | Notes |
 |--------------|-------|---------------------|--------|-------|
-| `steps` | Step indicator | Subway Line Progress | ✅ EXISTS | `/app/installation-progress-demo` |
+| `steps` | Step indicator | Subway Line Progress | ✅ EXISTS | `/src/installation-progress-demo` |
 | `step` | Individual step | Progress indicator patterns | ✅ EXISTS | 5 different options available |
 | `step-primary` | Active step | Active state in progress | ✅ EXISTS | Built into progress patterns |
 
@@ -191,7 +191,7 @@ This document maps every DaisyUI component used in thinkube-installer and thinku
 ### ✅ All Required Patterns Available
 1. **Progress/Step Indicators** - ✅ USE EXISTING PATTERNS
    - 5 different progress indicator patterns already available
-   - Location: `/app/installation-progress-demo`
+   - Location: `/src/installation-progress-demo`
    - Choose pattern during migration (recommend Subway Line for installer)
    - **No component** - use implementation patterns
 

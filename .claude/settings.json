@@ -7,16 +7,10 @@
           {
             "type": "command",
             "command": "/home/alexmc/thinkube-style/.claude/hooks/post-tool-use.sh"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
+          },
           {
             "type": "command",
-            "command": "/home/alexmc/thinkube-style/.claude/hooks/pre-commit.sh",
+            "command": "/home/alexmc/thinkube-style/.claude/hooks/validate-code.sh",
             "timeout": 120000
           }
         ]

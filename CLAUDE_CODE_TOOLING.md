@@ -326,7 +326,7 @@ Before declaring tooling "ready":
 ## Next Steps
 
 1. Create worktree (`/home/alexmc/thinkube-installer-react`)
-2. Initialize Next.js + Tauri in worktree
+2. Initialize Vite + React Router in worktree
 3. Create `.claude/skills/` and `.claude/hooks/`
 4. Write the 3 skills (migrate, validate, copy-backend)
 5. Write the 2 hooks (pre-commit, post-tool-use)

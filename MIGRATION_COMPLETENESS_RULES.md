@@ -89,7 +89,7 @@ const buildQueue = async (): Promise<Playbook[]> => {
    # Output: 450 lines
 
    # React migrated
-   wc -l frontend/app/deploy/page.tsx
+   wc -l frontend/src/deploy/[ComponentName].tsx
    # Output: 200 lines  ❌ TOO SMALL - missing functionality!
    ```
 
@@ -105,7 +105,7 @@ const buildQueue = async (): Promise<Playbook[]> => {
 
 4. **Search for Placeholders**
    ```bash
-   grep -r "TODO\|FIXME\|PLACEHOLDER" frontend/app/deploy/
+   grep -r "TODO\|FIXME\|PLACEHOLDER" frontend/src/deploy/
    # Should return ZERO results for completed migration
    ```
 
@@ -272,23 +272,23 @@ Use this checklist for EVERY migrated component:
 
 ```bash
 # 1. Check for placeholders
-grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/app/
+grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/src/
 
 # 2. Compare line counts
 echo "Vue:" && wc -l frontend-vue-backup/src/views/YourComponent.vue
-echo "React:" && wc -l frontend/app/your-component/page.tsx
+echo "React:" && wc -l frontend/src/your-component/[ComponentName].tsx
 
 # 3. Check for commented code
 grep -n "\/\/.*disable\|\/\*.*temporary" frontend-vue-backup/src/views/YourComponent.vue
-grep -n "\/\/.*disable\|\/\*.*temporary" frontend/app/your-component/page.tsx
+grep -n "\/\/.*disable\|\/\*.*temporary" frontend/src/your-component/[ComponentName].tsx
 
 # 4. Count conditional branches
 grep -c "if.*{" frontend-vue-backup/src/views/YourComponent.vue
-grep -c "if.*{" frontend/app/your-component/page.tsx
+grep -c "if.*{" frontend/src/your-component/[ComponentName].tsx
 
 # 5. Count array items (example: playbooks)
 grep -o "id: '" frontend-vue-backup/src/views/Deploy.vue | wc -l
-grep -o "id: '" frontend/app/deploy/page.tsx | wc -l
+grep -o "id: '" frontend/src/deploy/[ComponentName].tsx | wc -l
 ```
 
 ---
@@ -370,7 +370,7 @@ Add to `.git/hooks/pre-commit`:
 echo "Checking for incomplete migrations..."
 
 # Check for placeholders
-PLACEHOLDERS=$(grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/app/ | grep -v node_modules || true)
+PLACEHOLDERS=$(grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/src/ | grep -v node_modules || true)
 if [ -n "$PLACEHOLDERS" ]; then
   echo "❌ Found placeholders in migrated code:"
   echo "$PLACEHOLDERS"

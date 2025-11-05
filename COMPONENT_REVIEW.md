@@ -15,7 +15,7 @@
 
 **Description:** Horizontal top navigation bar with mobile menu
 
-**Current Usage:** AppLayout (vertical sidebar) is used instead in `app/layout.tsx`
+**Current Usage:** AppLayout (vertical sidebar) is used instead in `src/layout.tsx`
 
 **Recommendation:** **DELETE** - This is dead code from before the vertical navigation was implemented
 
@@ -120,7 +120,7 @@ useEffect(() => {
 
 ### 4. ✅ PATTERNS NOT COMPONENTS: Installation Progress Indicators
 
-**Location:** `/app/installation-progress-demo/page.tsx`
+**Location:** `/src/installation-progress-demo/[ComponentName].tsx`
 
 **Status:** Demo patterns, not separate components
 

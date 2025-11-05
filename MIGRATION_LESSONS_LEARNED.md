@@ -11,15 +11,15 @@
 - Missing base URL configuration
 
 **Files Affected**: 9 pages
-- `app/requirements/page.tsx`
-- `app/gpu-driver-check/page.tsx`
-- `app/node-configuration/page.tsx`
-- `app/sudo-password/page.tsx`
-- `app/hardware-detection/page.tsx`
-- `app/configuration/page.tsx`
-- `app/ssh-setup/page.tsx`
-- `app/network-configuration/page.tsx`
-- `app/server-discovery/page.tsx`
+- `src/requirements/[ComponentName].tsx`
+- `src/gpu-driver-check/[ComponentName].tsx`
+- `src/node-configuration/[ComponentName].tsx`
+- `src/sudo-password/[ComponentName].tsx`
+- `src/hardware-detection/[ComponentName].tsx`
+- `src/configuration/[ComponentName].tsx`
+- `src/ssh-setup/[ComponentName].tsx`
+- `src/network-configuration/[ComponentName].tsx`
+- `src/server-discovery/[ComponentName].tsx`
 
 **Fix**:
 ```typescript
@@ -80,7 +80,7 @@ const getBaseURL = () => {
 
 ---
 
-### 5. ❌ Next.js Config Issues for Tauri
+### 5. ❌ Vite Config Issues for Tauri
 **Problem**: Initial config had `assetPrefix: './'` which broke routing.
 
 **Impact**:
@@ -187,7 +187,7 @@ export default function Component() {
 - Invented direct axios POST calls that don't match backend
 
 **Files Affected**:
-- `app/ssh-setup/page.tsx` - completely broken API calls
+- `src/ssh-setup/[ComponentName].tsx` - completely broken API calls
 
 **Root Cause**: Migration agents didn't understand the Vue component architecture and invented a new (non-functional) approach.
 
@@ -228,8 +228,8 @@ playbookExecutorRef.current?.startExecution({
 - User reported seeing UI that never existed in the Vue app
 
 **Files Affected**:
-- `app/node-configuration/page.tsx` (792 lines) - **COMPLETELY HALLUCINATED**
-- `app/role-assignment/page.tsx` - navigated to wrong page
+- `src/node-configuration/[ComponentName].tsx` (792 lines) - **COMPLETELY HALLUCINATED**
+- `src/role-assignment/[ComponentName].tsx` - navigated to wrong page
 
 **Root Cause**:
 - Migration agent scanned `views/` folder and migrated ALL `.vue` files
@@ -237,7 +237,7 @@ playbookExecutorRef.current?.startExecution({
 - The `NodeConfiguration.vue` file existed but was not in `router/index.js`
 
 **Fix**:
-1. Delete the hallucinated page: `rm -rf app/node-configuration`
+1. Delete the hallucinated page: `rm -rf src/node-configuration`
 2. Fix role-assignment navigation: `router.push('/configuration')` not `'/node-configuration'`
 
 **How to Prevent**:
@@ -311,7 +311,7 @@ useEffect(() => {
 ```
 
 **Files Affected**:
-- `app/deploy/page.tsx:509-544` - initialization logic
+- `src/deploy/[ComponentName].tsx:509-544` - initialization logic
 
 **Lesson**: React state updates are asynchronous. NEVER call a function that depends on state immediately after setting that state. Use a separate useEffect with dependencies instead.
 
@@ -402,7 +402,7 @@ const buildQueue = async (): Promise<Playbook[]> => {
 ```
 
 **Files Affected**:
-- `app/deploy/page.tsx:118-324` - buildQueue function
+- `src/deploy/[ComponentName].tsx:118-324` - buildQueue function
 
 **Prevention**:
 1. Compare line counts (Vue: 450 lines, React: 200 lines ❌ TOO SMALL)
@@ -591,13 +591,13 @@ grep -n "/\*.*disabled\|//.*temporary\|//.*TODO\|//.*exclude" src/
 ### Systematic Fixes
 ```bash
 # Fix all axios imports
-find app/ -name "*.tsx" -exec sed -i 's|import axios from "axios"|import axios from "@/utils/axios"|g' {} \;
+find src/ -name "*.tsx" -exec sed -i 's|import axios from "axios"|import axios from "@/utils/axios"|g' {} \;
 
 # Copy public assets
 cp frontend-vue-backup/public/*.svg frontend/public/
 
 # Check for Google Fonts
-grep -r "next/font/google" app/
+grep -r "next/font/google" src/
 
 # Check for window usage without guards
 grep -r "window\." utils/ --include="*.ts" --include="*.tsx"

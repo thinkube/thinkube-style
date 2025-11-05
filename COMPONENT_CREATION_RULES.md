@@ -205,7 +205,7 @@ npm update thinkube-style
 **Only now can you use the component:**
 
 ```typescript
-// frontend/app/layout.tsx
+// frontend/src/layout.tsx
 import { TkAppHeader } from "thinkube-style/components/utilities"
 
 export default function RootLayout({ children }) {
@@ -242,7 +242,7 @@ export default function RootLayout({ children }) {
 ### These can be in applications:
 
 ❌ **Page-Specific Logic:**
-- Page components (e.g., `app/deploy/page.tsx`)
+- Page components (e.g., `src/deploy/[ComponentName].tsx`)
 - Route handlers
 - API integration code
 
@@ -274,7 +274,7 @@ export function ResultModal({ result }) {
 **Correct:**
 Use existing `TkDialog` from thinkube-style:
 ```typescript
-// frontend/app/deploy/page.tsx  ✅
+// frontend/src/deploy/[ComponentName].tsx  ✅
 import { TkDialog } from "thinkube-style/components/modals-overlays"
 
 export default function Deploy() {
@@ -339,7 +339,7 @@ export function StatCard({ title, value, icon }) {
 **Correct:**
 Check if TkCard can be composed to achieve this:
 ```typescript
-// frontend/app/dashboard/page.tsx  ✅
+// frontend/src/dashboard/[ComponentName].tsx  ✅
 import { TkCard, TkCardContent, TkCardHeader } from "thinkube-style/components/cards-data"
 
 <TkCard>
@@ -361,11 +361,11 @@ import { TkCard, TkCardContent, TkCardHeader } from "thinkube-style/components/c
 
 ## Exception: Page Components
 
-Page-level components in `app/` directory are allowed because they are not reusable UI components:
+Page-level components in `src/` directory are allowed because they are not reusable UI components:
 
 **Allowed:**
 ```typescript
-// frontend/app/deploy/page.tsx  ✅
+// frontend/src/deploy/[ComponentName].tsx  ✅
 export default function Deploy() {
   // Page-specific logic and layout
   // Uses thinkube-style components internally

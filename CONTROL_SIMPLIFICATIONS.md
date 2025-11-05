@@ -82,7 +82,7 @@ if (confirm('Delete this service?')) { ... }  // or use AlertDialog
 - Concurrent modal state
 
 **Target State (React):**
-- Separate routes using Next.js App Router
+- Separate routes using Vite React Router
 - `/services/:id` - Service details page
 - `/services/:id/pods/:podName` - Pod details + logs page
 - No nested modals, cleaner architecture

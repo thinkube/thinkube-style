@@ -1,7 +1,7 @@
 # Thinkube Installer Migration Plan
 
 **Date:** 2025-11-03
-**Target:** Migrate thinkube-installer from Vue + Vite + Tauri to Next.js + Tauri
+**Target:** Migrate thinkube-installer from Vue + Vite + Tauri to Vite + Tauri
 
 ---
 
@@ -28,16 +28,16 @@ thinkube-installer/
 ```
 thinkube-installer/
 ├── frontend/
-│   ├── src/               (Next.js + TypeScript - NEW)
-│   ├── app/               (Next.js app router - NEW)
+│   ├── src/               (Vite + TypeScript - NEW)
+│   ├── src/               (Vite app router - NEW)
 │   ├── components/        (React + shadcn/ui - NEW)
 │   ├── lib/               (utilities - NEW)
 │   ├── src-tauri/
 │   │   ├── backend/       (Python FastAPI - UNCHANGED)
 │   │   ├── src/           (Rust Tauri wrapper - MOSTLY UNCHANGED)
 │   │   └── tauri.conf.json (update paths)
-│   ├── package.json       (Next.js dependencies - NEW)
-│   └── next.config.js     (NEW)
+│   ├── package.json       (Vite dependencies - NEW)
+│   └── vite.config.ts     (NEW)
 ├── assets/                (KEEP)
 └── docs/                  (KEEP)
 ```
@@ -48,9 +48,9 @@ thinkube-installer/
 
 ### ✅ Frontend (Complete Rewrite)
 - Vue 3 → React 18
-- Vite → Next.js
+- Vite → Vite
 - DaisyUI → shadcn/ui
-- Vue Router → Next.js App Router
+- Vue Router → Vite React Router
 - Pinia → Zustand (if needed for state)
 
 ### ✅ Components (20 files to migrate)
@@ -58,12 +58,12 @@ See INSTALLER_COMPONENTS.md for full list
 
 ### ❌ Backend (UNCHANGED)
 - `src-tauri/backend/main.py` - Keep as-is
-- `src-tauri/backend/app/` - Keep as-is
+- `src-tauri/backend/src/` - Keep as-is
 - Python dependencies - Keep as-is
 - FastAPI endpoints - Keep as-is
 
 ### ⚠️ Tauri Configuration (Minor Updates)
-- Update `tauri.conf.json` to point to Next.js output
+- Update `tauri.conf.json` to point to Vite output
 - Rust code in `src-tauri/src/` - Minimal changes (if any)
 - Keep Cargo.toml, build scripts unchanged
 
@@ -73,9 +73,9 @@ See INSTALLER_COMPONENTS.md for full list
 
 ### Phase 1: Setup (Current)
 1. ✅ Git worktree created (`thinkube-installer-react`)
-2. ⏭️ Initialize Next.js in worktree
+2. ⏭️ Initialize Vite in worktree
 3. ⏭️ Copy shadcn/ui components from thinkube-style
-4. ⏭️ Configure Tauri to work with Next.js
+4. ⏭️ Configure Tauri to work with Vite
 
 ### Phase 2: Backend Verification
 1. Copy Python backend unchanged
@@ -106,7 +106,7 @@ See INSTALLER_COMPONENTS.md for full list
 
 | Aspect | Installer (Tauri) | Control/Template (Web) |
 |--------|------------------|------------------------|
-| **Routing** | Next.js App Router (SPA mode) | Next.js App Router (SSR) |
+| **Routing** | Vite React Router (SPA mode) | Vite React Router (SSR) |
 | **Backend** | Python FastAPI (bundled) | Python FastAPI (separate server) |
 | **Build Output** | Static export for Tauri | Server-side rendering |
 | **State** | May need Zustand | Context/props sufficient |
@@ -114,14 +114,14 @@ See INSTALLER_COMPONENTS.md for full list
 
 ---
 
-## Tauri + Next.js Integration
+## Tauri + Vite Integration
 
-### next.config.js Configuration
+### vite.config.ts Configuration
 ```js
 module.exports = {
   output: 'export',  // Static export for Tauri
   images: {
-    unoptimized: true  // Tauri doesn't support Next.js image optimization
+    unoptimized: true  // Tauri doesn't support Vite image optimization
   },
   assetPrefix: './',
   trailingSlash: true
@@ -134,8 +134,8 @@ module.exports = {
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:3000",  // Next.js dev server
-    "distDir": "../out"  // Next.js static export output
+    "devPath": "http://localhost:3000",  // Vite dev server
+    "distDir": "../out"  // Vite static export output
   }
 }
 ```
@@ -191,4 +191,4 @@ Python FastAPI serves:
 
 ## Next Action
 
-Initialize Next.js in the worktree with Tauri-compatible configuration.
+Initialize Vite in the worktree with Tauri-compatible configuration.

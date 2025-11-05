@@ -4,7 +4,7 @@
 
 ## Overview
 
-This document outlines the specific plan for migrating thinkube-control from Vue to React/Next.js, focusing on complete functionality migration and proper component usage.
+This document outlines the specific plan for migrating thinkube-control from Vue to React/Vite, focusing on complete functionality migration and proper component usage.
 
 **Context:** Control is a web-based management dashboard for Thinkube clusters with Keycloak authentication, state management, and more complex UI than the installer.
 
@@ -30,12 +30,12 @@ thinkube-control/
 └── k8s/                  (Kubernetes manifests)
 ```
 
-### Target (React + Next.js)
+### Target (React + Vite)
 
 ```
 thinkube-control-react/
 ├── frontend/
-│   ├── app/             (11 Next.js pages)
+│   ├── src/             (11 Vite pages)
 │   ├── components/      (Page-specific utilities ONLY)
 │   ├── stores/          (6 Zustand stores)
 │   ├── lib/             (Utilities, axios config)
@@ -107,11 +107,11 @@ thinkube-control-react/
 grep -c "Modal" frontend/src/views/HarborImages.vue  # Result: 4
 
 # Count React modal/dialog usage
-grep -c "TkDialog\|inline" frontend/app/harbor-images/page.tsx  # Must be: 4
+grep -c "TkDialog\|inline" frontend/src/harbor-images/[ComponentName].tsx  # Must be: 4
 
 # Verify all API endpoints called
 grep -o "axios\." frontend-vue/src/views/HarborImages.vue | wc -l
-grep -o "axios\." frontend/app/harbor-images/page.tsx | wc -l
+grep -o "axios\." frontend/src/harbor-images/[ComponentName].tsx | wc -l
 # Counts should match!
 ```
 
@@ -216,7 +216,7 @@ export function HealthChart({ data }) {
 grep -rn "//.*disabled\|//.*temporary\|//.*TODO" frontend/src/
 
 # Verify same comments exist in React
-grep -rn "//.*disabled\|//.*temporary\|//.*TODO" frontend/app/
+grep -rn "//.*disabled\|//.*temporary\|//.*TODO" frontend/src/
 
 # Counts should match or be explained!
 ```
@@ -323,7 +323,7 @@ export const useServicesStore = create<ServicesState>((set, get) => ({
 ### Using in Components
 
 ```typescript
-// app/services/page.tsx
+// src/services/[ComponentName].tsx
 import { useServicesStore } from '@/stores/useServicesStore'
 
 export default function Services() {
@@ -352,7 +352,7 @@ export default function Services() {
 ### Phase 1: Foundation (Day 1-2)
 
 **Setup:**
-1. Create Next.js project (use installer as template)
+1. Create Vite project (use installer as template)
 2. Copy backend Python code unchanged
 3. Setup Zustand stores (6 stores)
 4. Setup Keycloak auth provider
@@ -375,9 +375,9 @@ export default function Services() {
 4. Auth routes (Login, AuthCallback)
 
 **Files:**
-- `app/layout.tsx` - Root layout with AppLayout
-- `app/login/page.tsx` - Keycloak redirect
-- `app/auth/callback/page.tsx` - OAuth callback
+- `src/layout.tsx` - Root layout with AppLayout
+- `src/login/[ComponentName].tsx` - Keycloak redirect
+- `src/auth/callback/[ComponentName].tsx` - OAuth callback
 - `lib/auth.tsx` - Keycloak provider
 
 **Verification:**
@@ -392,26 +392,26 @@ export default function Services() {
 
 **Pages (in order):**
 
-1. **Dashboard** (`app/dashboard/page.tsx`)
+1. **Dashboard** (`src/dashboard/[ComponentName].tsx`)
    - Stat cards (use TkCard from thinkube-style)
    - Service overview
    - Health status
    - **Completeness:** ALL stats from Vue version
 
-2. **Templates** (`app/templates/page.tsx`)
+2. **Templates** (`src/templates/[ComponentName].tsx`)
    - Template list (TkTable or cards based on count)
    - Template parameter form (dynamic form generation)
    - **Completeness:** ALL template parameters, validation
 
-3. **Secrets** (`app/secrets/page.tsx`)
+3. **Secrets** (`src/secrets/[ComponentName].tsx`)
    - Secret CRUD (TkTable + forms)
    - **Completeness:** All secret types, validation
 
-4. **API Tokens** (`app/tokens/page.tsx`)
+4. **API Tokens** (`src/tokens/[ComponentName].tsx`)
    - Token CRUD (TkTable + actions)
    - **Completeness:** All token scopes, expiration
 
-5. **Optional Components** (`app/components/page.tsx`)
+5. **Optional Components** (`src/components/[ComponentName].tsx`)
    - Component enable/disable (checkboxes + forms)
    - **CRITICAL:** Migrate CVAT commented lines!
    - **Completeness:** ALL components including commented ones
@@ -430,7 +430,7 @@ export default function Services() {
 
 **Complex Pages:**
 
-1. **Harbor Images** (`app/harbor/page.tsx`)
+1. **Harbor Images** (`src/harbor/[ComponentName].tsx`)
    - Main list view
    - 4 modals (decide: keep modal or inline)
    - **AddImageModal:** Form to add custom image
@@ -443,16 +443,16 @@ export default function Services() {
      - [ ] Build logs streaming
      - [ ] All API endpoints called
 
-2. **Health History Chart** (`app/health/page.tsx`)
+2. **Health History Chart** (`src/health/[ComponentName].tsx`)
    - Chart.js or Recharts for historical data
    - Time range selector
    - **Completeness:** ALL chart data points, zoom, export
 
-3. **Image Mirror Deployment** (`app/image-mirror/page.tsx`)
+3. **Image Mirror Deployment** (`src/image-mirror/[ComponentName].tsx`)
    - Mirror configuration
    - **Completeness:** ALL mirror options
 
-4. **JupyterHub Config** (`app/jupyterhub/page.tsx`)
+4. **JupyterHub Config** (`src/jupyterhub/[ComponentName].tsx`)
    - JupyterHub configuration forms
    - **Completeness:** ALL config options
 
@@ -473,26 +473,26 @@ For **EVERY** migrated page:
 ```bash
 # 1. Line Count Check
 wc -l frontend-vue/src/views/YourPage.vue
-wc -l frontend/app/your-page/page.tsx
+wc -l frontend/src/your-page/[ComponentName].tsx
 # Should be within ±20%
 
 # 2. API Call Count
 grep -c "axios\." frontend-vue/src/views/YourPage.vue
-grep -c "axios\." frontend/app/your-page/page.tsx
+grep -c "axios\." frontend/src/your-page/[ComponentName].tsx
 # Should match
 
 # 3. Component Count (modals, cards, buttons)
 grep -c "<.*Modal\|<Card\|<Button" frontend-vue/src/views/YourPage.vue
-grep -c "<Tk.*Dialog\|<TkCard\|<TkButton" frontend/app/your-page/page.tsx
+grep -c "<Tk.*Dialog\|<TkCard\|<TkButton" frontend/src/your-page/[ComponentName].tsx
 # Should match
 
 # 4. Placeholder Check
-grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/app/your-page/
+grep -rn "TODO\|FIXME\|PLACEHOLDER" frontend/src/your-page/
 # Should return ZERO results
 
 # 5. Commented Code Preservation
 grep -c "//.*disabled\|//.*temporary" frontend-vue/src/views/YourPage.vue
-grep -c "//.*disabled\|//.*temporary" frontend/app/your-page/page.tsx
+grep -c "//.*disabled\|//.*temporary" frontend/src/your-page/[ComponentName].tsx
 # Should match
 ```
 
@@ -562,7 +562,7 @@ Before marking Control migration "complete":
 
 | Phase | Duration | Tasks |
 |-------|----------|-------|
-| Setup | 1 day | Next.js, stores, auth, axios |
+| Setup | 1 day | Vite, stores, auth, axios |
 | Layout & Nav | 1 day | AppLayout, login, navigation |
 | Core Pages | 3 days | Dashboard, templates, secrets, tokens, components |
 | Advanced Features | 2-3 days | Harbor (4 modals), charts, mirror, jupyterhub |

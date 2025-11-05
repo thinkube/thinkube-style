@@ -342,7 +342,7 @@ If database changes are needed, options:
 cd /path/to/thinkube-control/backend
 python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-# Frontend (React/Next.js)
+# Frontend (React/Vite)
 cd /path/to/thinkube-control/frontend
 npm run dev
 
@@ -497,7 +497,7 @@ argocd app get thinkube-control
 
 ## Environment Variables
 
-### Frontend (React/Next.js)
+### Frontend (React/Vite)
 
 Required environment variables (`.env.local` or deployment config):
 
