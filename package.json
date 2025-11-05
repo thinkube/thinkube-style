@@ -30,6 +30,11 @@
     "postcss.config.mjs"
   ],
   "exports": {
+    ".": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.js"
+    },
     "./components/*": {
       "types": "./dist/components/*/index.d.ts",
       "import": "./dist/components/*/index.js",
