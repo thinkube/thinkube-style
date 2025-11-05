@@ -43,7 +43,7 @@ Running Control Instance
 
 ### Thinkube Installer Repository
 
-**Location:** `/tmp/thinkube/thinkube-installer`
+**Location:** `/tmp/thinkube-installer`
 
 **Note:** Despite the name "thinkube-installer", this repository contains:
 - Ansible playbooks for deploying ALL Thinkube components
@@ -53,15 +53,34 @@ Running Control Instance
 
 **Structure:**
 ```
-/tmp/thinkube/thinkube-installer/
-├── playbooks/
-│   ├── 12_deploy.yaml         # Full deployment (recreates databases)
-│   └── 12_deploy_dev.yaml     # Incremental update (preserves data)
+/tmp/thinkube-installer/
+├── ansible/
+│   └── 40_thinkube/
+│       └── core/
+│           └── thinkube-control/
+│               ├── 12_deploy.yaml         # Full deployment (recreates databases)
+│               ├── 12_deploy_dev.yaml     # Incremental update (preserves data)
+│               └── 12_deploy_dev_test.yaml # Test variant
 ├── scripts/
 │   └── run_ansible.sh         # Ansible execution wrapper
 └── inventory/
     └── [inventory files]
 ```
+
+**⚠️ SECURITY REQUIREMENT:**
+
+The deployment script requires `ANSIBLE_BECOME_PASSWORD` environment variable:
+
+```bash
+# REQUIRED: Set password before running ansible
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+
+# Then run deployment
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
+```
+
+**NEVER hardcode this password in scripts or documents!**
 
 ---
 
@@ -85,8 +104,11 @@ Running Control Instance
 
 **Command:**
 ```bash
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy.yaml
+# Set password first
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy.yaml
 ```
 
 **⚠️ WARNING:** Destroys all existing data!
@@ -112,8 +134,11 @@ cd /tmp/thinkube/thinkube-installer
 
 **Command:**
 ```bash
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+# Set password first
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 ```
 
 **✅ SAFE:** Preserves user data
@@ -148,8 +173,9 @@ git commit -m "Migrate frontend from Vue to React"
 git push origin main
 
 # 3. Deploy incremental update
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 
 # 4. Verify deployment
 # - Check ArgoCD for sync status
@@ -209,8 +235,9 @@ git commit -m "Complete React migration - frontend production ready"
 git push origin main
 
 # 2. Deploy to production
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 
 # 3. Monitor deployment
 # - Watch ArgoCD sync
@@ -259,8 +286,9 @@ git reset --hard <commit-hash-before-migration>
 git push origin main --force
 
 # 3. Deploy Vue version
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 
 # 4. Verify Vue version restored
 ```
@@ -274,8 +302,9 @@ git commit -m "Rollback to Vue version"
 git push origin main
 
 # Deploy
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 ```
 
 ---
@@ -327,8 +356,9 @@ npm run dev
 
 ```bash
 # Deploy to dev environment
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 
 # Monitor deployment
 kubectl get pods -n thinkube-control -w
@@ -344,10 +374,11 @@ kubectl logs -n thinkube-control -l app=control --tail=100 -f
 
 ```bash
 # Same as dev, but with production inventory
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy.yaml  # Only if DB changes
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy.yaml  # Only if DB changes
 # OR
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml  # For code-only updates
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml  # For code-only updates
 ```
 
 ---
@@ -368,8 +399,9 @@ cd /tmp/thinkube/thinkube-installer
 
 ### Deployment
 
-- [ ] Navigate to `/tmp/thinkube/thinkube-installer`
-- [ ] Run: `./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml`
+- [ ] Navigate to `/tmp/thinkube-installer`
+- [ ] Set password: `export ANSIBLE_BECOME_PASSWORD="your-sudo-password"`
+- [ ] Run: `./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml`
 - [ ] Monitor ArgoCD sync status
 - [ ] Check Harbor for new image
 - [ ] Watch pod restart: `kubectl get pods -n thinkube-control -w`
@@ -496,9 +528,9 @@ Already configured, no changes needed for React migration.
 ./scripts/run_ansible.sh <playbook-path> [ansible-args]
 
 # Examples:
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
-./scripts/run_ansible.sh playbooks/12_deploy.yaml --check  # Dry run
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml -v   # Verbose
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy.yaml --check  # Dry run
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml -v   # Verbose
 ```
 
 **What it does:**
@@ -521,8 +553,9 @@ Already configured, no changes needed for React migration.
 
 **Deployment Command:**
 ```bash
-cd /tmp/thinkube/thinkube-installer
-./scripts/run_ansible.sh playbooks/12_deploy_dev.yaml
+export ANSIBLE_BECOME_PASSWORD="your-sudo-password"
+cd /tmp/thinkube-installer
+./scripts/run_ansible.sh ansible/40_thinkube/core/thinkube-control/12_deploy_dev.yaml
 ```
 
 **Key Benefit:** Zero deployment pipeline changes needed - architecture stays intact!
