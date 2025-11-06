@@ -15,13 +15,13 @@ fi
 
 VIOLATIONS=""
 
-# Check 1: Inline styled elements
-if grep -E 'className="[^"]*\s+(bg-|p-[0-9]|rounded|border)[^"]*"' "$FILE_PATH" | grep -v "@allowed-inline" | grep -q .; then
-  VIOLATIONS="${VIOLATIONS}• Inline styled elements found (use TkCard, TkButton from thinkube-style)\n"
+# Check 1: Inline styled elements (NO ESCAPE HATCH!)
+if grep -E 'className="[^"]*\s+(bg-|p-[0-9]|rounded|border)[^"]*"' "$FILE_PATH" | grep -q .; then
+  VIOLATIONS="${VIOLATIONS}• Inline styled elements found (use TkCard, TkButton, TkCodeBlock from thinkube-style)\n"
 fi
 
-# Check 2: Raw button elements
-if grep '<button' "$FILE_PATH" | grep -v 'TkButton' | grep -v '@allowed-button' | grep -q .; then
+# Check 2: Raw button elements (NO ESCAPE HATCH!)
+if grep '<button' "$FILE_PATH" | grep -v 'TkButton' | grep -q .; then
   VIOLATIONS="${VIOLATIONS}• Raw <button> elements found (use TkButton from thinkube-style)\n"
 fi
 
