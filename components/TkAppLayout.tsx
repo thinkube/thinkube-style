@@ -2,7 +2,6 @@
 
 import { useState, ReactNode } from "react";
 import { TkVerticalNav } from "./navigation/TkVerticalNav";
-import { ThemeToggle } from "./theme-toggle";
 import { LucideIcon } from "lucide-react";
 
 export interface TkNavItem {
@@ -23,6 +22,7 @@ interface TkAppLayoutProps {
   logoIcon?: string;
   logoText?: string;
   topBarTitle?: string;
+  topBarLeftContent?: ReactNode;
   topBarContent?: ReactNode;
 }
 
@@ -38,6 +38,7 @@ export function TkAppLayout({
   logoIcon = "/icons/tk_logo.svg",
   logoText = "Thinkube",
   topBarTitle = "Thinkube",
+  topBarLeftContent,
   topBarContent,
 }: TkAppLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
@@ -63,7 +64,7 @@ export function TkAppLayout({
             <h1 className="text-lg font-semibold">{topBarTitle}</h1>
           </div>
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            {topBarLeftContent}
             {topBarContent}
           </div>
         </header>
