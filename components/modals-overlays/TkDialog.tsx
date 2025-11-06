@@ -118,3 +118,49 @@ export function TkConfirmDialog({
     </Dialog>
   )
 }
+
+interface TkControlledConfirmDialogProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  title: string
+  description: string
+  onConfirm: () => void
+  confirmText?: string
+  cancelText?: string
+  variant?: "default" | "destructive"
+}
+
+/**
+ * TkControlledConfirmDialog - Controlled confirmation dialog for programmatic use
+ * Use this when you need to manage dialog state yourself (e.g., with useState)
+ * Thinkube-approved component from thinkube-style
+ */
+export function TkControlledConfirmDialog({
+  open,
+  onOpenChange,
+  title,
+  description,
+  onConfirm,
+  confirmText = "Continue",
+  cancelText = "Cancel",
+  variant = "default",
+}: TkControlledConfirmDialogProps) {
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => onOpenChange(false)}>
+            {cancelText}
+          </Button>
+          <Button variant={variant} onClick={onConfirm}>
+            {confirmText}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}

@@ -6,6 +6,7 @@
 export {
   TkDialog,
   TkConfirmDialog,
+  TkControlledConfirmDialog,
   TkDialogRoot,
   TkDialogContent,
   TkDialogDescription,
