@@ -5,7 +5,7 @@
 
 import { LucideIcon } from "lucide-react"
 import { TkCard, TkCardHeader, TkCardContent, TkCardFooter } from "@/components/cards-data"
-import { TkBadge, TkButton } from "@/components/buttons-badges"
+import { TkBadge, TkButton, TkGpuBadge } from "@/components/buttons-badges"
 import { TkSwitch } from "@/components/forms-inputs"
 import { TkTooltip } from "@/components/modals-overlays"
 import { TkBrandIcon } from "@/components/brand-icons"
@@ -117,11 +117,7 @@ export function TkServiceCard({
               {badge.label}
             </TkBadge>
           ))}
-          {gpuCount && gpuCount > 0 && (
-            <TkBadge className="text-base px-3 py-1 border-accent/40 bg-accent/10 text-accent font-semibold">
-              {gpuCount} GPU{gpuCount > 1 ? "s" : ""}
-            </TkBadge>
-          )}
+          {gpuCount && gpuCount > 0 && <TkGpuBadge gpuCount={gpuCount} />}
         </div>
 
         {/* Metrics */}

@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
 import { TkInput, TkLabel, TkTextarea } from "@/components/forms-inputs";
-import { TkDialog, TkConfirmDialog, TkTooltip } from "@/components/modals-overlays";
+import { TkDialog, TkConfirmDialog, TkControlledConfirmDialog, TkTooltip } from "@/components/modals-overlays";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { AlertCircle, HelpCircle, Info, Settings, Trash2, Eye } from "lucide-react";
+import { AlertCircle, HelpCircle, Info, Settings, Trash2, Eye, RefreshCw } from "lucide-react";
 
 export default function ModalsOverlaysPage() {
+  const [showRestartDialog, setShowRestartDialog] = useState(false);
+  const [serviceName, setServiceName] = useState("JupyterHub");
   return (
     <TkPageWrapper
       title="Modals & Overlays"
@@ -82,6 +85,35 @@ export default function ModalsOverlaysPage() {
                 variant="destructive"
                 confirmText="Delete"
                 onConfirm={() => {}}
+              />
+            </TkCardContent>
+          </TkCard>
+
+          <TkCard>
+            <TkCardHeader>
+              <TkCardTitle className="text-base">Controlled Dialog</TkCardTitle>
+              <TkCardDescription>Programmatically controlled with state</TkCardDescription>
+            </TkCardHeader>
+            <TkCardContent>
+              <TkButton
+                variant="destructive"
+                onClick={() => setShowRestartDialog(true)}
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Restart {serviceName}
+              </TkButton>
+
+              <TkControlledConfirmDialog
+                open={showRestartDialog}
+                onOpenChange={setShowRestartDialog}
+                title="Restart Service"
+                description={`Are you sure you want to restart ${serviceName}? This will temporarily interrupt the service.`}
+                variant="destructive"
+                confirmText="Restart"
+                onConfirm={() => {
+                  setShowRestartDialog(false);
+                  alert(`${serviceName} restarted!`);
+                }}
               />
             </TkCardContent>
           </TkCard>
