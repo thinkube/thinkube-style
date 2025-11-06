@@ -12,19 +12,22 @@ You are migrating a Vue component from the thinkube-control Vue app to React usi
 ## CRITICAL: Component Migration Rules
 
 **NEVER:**
-- ❌ Use inline styled divs or raw HTML elements with className styling
+- ❌ Use inline styled divs or raw HTML elements with `bg-`, `p-[0-9]`, `rounded`, or `border` classes
+- ❌ Use `@allowed-inline` without explicit user permission
 - ❌ Guess which thinkube-style component to use
-- ❌ Use DaisyUI classes (btn, card, badge, etc.)
+- ❌ Use DaisyUI classes (btn, card, badge, modal, alert, etc.)
 - ❌ Skip validation after creating component
 - ❌ Use components that don't exist in thinkube-style
+- ❌ Create workarounds for missing components without asking user first
 
 **ALWAYS:**
 - ✅ Read the Vue component first
 - ✅ Check COMPONENT_MAPPING.md for DaisyUI → shadcn/ui mappings
-- ✅ Use thinkube-style components exclusively
+- ✅ Use thinkube-style components exclusively (TkCard, TkButton, TkBadge, etc.)
 - ✅ Follow DESIGN_PATTERNS.md patterns
 - ✅ Run validation hook after component creation
-- ✅ Handle missing components properly
+- ✅ **STOP and ask user** if a needed component is missing
+- ✅ **STOP and ask user** if you need to use inline styles (bg-, p-, rounded, border classes)
 
 ## Migration Workflow
 
@@ -137,7 +140,23 @@ export function ComponentName({ prop1, prop2 }: ComponentNameProps) {
 }
 ```
 
-**Note:** Only `min-h-screen`, `bg-background`, `p-*` utility classes are allowed inline with `{/* @allowed-inline */}` comment for page-level layout divs.
+**IMPORTANT: @allowed-inline Usage**
+
+The `@allowed-inline` comment is **ONLY** allowed for page-level layout divs with these specific patterns:
+- `min-h-screen bg-background p-8` (page wrapper)
+- `flex h-screen items-center justify-center` (centered content)
+
+**You MUST ask user permission before using:**
+- Any `border` classes
+- Any `rounded` classes
+- Any `p-[0-9]` padding classes on non-page divs
+- Any `bg-` classes except `bg-background` on page wrapper
+
+**If you need these classes, STOP and ask:**
+"I need to use [specific classes] for [specific purpose]. Should I:
+1. Use an existing TkCard/TkButton component instead?
+2. Request permission to use @allowed-inline?
+3. Create a new thinkube-style component?"
 
 ### Step 7: Validate Component
 
@@ -202,6 +221,24 @@ Navigate to the component in browser and verify:
     <TkCardContent>{item.name}</TkCardContent>
   </TkCard>
 ))}
+```
+
+### Nested/Expandable Content
+**DO NOT use styled divs with border/rounded/padding classes.**
+
+Instead, use TkCard for nested content:
+```typescript
+{/* ❌ WRONG - Don't do this */}
+<div className="border rounded-lg p-3"> {/* Validation will FAIL */}
+  <div className="font-medium">{item.name}</div>
+</div>
+
+{/* ✅ CORRECT - Use TkCard */}
+<TkCard>
+  <TkCardContent>
+    <div className="font-medium">{item.name}</div>
+  </TkCardContent>
+</TkCard>
 ```
 
 ## Store Migration

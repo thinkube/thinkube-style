@@ -11,7 +11,7 @@ export function TkPageWrapper({
   description,
 }: {
   children: ReactNode;
-  title: string;
+  title?: string;
   description?: string;
 }) {
   return (
@@ -23,12 +23,14 @@ export function TkPageWrapper({
       perspective: 1000,
       WebkitPerspective: 1000
     }}>
-      <div className="mb-8">
-        <h1 className="text-4xl font-heading font-bold mb-2">{title}</h1>
-        {description && (
-          <p className="text-lg text-muted-foreground">{description}</p>
-        )}
-      </div>
+      {title && (
+        <div className="mb-8">
+          <h1 className="text-2xl font-heading font-bold mb-2">{title}</h1>
+          {description && (
+            <p className="text-sm text-muted-foreground">{description}</p>
+          )}
+        </div>
+      )}
       {children}
     </div>
   );
