@@ -35,7 +35,7 @@ export function TkAppLayout({
   navigationItems,
   activeItem,
   onItemClick,
-  logoIcon = "/icons/tk_logo.svg",
+  logoIcon = "tk_logo",
   logoText = "Thinkube",
   topBarTitle = "Thinkube",
   topBarLeftContent,
