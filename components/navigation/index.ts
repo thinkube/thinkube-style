@@ -22,3 +22,9 @@ export {
   TkTabsList,
   TkTabsTrigger
 } from "./TkTabs"
+export {
+  TkFolderTabs,
+  TkFolderTabsList,
+  TkFolderTabsTrigger,
+  TkFolderTabsContent
+} from "./TkFolderTabs"

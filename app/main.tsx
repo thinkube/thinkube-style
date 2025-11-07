@@ -12,7 +12,7 @@ import '@fontsource/noto-sans-mono/500.css';
 import '@fontsource/noto-sans-mono/600.css';
 import '@fontsource/noto-sans-mono/700.css';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { TkThemeProvider } from '@/components/theme/theme-provider';
 import { AppLayout } from '@/components/app-layout-router';
 
 // Import all pages
@@ -32,7 +32,7 @@ import TestMinimalPage from './test-minimal/page';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider
+    <TkThemeProvider
       attribute="class"
       defaultTheme="system"
       enableSystem
@@ -57,6 +57,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </Routes>
         </AppLayout>
       </BrowserRouter>
-    </ThemeProvider>
+    </TkThemeProvider>
   </React.StrictMode>
 );

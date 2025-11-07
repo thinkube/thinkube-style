@@ -3,10 +3,14 @@
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkButton } from "@/components/buttons-badges";
-import { TkDropdownMenu, TkTabs, TkBreadcrumbs } from "@/components/navigation";
+import { TkDropdownMenu, TkTabs, TkBreadcrumbs, TkFolderTabs, TkFolderTabsList, TkFolderTabsTrigger, TkFolderTabsContent } from "@/components/navigation";
+import { useState } from "react";
 import { ChevronDown, User, Settings, LogOut, FileText, HelpCircle, Home, RefreshCw, Eye, AlertCircle, StopCircle } from "lucide-react";
 
 export default function NavigationPage() {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [timeRange, setTimeRange] = useState("day");
+
   return (
     <TkPageWrapper
       title="Navigation & Menus"
@@ -252,6 +256,85 @@ export default function NavigationPage() {
                 },
               ]}
             />
+          </TkCardContent>
+        </TkCard>
+      </div>
+
+      {/* Folder-Style Tabs */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-heading font-semibold mb-4">Folder-Style Tabs</h2>
+        <TkCard>
+          <TkCardHeader>
+            <TkCardTitle>Modern Folder Tabs</TkCardTitle>
+            <TkCardDescription>Clean tab pattern where active tab appears "in front" and connects to content</TkCardDescription>
+          </TkCardHeader>
+          <TkCardContent>
+            <TkFolderTabs value={activeTab} onValueChange={setActiveTab}>
+              <TkFolderTabsList>
+                <TkFolderTabsTrigger value="overview">Overview</TkFolderTabsTrigger>
+                <TkFolderTabsTrigger value="metrics">Metrics</TkFolderTabsTrigger>
+                <TkFolderTabsTrigger value="logs">Logs</TkFolderTabsTrigger>
+                <TkFolderTabsTrigger value="settings">Settings</TkFolderTabsTrigger>
+              </TkFolderTabsList>
+              <TkFolderTabsContent value="overview">
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">Service Overview</h3>
+                  <p className="text-sm text-muted-foreground">
+                    View general information, health status, and key metrics at a glance.
+                  </p>
+                </div>
+              </TkFolderTabsContent>
+              <TkFolderTabsContent value="metrics">
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">Performance Metrics</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Monitor CPU, memory, network usage, and other performance indicators.
+                  </p>
+                </div>
+              </TkFolderTabsContent>
+              <TkFolderTabsContent value="logs">
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">Application Logs</h3>
+                  <p className="text-sm text-muted-foreground">
+                    View and search through recent application logs and events.
+                  </p>
+                </div>
+              </TkFolderTabsContent>
+              <TkFolderTabsContent value="settings">
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">Configuration</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Manage service configuration, environment variables, and deployment settings.
+                  </p>
+                </div>
+              </TkFolderTabsContent>
+            </TkFolderTabs>
+          </TkCardContent>
+        </TkCard>
+
+        {/* Time Range Filter Example */}
+        <TkCard className="mt-6">
+          <TkCardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <TkCardTitle>Health History</TkCardTitle>
+                <TkCardDescription>Folder tabs as filter controls (like in Service Details)</TkCardDescription>
+              </div>
+              <TkFolderTabs value={timeRange} onValueChange={setTimeRange}>
+                <TkFolderTabsList>
+                  <TkFolderTabsTrigger value="hour">Last Hour</TkFolderTabsTrigger>
+                  <TkFolderTabsTrigger value="day">Last Day</TkFolderTabsTrigger>
+                  <TkFolderTabsTrigger value="week">Last Week</TkFolderTabsTrigger>
+                </TkFolderTabsList>
+              </TkFolderTabs>
+            </div>
+          </TkCardHeader>
+          <TkCardContent>
+            <div className="h-32 flex items-center justify-center bg-muted rounded-md">
+              <p className="text-sm text-muted-foreground">
+                Health chart for <strong>{timeRange === 'hour' ? 'Last Hour' : timeRange === 'day' ? 'Last Day' : 'Last Week'}</strong>
+              </p>
+            </div>
           </TkCardContent>
         </TkCard>
       </div>

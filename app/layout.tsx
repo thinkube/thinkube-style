@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import { TkThemeProvider as ThemeProvider } from "@/components/theme/theme-provider";
 import { AppLayout } from "@/components/app-layout";
 
 const poppins = Poppins({
