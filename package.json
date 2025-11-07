@@ -24,6 +24,7 @@
   "types": "./dist/components/index.d.ts",
   "files": [
     "dist",
+    "styles.css",
     "README.md",
     "LICENSE",
     "tailwind.config.ts",
@@ -44,7 +45,8 @@
       "types": "./dist/lib/*.d.ts",
       "import": "./dist/lib/*.js",
       "require": "./dist/lib/*.js"
-    }
+    },
+    "./styles.css": "./styles.css"
   },
   "scripts": {
     "dev": "vite",
