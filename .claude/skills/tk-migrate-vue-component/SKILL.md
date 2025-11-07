@@ -1,7 +1,6 @@
 ---
-name: migrate-vue-component
+name: tk-migrate-vue-component
 description: Convert a Vue component to React + shadcn/ui following Thinkube standards. Maps DaisyUI classes to shadcn/ui components per COMPONENT_MAPPING.md and applies DESIGN_PATTERNS.md criteria. MUST BE USED when user asks to migrate, convert, or port a Vue component to React.
-tools: Read, Edit, Write, Grep, Glob, Bash
 model: inherit
 ---
 

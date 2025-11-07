@@ -45,6 +45,17 @@ if grep -E "from ['\"]pinia['\"]" "$FILE_PATH" | grep -q .; then
   VIOLATIONS="${VIOLATIONS}• Pinia imports found (use Zustand)\n"
 fi
 
+# Check 7: Invalid thinkube-style import paths (must use category folders, not /ui/)
+if grep -E "from ['\"]thinkube-style/components/ui/" "$FILE_PATH" | grep -q .; then
+  VIOLATIONS="${VIOLATIONS}• Invalid import path 'thinkube-style/components/ui/*' found (use category folders: buttons-badges, cards-data, forms-inputs, modals-overlays, tables, feedback, etc.)\n"
+fi
+
+# Check 8: Raw shadcn/ui components that should use Tk* prefix
+# Common components that must be prefixed: Dialog, Alert, Table, Button, Card, Input, Label, Select, Switch, Checkbox, etc.
+if grep -E '<(Dialog|Alert|Table|Button|Card|Input|Label|Select|Switch|Checkbox|Badge|Tabs|Tooltip)[^a-zA-Z]' "$FILE_PATH" | grep -v 'Tk' | grep -q .; then
+  VIOLATIONS="${VIOLATIONS}• Raw UI components found (must use Tk* prefix: TkDialog, TkAlert, TkTable, etc.)\n"
+fi
+
 # If violations found, block with structured JSON
 if [ -n "$VIOLATIONS" ]; then
   cat <<EOF
