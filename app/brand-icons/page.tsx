@@ -3,11 +3,11 @@
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBrandIcon } from "@/components/brand-icons";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme-provider";
 import { useEffect, useState } from "react";
 
 export default function BrandIconsPage() {
-  const { theme, resolvedTheme } = useTheme();
+  const { theme, actualTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

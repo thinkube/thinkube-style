@@ -6,7 +6,6 @@
 "use client"
 
 import { ReactNode } from "react"
-import Image from "next/image"
 import { ThemeToggle } from "../theme-toggle"
 
 export interface TkAppHeaderProps {
@@ -27,11 +26,9 @@ export function TkAppHeader({
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
-            <Image
+            <img
               src={logo}
               alt={logoAlt}
-              width={32}
-              height={32}
               className="h-8 w-8"
             />
             <h1 className="text-xl font-bold">{title}</h1>
