@@ -27,6 +27,9 @@
  * 3. Update all consuming code to use the main barrel export
  */
 
+// Theme Provider
+export { ThemeProvider, useTheme } from "./theme-provider"
+
 // Feedback components
 export { TkProgress, TkLoader, TkInfoAlert, TkSuccessAlert, TkWarningAlert, TkErrorAlert } from "./feedback"
 
