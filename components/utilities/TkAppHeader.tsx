@@ -6,7 +6,7 @@
 "use client"
 
 import { ReactNode } from "react"
-import { ThemeToggle } from "../theme-toggle"
+import { TkThemeToggle } from "../theme"
 
 export interface TkAppHeaderProps {
   title?: string
@@ -39,7 +39,7 @@ export function TkAppHeader({
           </div>
 
           <div>
-            <ThemeToggle />
+            <TkThemeToggle />
           </div>
         </div>
       </div>

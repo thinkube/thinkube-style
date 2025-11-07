@@ -20,7 +20,7 @@ interface ThemeProviderProps {
   disableTransitionOnChange?: boolean;
 }
 
-export function ThemeProvider({
+export function TkThemeProvider({
   children,
   defaultTheme = 'system'
 }: ThemeProviderProps) {
@@ -56,10 +56,10 @@ export function ThemeProvider({
   );
 }
 
-export function useTheme() {
+export function useTkTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTkTheme must be used within a TkThemeProvider');
   }
   return context;
 }

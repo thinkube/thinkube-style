@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { ThemeToggle } from "./theme-toggle";
+import { TkThemeToggle } from "./theme";
 
 const navigationItems = [
   {
@@ -170,7 +170,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <h1 className="text-lg font-semibold">Thinkube Style Guide</h1>
           </div>
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <TkThemeToggle />
           </div>
         </header>
 

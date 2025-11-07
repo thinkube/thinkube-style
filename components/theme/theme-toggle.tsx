@@ -1,11 +1,11 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
+import { useTkTheme } from "./theme-provider";
 import { Button } from "@/components/ui/button";
 
-export function ThemeToggle() {
-  const { actualTheme, setTheme } = useTheme();
+export function TkThemeToggle() {
+  const { actualTheme, setTheme } = useTkTheme();
 
   return (
     <Button
