@@ -36,9 +36,9 @@ export function TkHealthChart({
   height = '200px',
 }: TkHealthChartProps) {
   const barWidth = useMemo(() => {
-    const count = data.length
+    const count = data?.length ?? 0
     return count > 0 ? `${100 / count}%` : '0%'
-  }, [data.length])
+  }, [data?.length])
 
   const formatTime = (timestamp: string) => {
     return new Date(timestamp).toLocaleString()
@@ -66,7 +66,7 @@ export function TkHealthChart({
         className="flex items-end gap-0 mb-4"
         style={{ height }}
       >
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <div
             key={index}
             className={cn(
