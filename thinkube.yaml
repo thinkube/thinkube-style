@@ -1,0 +1,19 @@
+apiVersion: thinkube.io/v1
+kind: ThinkubeDeployment
+metadata:
+  name: "{{ project_name }}"
+
+spec:
+  deployment:
+    type: app
+
+  containers:
+    - name: frontend
+      build: .
+      port: 80
+      size: small
+      health: /health
+
+  routes:
+    - path: /
+      to: frontend
