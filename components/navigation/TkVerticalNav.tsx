@@ -5,7 +5,7 @@
 
 "use client"
 
-import { useState, ReactNode } from "react"
+import { useState, useEffect, ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, LucideIcon } from "lucide-react"
 import { TkBrandIcon } from "../brand-icons/TkBrandIcon"
@@ -47,9 +47,27 @@ export function TkVerticalNav({
   className = "",
 }: TkVerticalNavProps) {
   const [internalCollapsed, setInternalCollapsed] = useState(false)
-  const [expandedGroups, setExpandedGroups] = useState<string[]>([])
 
   const isCollapsed = controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed
+
+  // Initialize expanded groups: all groups expanded by default,
+  // and always ensure the group containing the active item is expanded
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(() => {
+    return items.filter((item) => item.isGroup).map((item) => item.id)
+  })
+
+  // Auto-expand the group containing the active item when activeItem changes
+  useEffect(() => {
+    if (!activeItem) return
+    for (const item of items) {
+      if (item.isGroup && item.children) {
+        const hasActiveChild = item.children.some((child) => child.id === activeItem)
+        if (hasActiveChild && !expandedGroups.includes(item.id)) {
+          setExpandedGroups((prev) => [...prev, item.id])
+        }
+      }
+    }
+  }, [activeItem, items])
 
   const handleCollapsedChange = (newCollapsed: boolean) => {
     if (onCollapsedChange) {
@@ -67,7 +85,15 @@ export function TkVerticalNav({
 
   const handleItemClick = (item: TkNavItem) => {
     if (item.isGroup) {
-      toggleGroup(item.id)
+      // If collapsed, expand the sidebar and open the group
+      if (isCollapsed) {
+        handleCollapsedChange(false)
+        setExpandedGroups((prev) =>
+          prev.includes(item.id) ? prev : [...prev, item.id]
+        )
+      } else {
+        toggleGroup(item.id)
+      }
     } else {
       if (onItemClick) {
         onItemClick(item.id)
