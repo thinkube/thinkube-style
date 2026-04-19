@@ -1,0 +1,223 @@
+{
+  "lastUpdated": "2025-11-06T12:01:00Z",
+  "paths": {
+    "vueSource": "/home/alexmc/thinkube-control-vue-backup/frontend/src",
+    "reactDest": "/home/alexmc/thinkube-control/frontend/src"
+  },
+  "components": [
+    {
+      "name": "NavBar",
+      "vuePath": "components/NavBar.vue",
+      "reactPath": "main.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "MainLayout",
+      "vuePath": "layouts/MainLayout.vue",
+      "reactPath": "main.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "ProfileDropdown",
+      "vuePath": "components/ProfileDropdown.vue",
+      "reactPath": "components/UserMenu.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "Dashboard",
+      "vuePath": "views/Dashboard.vue",
+      "reactPath": "pages/DashboardPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "ServiceCard",
+      "vuePath": "components/ServiceCard.vue",
+      "reactPath": "components/ServiceCard.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "FavoriteServiceCard",
+      "vuePath": "components/FavoriteServiceCard.vue",
+      "reactPath": "components/SortableServiceCard.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "DashboardCard",
+      "vuePath": "components/DashboardCard.vue",
+      "reactPath": "pages/DashboardPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "ServiceDetailsModal",
+      "vuePath": "components/ServiceDetailsModal.vue",
+      "reactPath": "pages/ServiceDetailsPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "Login",
+      "vuePath": "views/Login.vue",
+      "reactPath": "pages/LoginPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "AuthCallback",
+      "vuePath": "views/AuthCallback.vue",
+      "reactPath": "pages/AuthCallbackPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T00:00:00Z",
+      "error": null
+    },
+    {
+      "name": "NotFound",
+      "vuePath": "views/NotFound.vue",
+      "reactPath": "pages/NotFoundPage.tsx",
+      "status": "completed",
+      "migratedAt": "2025-11-06T12:01:00Z",
+      "error": null
+    },
+    {
+      "name": "Secrets",
+      "vuePath": "views/Secrets.vue",
+      "reactPath": "pages/SecretsPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "ApiTokens",
+      "vuePath": "views/ApiTokens.vue",
+      "reactPath": "pages/ApiTokensPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "ComponentCard",
+      "vuePath": "components/ComponentCard.vue",
+      "reactPath": "components/ComponentCard.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "JupyterHubConfig",
+      "vuePath": "views/JupyterHubConfig.vue",
+      "reactPath": "pages/JupyterHubConfigPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "OptionalComponents",
+      "vuePath": "views/OptionalComponents.vue",
+      "reactPath": "pages/OptionalComponentsPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "ViewImageModal",
+      "vuePath": "components/harbor/ViewImageModal.vue",
+      "reactPath": "components/harbor/ViewImageModal.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "AddImageModal",
+      "vuePath": "components/harbor/AddImageModal.vue",
+      "reactPath": "components/harbor/AddImageModal.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "CreateCustomImageModal",
+      "vuePath": "components/harbor/CreateCustomImageModal.vue",
+      "reactPath": "components/harbor/CreateCustomImageModal.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "TemplateParameterForm",
+      "vuePath": "components/TemplateParameterForm.vue",
+      "reactPath": "components/TemplateParameterForm.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "PlaybookExecutor",
+      "vuePath": "components/PlaybookExecutor.vue",
+      "reactPath": "components/PlaybookExecutor.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "BuildExecutor",
+      "vuePath": "components/harbor/BuildExecutor.vue",
+      "reactPath": "components/harbor/BuildExecutor.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "HarborImages",
+      "vuePath": "views/HarborImages.vue",
+      "reactPath": "pages/HarborImagesPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "Templates",
+      "vuePath": "views/Templates.vue",
+      "reactPath": "pages/TemplatesPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "ImageMirrorDeployment",
+      "vuePath": "views/ImageMirrorDeployment.vue",
+      "reactPath": "pages/ImageMirrorDeploymentPage.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    },
+    {
+      "name": "HealthHistoryChart",
+      "vuePath": "components/HealthHistoryChart.vue",
+      "reactPath": "components/HealthHistoryChart.tsx",
+      "status": "pending",
+      "migratedAt": null,
+      "error": null
+    }
+  ],
+  "stats": {
+    "total": 26,
+    "completed": 11,
+    "pending": 15,
+    "failed": 0
+  }
+}

@@ -123,7 +123,7 @@ export default function UtilitiesPage() {
                 <span className="text-sm font-medium">Alejandro Martínez</span>
                 <span className="text-xs text-muted-foreground">Owner</span>
               </div>
-              <TkBadge variant="outline" className="ml-auto">Admin</TkBadge>
+              <TkBadge appearance="outlined" className="ml-auto">Admin</TkBadge>
             </div>
           </div>
         </TkCardContent>

@@ -143,7 +143,7 @@ export default function CardsDataPage() {
             value="847 GB"
             description="PostgreSQL primary"
             icon={Database}
-            badge={<TkBadge variant="outline">Growing</TkBadge>}
+            badge={<TkBadge appearance="outlined">Growing</TkBadge>}
           />
 
           <TkStatCard
@@ -171,8 +171,8 @@ export default function CardsDataPage() {
             </TkCardHeader>
             <TkCardContent>
               <div className="flex flex-wrap gap-2 mb-3">
-                <TkBadge variant="outline">Python</TkBadge>
-                <TkBadge variant="outline">Jupyter</TkBadge>
+                <TkBadge appearance="outlined">Python</TkBadge>
+                <TkBadge appearance="outlined">Jupyter</TkBadge>
                 <TkGpuBadge gpuCount={4} size="sm" />
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -198,7 +198,7 @@ export default function CardsDataPage() {
             </TkCardHeader>
             <TkCardContent>
               <div className="flex flex-wrap gap-2 mb-3">
-                <TkBadge variant="outline">Database</TkBadge>
+                <TkBadge appearance="outlined">Database</TkBadge>
                 <TkBadge>Core</TkBadge>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -224,8 +224,8 @@ export default function CardsDataPage() {
             </TkCardHeader>
             <TkCardContent>
               <div className="flex flex-wrap gap-2 mb-3">
-                <TkBadge variant="outline">Cache</TkBadge>
-                <TkBadge variant="secondary">Optional</TkBadge>
+                <TkBadge appearance="outlined">Cache</TkBadge>
+                <TkBadge category="optional">Optional</TkBadge>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <TkStatusIndicator status="unhealthy" size="sm" />
@@ -271,7 +271,7 @@ export default function CardsDataPage() {
                 <TkTableRow>
                   <TkTableCell className="font-medium">worker-01</TkTableCell>
                   <TkTableCell>192.168.1.20</TkTableCell>
-                  <TkTableCell><TkBadge variant="secondary">Worker</TkBadge></TkTableCell>
+                  <TkTableCell><TkBadge appearance="muted">Worker</TkBadge></TkTableCell>
                   <TkTableCell>
                     <TkBadge status="healthy">Active</TkBadge>
                   </TkTableCell>
@@ -279,7 +279,7 @@ export default function CardsDataPage() {
                 <TkTableRow>
                   <TkTableCell className="font-medium">worker-02</TkTableCell>
                   <TkTableCell>192.168.1.21</TkTableCell>
-                  <TkTableCell><TkBadge variant="secondary">GPU Worker</TkBadge></TkTableCell>
+                  <TkTableCell><TkBadge appearance="muted">GPU Worker</TkBadge></TkTableCell>
                   <TkTableCell>
                     <TkBadge status="healthy">Active</TkBadge>
                   </TkTableCell>

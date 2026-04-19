@@ -97,7 +97,7 @@ export default function Home() {
                 className="flex items-center justify-between p-4 border border-border hover:bg-secondary/50 transition-colors"
               >
                 <span className="font-medium">{item.category}</span>
-                <TkBadge variant="outline">{item.count}</TkBadge>
+                <TkBadge appearance="outlined">{item.count}</TkBadge>
               </div>
             ))}
           </div>

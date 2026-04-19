@@ -13,18 +13,12 @@ const intentMap = {
   ghost: "ghost",
 } as const
 
-type TkButtonIntent = keyof typeof intentMap
+export type TkButtonIntent = keyof typeof intentMap
 
 type TkButtonProps = Omit<ComponentProps<typeof Button>, "variant"> & {
   intent?: TkButtonIntent
-  /** @deprecated Use `intent` instead */
-  variant?: ComponentProps<typeof Button>["variant"]
 }
 
-export function TkButton({ intent, variant, ...props }: TkButtonProps) {
-  const resolvedVariant = intent
-    ? intentMap[intent]
-    : variant
-
-  return <Button variant={resolvedVariant} {...props} />
+export function TkButton({ intent = "primary", ...props }: TkButtonProps) {
+  return <Button variant={intentMap[intent]} {...props} />
 }

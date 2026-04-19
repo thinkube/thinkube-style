@@ -11,25 +11,39 @@ const statusMap = {
   unhealthy: "destructive",
   pending: "secondary",
   warning: "warning",
+  active: "default",
 } as const
 
-type TkBadgeStatus = keyof typeof statusMap
+const categoryMap = {
+  core: "default",
+  optional: "secondary",
+  user: "outline",
+} as const
 
-type TkBadgeCategory = "core" | "optional" | "user"
+const appearanceMap = {
+  prominent: "default",
+  muted: "secondary",
+  outlined: "outline",
+} as const
+
+export type TkBadgeStatus = keyof typeof statusMap
+export type TkBadgeCategory = keyof typeof categoryMap
+export type TkBadgeAppearance = keyof typeof appearanceMap
 
 type TkBadgeProps = Omit<ComponentProps<typeof Badge>, "variant"> & {
   status?: TkBadgeStatus
   category?: TkBadgeCategory
-  /** @deprecated Use `status` or `category` instead */
-  variant?: ComponentProps<typeof Badge>["variant"]
+  appearance?: TkBadgeAppearance
 }
 
-export function TkBadge({ status, category, variant, ...props }: TkBadgeProps) {
+export function TkBadge({ status, category, appearance, ...props }: TkBadgeProps) {
   const resolvedVariant = status
     ? statusMap[status]
     : category
-      ? "outline"
-      : variant
+      ? categoryMap[category]
+      : appearance
+        ? appearanceMap[appearance]
+        : "outline"
 
   return <Badge variant={resolvedVariant} {...props} />
 }

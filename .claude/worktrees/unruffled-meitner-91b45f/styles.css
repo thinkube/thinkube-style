@@ -1,0 +1,17 @@
+/* Folder tabs - remove bottom border on active tab */
+.tk-folder-tab[data-state="active"] {
+  border-bottom: none !important;
+  position: relative;
+  z-index: 10;
+}
+
+.tk-folder-tab[data-state="active"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-background);
+  z-index: 11;
+}

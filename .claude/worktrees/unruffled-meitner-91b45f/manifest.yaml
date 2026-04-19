@@ -1,0 +1,11 @@
+apiVersion: thinkube.io/v1
+kind: TemplateManifest
+metadata:
+  name: thinkube-style
+  title: "Thinkube Style Guide"
+  description: Interactive component showcase for the thinkube-style design system. Browse all Tk components with live examples, theme previews, and usage patterns.
+  version: 1.0.0
+  author: Thinkube
+  tags: ["style-guide", "components", "design-system", "reference"]
+
+parameters: []
