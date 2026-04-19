@@ -52,40 +52,38 @@
   --hover-foreground: oklch(100% 0 0);
 }
 
-/* Dark theme — Solarized-style derivation from light tokens.
- * Hue stays constant (H 230 teal tint on neutrals); only lightness mirrors. */
 .dark {
-  --background: oklch(14% 0.025 230);
-  --foreground: oklch(92% 0.015 230);
-  --card: oklch(18% 0.025 230);
-  --card-foreground: oklch(92% 0.015 230);
-  --popover: oklch(18% 0.025 230);
-  --popover-foreground: oklch(92% 0.015 230);
+  --background: oklch(14% 0 0);
+  --foreground: oklch(92% 0 0);
+  --card: oklch(22% 0 0);
+  --card-foreground: oklch(92% 0 0);
+  --popover: oklch(22% 0 0);
+  --popover-foreground: oklch(92% 0 0);
 
   --primary: oklch(62% 0.13 220);
-  --primary-foreground: oklch(14% 0.025 230);
-  --secondary: oklch(22% 0.02 230);
-  --secondary-foreground: oklch(92% 0.015 230);
-  --muted: oklch(22% 0.02 230);
-  --muted-foreground: oklch(70% 0.01 230);
+  --primary-foreground: oklch(14% 0 0);
+  --secondary: oklch(24% 0 0);
+  --secondary-foreground: oklch(92% 0 0);
+  --muted: oklch(24% 0 0);
+  --muted-foreground: oklch(70% 0 0);
   --accent: oklch(74% 0.15 45);
-  --accent-foreground: oklch(14% 0.025 230);
+  --accent-foreground: oklch(14% 0 0);
 
   --destructive: oklch(68% 0.13 25);
-  --destructive-foreground: oklch(14% 0.025 230);
-  --border: oklch(30% 0.02 230);
-  --input: oklch(22% 0.02 230);
+  --destructive-foreground: oklch(14% 0 0);
+  --border: oklch(32% 0 0);
+  --input: oklch(24% 0 0);
   --ring: oklch(62% 0.13 220);
 
   --hover: oklch(62% 0.13 220);
-  --hover-foreground: oklch(14% 0.025 230);
+  --hover-foreground: oklch(14% 0 0);
 
   --success: oklch(68% 0.10 145);
-  --success-foreground: oklch(14% 0.025 230);
+  --success-foreground: oklch(14% 0 0);
   --warning: oklch(78% 0.12 80);
-  --warning-foreground: oklch(14% 0.025 230);
+  --warning-foreground: oklch(14% 0 0);
   --info: oklch(72% 0.10 240);
-  --info-foreground: oklch(14% 0.025 230);
+  --info-foreground: oklch(14% 0 0);
 }
 
 @theme inline {
