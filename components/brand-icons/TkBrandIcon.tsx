@@ -24,7 +24,7 @@ export function TkBrandIcon({ icon, alt, size = 20, className = "" }: TkBrandIco
         className="dark:hidden"
       />
       <img
-        src={`/icons/${icon}_inverted.svg`}
+        src={`/icons/${icon}_white.svg`}
         alt={alt}
         style={{ width: size, height: size }}
         className="hidden dark:block"

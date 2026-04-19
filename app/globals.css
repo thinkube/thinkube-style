@@ -52,38 +52,41 @@
   --hover-foreground: oklch(100% 0 0);
 }
 
+/* Dark theme — Solarized-style derivation from light tokens.
+ * Hue stays constant; only lightness mirrors around the midline.
+ * All neutral surfaces are pure gray (chroma 0) — no blue tint. */
 .dark {
-  --background: oklch(24% 0.06 220); /* Brighter background */
-  --foreground: oklch(98% 0 0); /* Even brighter text */
-  --card: oklch(26% 0.06 220); /* Brighter card */
-  --card-foreground: oklch(98% 0 0);
-  --popover: oklch(26% 0.06 220); /* Brighter popover */
-  --popover-foreground: oklch(98% 0 0);
-  --primary: oklch(60% 0.13 220); /* Brighter teal for dark */
-  --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(38% 0.07 220); /* Much brighter secondary */
-  --secondary-foreground: oklch(98% 0 0);
-  --muted: oklch(38% 0.07 220); /* Much brighter muted */
-  --muted-foreground: oklch(88% 0 0); /* MUCH brighter muted text - was 80%, now 88% */
-  --accent: oklch(75% 0.15 45); /* Warm coral for dark mode */
-  --accent-foreground: oklch(20% 0 0);
-  --destructive: oklch(68% 0.17 25); /* Brighter red for dark mode */
-  --destructive-foreground: oklch(100% 0 0);
-  --border: oklch(52% 0.10 220); /* Much brighter border - was 48%, now 52% */
-  --input: oklch(38% 0.07 220); /* Brighter input */
-  --ring: oklch(60% 0.13 220); /* Brighter ring */
+  --background: oklch(14% 0 0);
+  --foreground: oklch(92% 0 0);
+  --card: oklch(22% 0 0);
+  --card-foreground: oklch(92% 0 0);
+  --popover: oklch(22% 0 0);
+  --popover-foreground: oklch(92% 0 0);
 
-  /* Hover color using light teal */
-  --hover: oklch(50% 0.11 220); /* Light teal for hovers */
-  --hover-foreground: oklch(100% 0 0);
+  --primary: oklch(62% 0.13 220);
+  --primary-foreground: oklch(14% 0 0);
+  --secondary: oklch(24% 0 0);
+  --secondary-foreground: oklch(92% 0 0);
+  --muted: oklch(24% 0 0);
+  --muted-foreground: oklch(70% 0 0);
+  --accent: oklch(74% 0.15 45);
+  --accent-foreground: oklch(14% 0 0);
 
-  /* Professional semantic colors for dark mode - brighter for visibility */
-  --success: oklch(68% 0.14 145); /* Brighter green */
-  --success-foreground: oklch(100% 0 0);
-  --warning: oklch(78% 0.14 75); /* Brighter, more yellow warning */
-  --warning-foreground: oklch(15% 0 0);
-  --info: oklch(70% 0.12 240); /* Brighter blue */
-  --info-foreground: oklch(100% 0 0);
+  --destructive: oklch(68% 0.13 25);
+  --destructive-foreground: oklch(14% 0 0);
+  --border: oklch(32% 0 0);
+  --input: oklch(24% 0 0);
+  --ring: oklch(62% 0.13 220);
+
+  --hover: oklch(62% 0.13 220);
+  --hover-foreground: oklch(14% 0 0);
+
+  --success: oklch(68% 0.10 145);
+  --success-foreground: oklch(14% 0 0);
+  --warning: oklch(78% 0.12 80);
+  --warning-foreground: oklch(14% 0 0);
+  --info: oklch(72% 0.10 240);
+  --info-foreground: oklch(14% 0 0);
 }
 
 @theme inline {
