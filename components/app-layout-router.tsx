@@ -126,7 +126,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   to={item.href || "#"}
                   className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
                     pathname === item.href
-                      ? "bg-secondary text-foreground font-semibold border-l-4 border-l-primary"
+                      ? "bg-secondary text-foreground font-semibold border-l-4 border-l-foreground"
                       : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                   }`}
                 >
@@ -161,7 +161,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                           to={child.href || "#"}
                           className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
                             pathname === child.href
-                              ? "bg-secondary text-foreground font-semibold border-l-4 border-l-primary"
+                              ? "bg-secondary text-foreground font-semibold border-l-4 border-l-foreground"
                               : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                           }`}
                         >
