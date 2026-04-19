@@ -74,14 +74,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           {!collapsed && (
             <div className="flex items-center gap-2">
               <img src="/icons/tk_logo.svg" alt="Thinkube" className="w-8 h-8 dark:hidden" />
-              <img src="/icons/tk_logo_white.svg" alt="Thinkube" className="w-8 h-8 hidden dark:block" />
+              <img src="/icons/tk_logo_inverted.svg" alt="Thinkube" className="w-8 h-8 hidden dark:block" />
               <span className="font-semibold">Thinkube</span>
             </div>
           )}
           {collapsed && (
             <>
               <img src="/icons/tk_logo.svg" alt="Thinkube" className="w-8 h-8 mx-auto dark:hidden" />
-              <img src="/icons/tk_logo_white.svg" alt="Thinkube" className="w-8 h-8 mx-auto hidden dark:block" />
+              <img src="/icons/tk_logo_inverted.svg" alt="Thinkube" className="w-8 h-8 mx-auto hidden dark:block" />
             </>
           )}
         </div>
