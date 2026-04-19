@@ -18,67 +18,64 @@
   --font-poppins: "Poppins", system-ui, -apple-system, sans-serif;
   --font-noto-sans-mono: "Noto Sans Mono", "Courier New", monospace;
 
-  --background: oklch(99% 0.005 75); /* Warm off-white instead of pure white */
-  --foreground: oklch(20% 0 0);
-  --card: oklch(100% 0 0); /* Cards stay pure white for contrast */
-  --card-foreground: oklch(20% 0 0);
-  --popover: oklch(100% 0 0);
-  --popover-foreground: oklch(20% 0 0);
-  --primary: oklch(38% 0.15 220); /* Darker, more saturated teal for light mode */
+  --background: oklch(98.5% 0.01 85);
+  --foreground: oklch(16% 0.01 260);
+  --card: oklch(99.5% 0.005 85);
+  --card-foreground: oklch(16% 0.01 260);
+  --popover: oklch(99.5% 0.005 85);
+  --popover-foreground: oklch(16% 0.01 260);
+  --primary: oklch(40% 0.12 220);
   --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(96% 0.005 220);
-  --secondary-foreground: oklch(20% 0 0);
-  --muted: oklch(96% 0.005 220);
-  --muted-foreground: oklch(50% 0 0);
-  --accent: oklch(65% 0.10 75); /* Yellow-amber accent, not orange */
-  --accent-foreground: oklch(20% 0 0);
-  --destructive: oklch(55% 0.15 25); /* Toned down red */
+  --secondary: oklch(95% 0.01 85);
+  --secondary-foreground: oklch(30% 0.01 260);
+  --muted: oklch(95% 0.01 85);
+  --muted-foreground: oklch(55% 0.01 260);
+  --accent: oklch(95% 0.01 85);
+  --accent-foreground: oklch(30% 0.01 260);
+  --destructive: oklch(55% 0.22 27);
   --destructive-foreground: oklch(100% 0 0);
-  --border: oklch(90% 0.005 220);
-  --input: oklch(90% 0.005 220);
-  --ring: oklch(42% 0.12 220);
+  --border: oklch(92% 0.01 85);
+  --input: oklch(92% 0.01 85);
+  --ring: oklch(40% 0.12 220);
   --radius: 0rem;
 
-  /* Professional semantic colors */
-  --success: oklch(50% 0.12 145); /* Muted green */
-  --success-foreground: oklch(98% 0 0);
-  --warning: oklch(65% 0.12 80); /* Muted amber */
-  --warning-foreground: oklch(20% 0 0);
-  --info: oklch(55% 0.10 240); /* Muted blue */
-  --info-foreground: oklch(98% 0 0);
+  --success: oklch(52% 0.17 152);
+  --success-foreground: oklch(100% 0 0);
+  --warning: oklch(78% 0.16 75);
+  --warning-foreground: oklch(25% 0.02 75);
+  --info: oklch(55% 0.15 250);
+  --info-foreground: oklch(100% 0 0);
 }
 
 .dark {
-  --background: oklch(24% 0.06 220); /* Brighter background */
-  --foreground: oklch(98% 0 0); /* Even brighter text */
-  --card: oklch(26% 0.06 220); /* Brighter card */
-  --card-foreground: oklch(98% 0 0);
-  --popover: oklch(26% 0.06 220); /* Brighter popover */
-  --popover-foreground: oklch(98% 0 0);
-  --primary: oklch(60% 0.13 220); /* Brighter teal for dark */
+  --background: oklch(18% 0.01 260);
+  --foreground: oklch(93% 0.01 85);
+  --card: oklch(22% 0.01 260);
+  --card-foreground: oklch(93% 0.01 85);
+  --popover: oklch(22% 0.01 260);
+  --popover-foreground: oklch(93% 0.01 85);
+  --primary: oklch(62% 0.13 220);
   --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(38% 0.07 220); /* Much brighter secondary */
-  --secondary-foreground: oklch(98% 0 0);
-  --muted: oklch(38% 0.07 220); /* Much brighter muted */
-  --muted-foreground: oklch(88% 0 0); /* MUCH brighter muted text - was 80%, now 88% */
-  --accent: oklch(72% 0.12 70); /* Shifted to yellow-amber, brighter */
-  --accent-foreground: oklch(20% 0 0);
-  --destructive: oklch(68% 0.17 25); /* Brighter red for dark mode */
+  --secondary: oklch(28% 0.01 260);
+  --secondary-foreground: oklch(90% 0.01 85);
+  --muted: oklch(28% 0.01 260);
+  --muted-foreground: oklch(70% 0.01 260);
+  --accent: oklch(28% 0.01 260);
+  --accent-foreground: oklch(90% 0.01 85);
+  --destructive: oklch(65% 0.22 25);
   --destructive-foreground: oklch(100% 0 0);
-  --border: oklch(52% 0.10 220); /* Much brighter border - was 48%, now 52% */
-  --input: oklch(38% 0.07 220); /* Brighter input */
-  --ring: oklch(60% 0.13 220); /* Brighter ring */
+  --border: oklch(32% 0.01 260);
+  --input: oklch(28% 0.01 260);
+  --ring: oklch(62% 0.13 220);
 
-  /* Hover color using light teal */
-  --hover: oklch(50% 0.11 220); /* Light teal for hovers */
+  --hover: oklch(26% 0.02 260);
   --hover-foreground: oklch(100% 0 0);
 
-  /* Professional semantic colors for dark mode - brighter for visibility */
-  --success: oklch(68% 0.14 145); /* Brighter green */
+  --success: oklch(65% 0.17 152);
   --success-foreground: oklch(100% 0 0);
-  --warning: oklch(78% 0.14 75); /* Brighter, more yellow warning */
-  --warning-foreground: oklch(15% 0 0);
-  --info: oklch(70% 0.12 240); /* Brighter blue */
+  --warning: oklch(80% 0.15 75);
+  --warning-foreground: oklch(20% 0.02 75);
+  --info: oklch(68% 0.14 250);
   --info-foreground: oklch(100% 0 0);
 }
 
