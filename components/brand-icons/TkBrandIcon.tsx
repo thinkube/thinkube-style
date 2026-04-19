@@ -8,27 +8,28 @@ interface TkBrandIconProps {
   alt: string
   size?: number
   className?: string
+  color?: string
 }
 
-/**
- * TkBrandIcon - Thinkube brand icon with automatic light/dark mode switching
- * Thinkube-approved component from thinkube-style
- */
-export function TkBrandIcon({ icon, alt, size = 20, className = "" }: TkBrandIconProps) {
+export function TkBrandIcon({ icon, alt, size = 20, className = "", color }: TkBrandIconProps) {
   return (
-    <div className={`relative ${className}`} style={{ width: size, height: size }}>
-      <img
-        src={`/icons/${icon}.svg`}
-        alt={alt}
-        style={{ width: size, height: size }}
-        className="dark:hidden"
-      />
-      <img
-        src={`/icons/${icon}_inverted.svg`}
-        alt={alt}
-        style={{ width: size, height: size }}
-        className="hidden dark:block"
-      />
-    </div>
+    <div
+      role="img"
+      aria-label={alt}
+      className={`inline-block ${color ? "" : "text-[#006680] dark:text-foreground"} ${className}`}
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: color || "currentColor",
+        maskImage: `url(/icons/${icon}.svg)`,
+        WebkitMaskImage: `url(/icons/${icon}.svg)`,
+        maskSize: "contain",
+        WebkitMaskSize: "contain",
+        maskRepeat: "no-repeat",
+        WebkitMaskRepeat: "no-repeat",
+        maskPosition: "center",
+        WebkitMaskPosition: "center",
+      }}
+    />
   )
 }

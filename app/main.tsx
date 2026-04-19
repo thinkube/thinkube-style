@@ -33,6 +33,7 @@ import VerticalNavDemoPage from './vertical-nav-demo/page';
 import InstallationProgressDemoPage from './installation-progress-demo/page';
 import InstallerWelcomePage from './installer-welcome/page';
 import TestMinimalPage from './test-minimal/page';
+import ColorsPage from './colors/page';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -60,6 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/vertical-nav-demo" element={<VerticalNavDemoPage />} />
             <Route path="/installation-progress-demo" element={<InstallationProgressDemoPage />} />
             <Route path="/installer-welcome" element={<InstallerWelcomePage />} />
+            <Route path="/colors" element={<ColorsPage />} />
             <Route path="/test-minimal" element={<TestMinimalPage />} />
           </Routes>
         </AppLayout>

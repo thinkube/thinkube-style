@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings, Activity, BarChart3, Wrench, Rocket } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings, Activity, BarChart3, Wrench, Rocket, Droplets } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { TkThemeToggle } from "./theme";
 
@@ -28,6 +28,7 @@ const navigationItems = [
       { id: "progress", label: "Progress", lucideIcon: Activity, href: "/progress" },
       { id: "data-viz", label: "Data Viz", lucideIcon: BarChart3, href: "/data-viz" },
       { id: "utilities", label: "Utilities", lucideIcon: Wrench, href: "/utilities" },
+      { id: "colors", label: "Colors", lucideIcon: Droplets, href: "/colors" },
     ],
   },
   {
@@ -77,16 +78,42 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="h-16 flex items-center justify-between px-4 border-b border-border">
           {!collapsed && (
             <div className="flex items-center gap-2">
-              <img src="/icons/tk_logo.svg" alt="Thinkube" className="w-8 h-8 dark:hidden" />
-              <img src="/icons/tk_logo_inverted.svg" alt="Thinkube" className="w-8 h-8 hidden dark:block" />
+              <div
+                role="img"
+                aria-label="Thinkube"
+                className="w-8 h-8 text-[#006680] dark:text-foreground"
+                style={{
+                  backgroundColor: "currentColor",
+                  maskImage: "url(/icons/tk_logo.svg)",
+                  WebkitMaskImage: "url(/icons/tk_logo.svg)",
+                  maskSize: "contain",
+                  WebkitMaskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  WebkitMaskPosition: "center",
+                }}
+              />
               <span className="font-semibold">Thinkube</span>
             </div>
           )}
           {collapsed && (
-            <>
-              <img src="/icons/tk_logo.svg" alt="Thinkube" className="w-8 h-8 mx-auto dark:hidden" />
-              <img src="/icons/tk_logo_inverted.svg" alt="Thinkube" className="w-8 h-8 mx-auto hidden dark:block" />
-            </>
+            <div
+              role="img"
+              aria-label="Thinkube"
+              className="w-8 h-8 mx-auto text-[#006680] dark:text-foreground"
+              style={{
+                backgroundColor: "currentColor",
+                maskImage: "url(/icons/tk_logo.svg)",
+                WebkitMaskImage: "url(/icons/tk_logo.svg)",
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskPosition: "center",
+              }}
+            />
           )}
         </div>
 
