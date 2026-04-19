@@ -1,7 +1,8 @@
 "use client";
 
 import { TkPageWrapper } from "@/components/utilities";
-import { TkCard, TkCardContent, TkCardHeader, TkCardTitle } from "@/components/cards-data";
+import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
+import { TkBrandIcon } from "@/components/brand-icons";
 
 interface ColorSwatchProps {
   label: string;
@@ -115,6 +116,54 @@ export default function ColorsPage() {
             <p className="text-sm text-warning mt-1">Warning message — warning</p>
             <p className="text-sm text-info mt-1">Info message — info</p>
           </div>
+        </TkCardContent>
+      </TkCard>
+
+      {/* Icon color options — switch to dark mode to compare */}
+      <TkCard className="mb-8">
+        <TkCardHeader>
+          <TkCardTitle>Dark Mode Icon Color Options</TkCardTitle>
+          <TkCardDescription>
+            Switch to dark mode to compare these options. Current default uses the foreground token (near-white).
+          </TkCardDescription>
+        </TkCardHeader>
+        <TkCardContent>
+          {(() => {
+            const icons = ["tk_logo", "tk_ai", "tk_dashboard", "tk_code", "tk_data", "tk_devops"];
+            const options = [
+              { label: "Current (foreground)", color: undefined, hex: "currentColor" },
+              { label: "Warm Cream", color: "#f2ebe0", hex: "#f2ebe0" },
+              { label: "Soft Parchment", color: "#ede4d6", hex: "#ede4d6" },
+              { label: "Light Sand", color: "#f5efe6", hex: "#f5efe6" },
+              { label: "Old (cyan — for reference)", color: "#d5f6ff", hex: "#d5f6ff" },
+            ];
+            return (
+              <div className="space-y-6">
+                {options.map((opt) => (
+                  <div key={opt.hex}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className="w-5 h-5 border border-border"
+                        style={{ backgroundColor: opt.color || "var(--foreground)" }}
+                      />
+                      <span className="text-sm font-semibold">{opt.label}</span>
+                      <code className="text-xs text-muted-foreground font-mono">{opt.hex}</code>
+                    </div>
+                    <div className="flex gap-6">
+                      {icons.map((icon) => (
+                        <div key={icon} className="flex flex-col items-center gap-2">
+                          <TkBrandIcon icon={icon} alt={icon} size={40} color={opt.color} />
+                          <span className="text-[10px] text-muted-foreground">
+                            {icon.replace("tk_", "")}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </TkCardContent>
       </TkCard>
 
