@@ -81,7 +81,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               <div
                 role="img"
                 aria-label="Thinkube"
-                className="w-8 h-8 text-[#006680] dark:text-foreground"
+                className="w-8 h-8 text-[#006680] dark:text-[#ede4d6]"
                 style={{
                   backgroundColor: "currentColor",
                   maskImage: "url(/icons/tk_logo.svg)",
@@ -101,7 +101,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             <div
               role="img"
               aria-label="Thinkube"
-              className="w-8 h-8 mx-auto text-[#006680] dark:text-foreground"
+              className="w-8 h-8 mx-auto text-[#006680] dark:text-[#ede4d6]"
               style={{
                 backgroundColor: "currentColor",
                 maskImage: "url(/icons/tk_logo.svg)",
@@ -126,10 +126,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   to={item.href || "#"}
                   className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
                     pathname === item.href
-                      ? "bg-primary/10 text-primary border-l-4"
-                      : "text-muted-foreground hover:bg-hover/25 hover:text-primary"
+                      ? "bg-secondary text-foreground font-semibold border-l-4 border-l-primary"
+                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                   }`}
-                  style={pathname === item.href ? { borderLeftColor: '#008899' } : undefined}
                 >
                   {item.lucideIcon && <item.lucideIcon className="w-5 h-5 flex-shrink-0" />}
                   {!collapsed && <span className="text-sm font-medium text-left">{item.label}</span>}
@@ -138,7 +137,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                 <>
                   <button
                     onClick={() => toggleGroup(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-muted-foreground hover:bg-hover/25 hover:text-primary transition-colors ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-muted-foreground hover:bg-secondary/50 hover:text-foreground transition-colors ${
                       collapsed ? "" : "justify-between"
                     }`}
                   >
@@ -162,10 +161,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                           to={child.href || "#"}
                           className={`w-full flex items-center gap-3 px-3 py-2 transition-colors ${
                             pathname === child.href
-                              ? "bg-primary/10 text-primary border-l-4"
-                              : "text-muted-foreground hover:bg-hover/25 hover:text-primary"
+                              ? "bg-secondary text-foreground font-semibold border-l-4 border-l-primary"
+                              : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
                           }`}
-                          style={pathname === child.href ? { borderLeftColor: '#008899' } : undefined}
                         >
                           {child.lucideIcon && <child.lucideIcon className="w-4 h-4 flex-shrink-0" />}
                           <span className="text-sm text-left">{child.label}</span>

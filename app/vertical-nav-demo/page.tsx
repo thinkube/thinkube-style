@@ -65,7 +65,7 @@ export default function VerticalNavDemo() {
               <div
                 role="img"
                 aria-label="Thinkube"
-                className="w-8 h-8 text-[#006680] dark:text-foreground"
+                className="w-8 h-8 text-[#006680] dark:text-[#ede4d6]"
                 style={{
                   backgroundColor: "currentColor",
                   maskImage: "url(/icons/tk_logo.svg)",
@@ -85,7 +85,7 @@ export default function VerticalNavDemo() {
             <div
               role="img"
               aria-label="Thinkube"
-              className="w-8 h-8 mx-auto text-[#006680] dark:text-foreground"
+              className="w-8 h-8 mx-auto text-[#006680] dark:text-[#ede4d6]"
               style={{
                 backgroundColor: "currentColor",
                 maskImage: "url(/icons/tk_logo.svg)",

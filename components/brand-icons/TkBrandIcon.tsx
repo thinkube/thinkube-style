@@ -16,7 +16,7 @@ export function TkBrandIcon({ icon, alt, size = 20, className = "", color }: TkB
     <div
       role="img"
       aria-label={alt}
-      className={`inline-block ${color ? "" : "text-[#006680] dark:text-foreground"} ${className}`}
+      className={`inline-block ${color ? "" : "text-[#006680] dark:text-[#ede4d6]"} ${className}`}
       style={{
         width: size,
         height: size,
