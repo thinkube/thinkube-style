@@ -28,7 +28,7 @@ export default function ModalsOverlaysPage() {
             </TkCardHeader>
             <TkCardContent>
               <TkConfirmDialog
-                trigger={<TkButton variant="outline">Open Dialog</TkButton>}
+                trigger={<TkButton intent="secondary">Open Dialog</TkButton>}
                 title="Are you sure?"
                 description="This action cannot be undone. This will permanently delete your data."
                 onConfirm={() => {}}
@@ -48,7 +48,7 @@ export default function ModalsOverlaysPage() {
                 description="Add a new item to your collection."
                 footer={
                   <>
-                    <TkButton variant="outline">Cancel</TkButton>
+                    <TkButton intent="secondary">Cancel</TkButton>
                     <TkButton>Save</TkButton>
                   </>
                 }
@@ -75,7 +75,7 @@ export default function ModalsOverlaysPage() {
             <TkCardContent>
               <TkConfirmDialog
                 trigger={
-                  <TkButton variant="destructive">
+                  <TkButton intent="danger">
                     <Trash2 className="mr-2 h-4 w-4" />
                     Delete Service
                   </TkButton>
@@ -96,7 +96,7 @@ export default function ModalsOverlaysPage() {
             </TkCardHeader>
             <TkCardContent>
               <TkButton
-                variant="destructive"
+                intent="danger"
                 onClick={() => setShowRestartDialog(true)}
               >
                 <RefreshCw className="mr-2 h-4 w-4" />
@@ -126,7 +126,7 @@ export default function ModalsOverlaysPage() {
             <TkCardContent>
               <TkDialog
                 trigger={
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <Settings className="mr-2 h-4 w-4" />
                     Service Details
                   </TkButton>
@@ -136,7 +136,7 @@ export default function ModalsOverlaysPage() {
                 maxWidth="2xl"
                 footer={
                   <>
-                    <TkButton variant="outline">Close</TkButton>
+                    <TkButton intent="secondary">Close</TkButton>
                     <TkButton>Open Service</TkButton>
                   </>
                 }
@@ -180,7 +180,7 @@ export default function ModalsOverlaysPage() {
             <TkCardContent>
               <TkDialog
                 trigger={
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <Eye className="mr-2 h-4 w-4" />
                     View Logs
                   </TkButton>
@@ -191,7 +191,7 @@ export default function ModalsOverlaysPage() {
                 maxHeight="max-h-[80vh]"
                 footer={
                   <>
-                    <TkButton variant="outline">Download</TkButton>
+                    <TkButton intent="secondary">Download</TkButton>
                     <TkButton>Close</TkButton>
                   </>
                 }
@@ -227,25 +227,25 @@ export default function ModalsOverlaysPage() {
             <TkCardContent className="space-y-4">
               <div className="flex flex-wrap gap-3">
                 <TkTooltip content="Information">
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <Info className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="Settings">
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <Settings className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="Help & Documentation">
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <HelpCircle className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="Delete permanently">
-                  <TkButton variant="destructive">
+                  <TkButton intent="danger">
                     <Trash2 className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
@@ -307,25 +307,25 @@ export default function ModalsOverlaysPage() {
             <TkCardContent>
               <div className="flex gap-2">
                 <TkTooltip content="Open service">
-                  <TkButton size="icon" variant="outline">
+                  <TkButton size="icon" intent="secondary">
                     <Eye className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="Restart service">
-                  <TkButton size="icon" variant="outline">
+                  <TkButton size="icon" intent="secondary">
                     <Settings className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="Health check">
-                  <TkButton size="icon" variant="outline">
+                  <TkButton size="icon" intent="secondary">
                     <AlertCircle className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>
 
                 <TkTooltip content="View details">
-                  <TkButton size="icon" variant="outline">
+                  <TkButton size="icon" intent="secondary">
                     <Info className="h-4 w-4" />
                   </TkButton>
                 </TkTooltip>

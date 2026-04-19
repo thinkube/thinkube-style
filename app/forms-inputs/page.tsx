@@ -386,7 +386,7 @@ export default function FormsInputsPage() {
 
             <div className="flex gap-2 pt-2">
               <TkButton type="submit">Submit</TkButton>
-              <TkButton type="button" variant="outline">Cancel</TkButton>
+              <TkButton type="button" intent="secondary">Cancel</TkButton>
             </div>
           </form>
         </TkCardContent>

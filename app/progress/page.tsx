@@ -62,7 +62,7 @@ export default function ProgressPage() {
           {isRunning ? "Running..." : "Start demo"}
         </TkLoadingButton>
         {current > 0 && (
-          <TkButton variant="outline" onClick={reset}>
+          <TkButton intent="secondary" onClick={reset}>
             Reset
           </TkButton>
         )}

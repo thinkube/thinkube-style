@@ -78,7 +78,7 @@ export default function InstallationProgressDemo() {
           {isRunning ? "Running..." : "Start Demo"}
         </TkLoadingButton>
         {currentStep > 0 && (
-          <TkButton variant="outline" onClick={reset}>
+          <TkButton intent="secondary" onClick={reset}>
             Reset
           </TkButton>
         )}

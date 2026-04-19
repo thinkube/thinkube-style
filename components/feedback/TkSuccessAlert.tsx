@@ -13,29 +13,12 @@ interface TkSuccessAlertProps {
   className?: string
 }
 
-/**
- * TkSuccessAlert - Green success alert
- * Thinkube-approved component from thinkube-style
- */
 export function TkSuccessAlert({ title, children, className = "" }: TkSuccessAlertProps) {
-  if (!title) {
-    return (
-      <Alert className={`border-[var(--color-success)]/40 bg-[var(--color-success)]/5 ${className}`}>
-        <CheckCircle2 className="h-4 w-4 text-[var(--color-success)]" />
-        <AlertDescription className="text-[var(--color-success)]">
-          {children}
-        </AlertDescription>
-      </Alert>
-    )
-  }
-
   return (
-    <Alert className={`border-[var(--color-success)]/40 bg-[var(--color-success)]/5 ${className}`}>
-      <CheckCircle2 className="h-4 w-4 text-[var(--color-success)]" />
-      <AlertTitle className="text-[var(--color-success)]">{title}</AlertTitle>
-      <AlertDescription className="text-[var(--color-success)]">
-        {children}
-      </AlertDescription>
+    <Alert variant="success" className={className}>
+      <CheckCircle2 className="h-4 w-4" />
+      {title && <AlertTitle>{title}</AlertTitle>}
+      <AlertDescription>{children}</AlertDescription>
     </Alert>
   )
 }

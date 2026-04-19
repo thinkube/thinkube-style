@@ -13,6 +13,7 @@ import {
   TkAlert,
   TkAlertTitle,
   TkAlertDescription,
+  TkStatusIndicator,
   tkToast,
 } from "@/components/feedback";
 import { TkButton, TkLoadingButton } from "@/components/buttons-badges";
@@ -43,6 +44,57 @@ export default function FeedbackPage() {
       title="Feedback Components"
       description="Alerts, progress indicators, and loading states"
     >
+      {/* Status Indicators */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-heading font-semibold mb-4">Status Indicators</h2>
+        <TkCard>
+          <TkCardHeader>
+            <TkCardTitle>TkStatusIndicator</TkCardTitle>
+            <TkCardDescription>Colored dots for service health. Use alongside text labels.</TkCardDescription>
+          </TkCardHeader>
+          <TkCardContent className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium mb-3 text-muted-foreground">Default Size (md)</h3>
+              <div className="flex flex-wrap gap-6">
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="healthy" />
+                  <span className="text-sm">Healthy</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="unhealthy" />
+                  <span className="text-sm">Unhealthy</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="pending" />
+                  <span className="text-sm">Pending</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="warning" />
+                  <span className="text-sm">Warning</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium mb-3 text-muted-foreground">Small Size (sm)</h3>
+              <div className="flex flex-wrap gap-6">
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="healthy" size="sm" />
+                  <span className="text-sm">Running</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="unhealthy" size="sm" />
+                  <span className="text-sm">Stopped</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TkStatusIndicator status="pending" size="sm" />
+                  <span className="text-sm">Starting...</span>
+                </div>
+              </div>
+            </div>
+          </TkCardContent>
+        </TkCard>
+      </div>
+
       {/* Alerts */}
       <div className="mb-8">
         <h2 className="text-2xl font-heading font-semibold mb-4">Alerts</h2>
@@ -184,8 +236,8 @@ export default function FeedbackPage() {
             </TkCardHeader>
             <TkCardContent className="flex flex-wrap gap-3">
               <TkLoadingButton loading>Loading...</TkLoadingButton>
-              <TkLoadingButton loading variant="secondary">Processing</TkLoadingButton>
-              <TkLoadingButton loading variant="outline">Please wait</TkLoadingButton>
+              <TkLoadingButton loading intent="secondary">Processing</TkLoadingButton>
+              <TkLoadingButton loading intent="ghost">Please wait</TkLoadingButton>
             </TkCardContent>
           </TkCard>
 
@@ -268,13 +320,13 @@ export default function FeedbackPage() {
                 Default
               </TkButton>
               <TkButton
-                variant="secondary"
+                intent="secondary"
                 onClick={() => tkToast.success("Service started successfully")}
               >
                 Success
               </TkButton>
               <TkButton
-                variant="outline"
+                intent="secondary"
                 onClick={() =>
                   tkToast.info("Heads up", {
                     description: "The cluster will be upgraded tonight at 23:00.",
@@ -284,7 +336,7 @@ export default function FeedbackPage() {
                 Info with description
               </TkButton>
               <TkButton
-                variant="outline"
+                intent="secondary"
                 onClick={() =>
                   tkToast.warning("Low disk space", {
                     description: "Less than 5% free on /var/lib/containerd",
@@ -294,13 +346,13 @@ export default function FeedbackPage() {
                 Warning
               </TkButton>
               <TkButton
-                variant="destructive"
+                intent="danger"
                 onClick={() => tkToast.error("Failed to deploy service")}
               >
                 Error
               </TkButton>
               <TkButton
-                variant="outline"
+                intent="secondary"
                 onClick={() =>
                   tkToast("Restart required", {
                     action: {
@@ -391,7 +443,7 @@ spec:
               <TkErrorAlert title="Connection Failed">
                 Could not connect to the API server. Check your network connection.
               </TkErrorAlert>
-              <TkButton variant="outline">
+              <TkButton intent="secondary">
                 Retry Connection
               </TkButton>
             </TkCardContent>

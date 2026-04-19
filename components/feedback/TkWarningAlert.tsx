@@ -13,29 +13,12 @@ interface TkWarningAlertProps {
   className?: string
 }
 
-/**
- * TkWarningAlert - Amber warning alert
- * Thinkube-approved component from thinkube-style
- */
 export function TkWarningAlert({ title, children, className = "" }: TkWarningAlertProps) {
-  if (!title) {
-    return (
-      <Alert className={`border-[var(--color-warning)]/40 bg-[var(--color-warning)]/5 ${className}`}>
-        <AlertTriangle className="h-4 w-4 text-[var(--color-warning)]" />
-        <AlertDescription className="text-[var(--color-warning)]">
-          {children}
-        </AlertDescription>
-      </Alert>
-    )
-  }
-
   return (
-    <Alert className={`border-[var(--color-warning)]/40 bg-[var(--color-warning)]/5 ${className}`}>
-      <AlertTriangle className="h-4 w-4 text-[var(--color-warning)]" />
-      <AlertTitle className="text-[var(--color-warning)]">{title}</AlertTitle>
-      <AlertDescription className="text-[var(--color-warning)]">
-        {children}
-      </AlertDescription>
+    <Alert variant="warning" className={className}>
+      <AlertTriangle className="h-4 w-4" />
+      {title && <AlertTitle>{title}</AlertTitle>}
+      <AlertDescription>{children}</AlertDescription>
     </Alert>
   )
 }

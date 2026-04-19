@@ -2,24 +2,14 @@
 
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
-import { TkButton, TkIconButton, TkLoadingButton } from "@/components/buttons-badges";
-import { TkBadge, TkSuccessBadge, TkWarningBadge, TkErrorBadge, TkGpuBadge } from "@/components/buttons-badges";
-import { Heart, Download, Trash2, Plus, Settings, Loader2, Save, RefreshCw, Pencil } from "lucide-react";
+import { TkButton, TkLoadingButton } from "@/components/buttons-badges";
+import { TkBadge, TkGpuBadge } from "@/components/buttons-badges";
+import { Heart, Download, Trash2, Plus, Settings, Save, RefreshCw, Pencil } from "lucide-react";
 import { useState } from "react";
 
 export default function ButtonsBadgesPage() {
-  const [loadingButtons, setLoadingButtons] = useState<Set<string>>(new Set());
   const [saveLoading, setSaveLoading] = useState(false);
   const [syncLoading, setSyncLoading] = useState(false);
-
-  const handleClick = (id: string) => {
-    setLoadingButtons(new Set(loadingButtons.add(id)));
-    setTimeout(() => {
-      const newSet = new Set(loadingButtons);
-      newSet.delete(id);
-      setLoadingButtons(newSet);
-    }, 2000);
-  };
 
   const triggerLoading = (setter: (v: boolean) => void) => {
     setter(true);
@@ -29,80 +19,40 @@ export default function ButtonsBadgesPage() {
   return (
     <TkPageWrapper
       title="Buttons & Badges"
-      description="All button variants, sizes, and badge styles from your DaisyUI inventory"
+      description="Semantic button intents and badge statuses"
     >
-      {/* TkButton Variants */}
-      <TkCard className="mb-8">
+      {/* Button Intents */}
+      <TkCard className="mb-6">
         <TkCardHeader>
-          <TkCardTitle>TkButton Variants</TkCardTitle>
+          <TkCardTitle>TkButton — Intent API</TkCardTitle>
           <TkCardDescription>
-            Primary, secondary, accent, outline, ghost, and destructive buttons
+            Use intent to express purpose. One primary per section, secondary for supporting actions,
+            ghost for toolbar/nav, danger for destructive operations.
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent className="space-y-6">
           <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Solid TkButtons</h3>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Intents</h3>
             <div className="flex flex-wrap gap-3">
-              <TkButton variant="default" onClick={() => handleClick("primary")}>
-                {loadingButtons.has("primary") ? (
-                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading</>
-                ) : (
-                  "Primary"
-                )}
-              </TkButton>
-              <TkButton variant="secondary">Secondary</TkButton>
-              <TkButton variant="destructive">Destructive</TkButton>
+              <TkButton intent="primary">Primary Action</TkButton>
+              <TkButton intent="secondary">Secondary</TkButton>
+              <TkButton intent="ghost">Ghost</TkButton>
+              <TkButton intent="danger">Danger</TkButton>
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Outline & Ghost</h3>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">With Icons</h3>
             <div className="flex flex-wrap gap-3">
-              <TkButton variant="outline">Outline</TkButton>
-              <TkButton variant="ghost">Ghost</TkButton>
-              <TkButton variant="link">Link</TkButton>
-            </div>
-          </div>
-        </TkCardContent>
-      </TkCard>
-
-      {/* TkButton Sizes */}
-      <TkCard className="mb-8">
-        <TkCardHeader>
-          <TkCardTitle>TkButton Sizes</TkCardTitle>
-          <TkCardDescription>xs, sm, default (md), lg sizes</TkCardDescription>
-        </TkCardHeader>
-        <TkCardContent>
-          <div className="flex flex-wrap items-center gap-3">
-            <TkButton size="sm" variant="outline">Small</TkButton>
-            <TkButton size="default">Default</TkButton>
-            <TkButton size="lg">Large</TkButton>
-            <TkButton size="icon" variant="outline">
-              <Settings className="h-4 w-4" />
-            </TkButton>
-          </div>
-        </TkCardContent>
-      </TkCard>
-
-      {/* TkButton with Icons */}
-      <TkCard className="mb-8">
-        <TkCardHeader>
-          <TkCardTitle>TkButtons with Icons</TkCardTitle>
-          <TkCardDescription>Icon placement and icon-only buttons</TkCardDescription>
-        </TkCardHeader>
-        <TkCardContent className="space-y-6">
-          <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">With Text</h3>
-            <div className="flex flex-wrap gap-3">
-              <TkButton>
+              <TkButton intent="primary">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Item
               </TkButton>
-              <TkButton variant="secondary">
+              <TkButton intent="secondary">
                 <Download className="mr-2 h-4 w-4" />
                 Download
               </TkButton>
-              <TkButton variant="destructive">
+              <TkButton intent="danger">
                 <Trash2 className="mr-2 h-4 w-4" />
                 Delete
               </TkButton>
@@ -110,170 +60,133 @@ export default function ButtonsBadgesPage() {
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Icon Only (Square & Circle)</h3>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Icon Only</h3>
             <div className="flex flex-wrap gap-3">
-              <TkButton size="icon" variant="outline">
-                <Heart className="h-4 w-4" />
+              <TkButton size="icon" intent="secondary" aria-label="Edit">
+                <Pencil className="h-4 w-4" />
               </TkButton>
-              <TkButton size="icon" variant="ghost">
+              <TkButton size="icon" intent="ghost" aria-label="Settings">
                 <Settings className="h-4 w-4" />
               </TkButton>
-              <TkButton size="icon" variant="destructive">
+              <TkButton size="icon" intent="danger" aria-label="Delete">
                 <Trash2 className="h-4 w-4" />
               </TkButton>
-              <TkButton size="icon" className="rounded-full" variant="outline">
-                <Plus className="h-4 w-4" />
-              </TkButton>
-              <TkButton size="icon" className="rounded-full">
+              <TkButton size="icon" intent="primary" aria-label="Favorite">
                 <Heart className="h-4 w-4" />
               </TkButton>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Sizes</h3>
+            <div className="flex flex-wrap items-center gap-3">
+              <TkButton size="sm" intent="secondary">Small</TkButton>
+              <TkButton intent="primary">Default</TkButton>
+              <TkButton size="lg" intent="primary">Large</TkButton>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Disabled</h3>
+            <div className="flex flex-wrap gap-3">
+              <TkButton disabled intent="primary">Disabled Primary</TkButton>
+              <TkButton disabled intent="secondary">Disabled Secondary</TkButton>
             </div>
           </div>
         </TkCardContent>
       </TkCard>
 
-      {/* Disabled State */}
-      <TkCard className="mb-8">
+      {/* Loading Button */}
+      <TkCard className="mb-6">
         <TkCardHeader>
-          <TkCardTitle>Disabled State</TkCardTitle>
-          <TkCardDescription>Disabled buttons with loading state</TkCardDescription>
+          <TkCardTitle>TkLoadingButton</TkCardTitle>
+          <TkCardDescription>
+            Built-in loading state with spinner and auto-disable.
+          </TkCardDescription>
         </TkCardHeader>
         <TkCardContent>
           <div className="flex flex-wrap gap-3">
-            <TkButton disabled>Disabled</TkButton>
-            <TkButton disabled variant="secondary">Disabled Secondary</TkButton>
-            <TkButton disabled>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Loading...
-            </TkButton>
+            <TkLoadingButton
+              loading={saveLoading}
+              onClick={() => triggerLoading(setSaveLoading)}
+            >
+              <Save className="mr-2 h-4 w-4" />
+              Save changes
+            </TkLoadingButton>
+            <TkLoadingButton
+              intent="secondary"
+              loading={syncLoading}
+              onClick={() => triggerLoading(setSyncLoading)}
+            >
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Sync now
+            </TkLoadingButton>
           </div>
         </TkCardContent>
       </TkCard>
 
-      {/* Specialized Buttons */}
-      <TkCard className="mb-8">
+      {/* Badge Status */}
+      <TkCard className="mb-6">
         <TkCardHeader>
-          <TkCardTitle>Specialized Buttons</TkCardTitle>
+          <TkCardTitle>TkBadge — Status API</TkCardTitle>
           <TkCardDescription>
-            TkIconButton (icon-only) and TkLoadingButton (built-in loading state)
+            Use status for service/health indicators. Color is determined by meaning, not choice.
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent className="space-y-6">
           <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkIconButton</h3>
-            <p className="text-xs text-muted-foreground mb-3">
-              Defaults to <code className="text-xs">size="icon"</code> so icon-only buttons stay consistent.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <TkIconButton variant="outline" aria-label="Edit">
-                <Pencil className="h-4 w-4" />
-              </TkIconButton>
-              <TkIconButton variant="ghost" aria-label="Settings">
-                <Settings className="h-4 w-4" />
-              </TkIconButton>
-              <TkIconButton variant="destructive" aria-label="Delete">
-                <Trash2 className="h-4 w-4" />
-              </TkIconButton>
-              <TkIconButton aria-label="Save">
-                <Save className="h-4 w-4" />
-              </TkIconButton>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkLoadingButton</h3>
-            <p className="text-xs text-muted-foreground mb-3">
-              Pass <code className="text-xs">loading</code> to show a spinner and auto-disable the button.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <TkLoadingButton
-                loading={saveLoading}
-                onClick={() => triggerLoading(setSaveLoading)}
-              >
-                <Save className="mr-2 h-4 w-4" />
-                Save changes
-              </TkLoadingButton>
-              <TkLoadingButton
-                variant="secondary"
-                loading={syncLoading}
-                onClick={() => triggerLoading(setSyncLoading)}
-              >
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Sync now
-              </TkLoadingButton>
-              <TkLoadingButton loading variant="outline">
-                Always loading
-              </TkLoadingButton>
-            </div>
-          </div>
-        </TkCardContent>
-      </TkCard>
-
-      {/* TkBadges */}
-      <TkCard className="mb-8">
-        <TkCardHeader>
-          <TkCardTitle>TkBadge Variants</TkCardTitle>
-          <TkCardDescription>All badge colors and styles</TkCardDescription>
-        </TkCardHeader>
-        <TkCardContent className="space-y-6">
-          <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkBadge Variants (Subtle & Professional)</h3>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Status Badges</h3>
             <div className="flex flex-wrap gap-2">
-              <TkBadge>Default</TkBadge>
-              <TkBadge variant="secondary">Secondary</TkBadge>
-              <TkErrorBadge>Destructive</TkErrorBadge>
-              <TkWarningBadge>Warning</TkWarningBadge>
-              <TkSuccessBadge>Success</TkSuccessBadge>
-              <TkBadge variant="outline">Outline</TkBadge>
+              <TkBadge status="healthy">Healthy</TkBadge>
+              <TkBadge status="unhealthy">Unhealthy</TkBadge>
+              <TkBadge status="pending">Pending</TkBadge>
+              <TkBadge status="warning">Warning</TkBadge>
             </div>
           </div>
 
           <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Custom Color Examples</h3>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Category Badges</h3>
             <div className="flex flex-wrap gap-2">
-              <TkBadge variant="outline">Neutral</TkBadge>
-              <TkBadge variant="outline" className="border-primary text-primary">Primary</TkBadge>
-              <TkBadge variant="outline" className="border-[var(--color-warning)] text-[var(--color-warning)]">Warning Outline</TkBadge>
-              <TkBadge variant="outline" className="border-[var(--color-success)] text-[var(--color-success)]">Success Outline</TkBadge>
-              <TkBadge variant="outline" className="border-destructive text-destructive">Error Outline</TkBadge>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkBadge Sizes</h3>
-            <div className="flex flex-wrap items-center gap-2">
-              <TkBadge className="text-xs px-1.5 py-0">XS</TkBadge>
-              <TkBadge className="text-xs px-2 py-0.5">Small</TkBadge>
-              <TkBadge>Default</TkBadge>
-              <TkBadge className="text-sm px-3 py-1">Large</TkBadge>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium mb-3 text-muted-foreground">Use Cases (From Your Apps)</h3>
-            <div className="flex flex-wrap gap-2">
-              <TkBadge>Core Service</TkBadge>
-              <TkBadge variant="secondary">Optional</TkBadge>
-              <TkWarningBadge>User App</TkWarningBadge>
-              <TkSuccessBadge>Healthy</TkSuccessBadge>
-              <TkErrorBadge>Unhealthy</TkErrorBadge>
-              <TkBadge variant="outline">Vue.js</TkBadge>
-              <TkBadge variant="outline">FastAPI</TkBadge>
+              <TkBadge category="core">Core Service</TkBadge>
+              <TkBadge category="optional">Optional</TkBadge>
+              <TkBadge category="user">User App</TkBadge>
             </div>
           </div>
 
           <div>
             <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkGpuBadge</h3>
-            <p className="text-xs text-muted-foreground mb-3">
-              Specialized badge for GPU count with accent styling. Auto-pluralizes.
-            </p>
             <div className="flex flex-wrap items-center gap-2">
               <TkGpuBadge gpuCount={1} size="sm" />
-              <TkGpuBadge gpuCount={2} size="sm" />
-              <TkGpuBadge gpuCount={1} />
-              <TkGpuBadge gpuCount={4} />
+              <TkGpuBadge gpuCount={2} />
               <TkGpuBadge gpuCount={8} />
             </div>
+          </div>
+        </TkCardContent>
+      </TkCard>
+
+      {/* Usage Rules */}
+      <TkCard>
+        <TkCardHeader>
+          <TkCardTitle>Usage Rules</TkCardTitle>
+        </TkCardHeader>
+        <TkCardContent className="space-y-6">
+          <div className="p-4 border border-border">
+            <h3 className="text-sm font-semibold mb-2">Buttons</h3>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>One <code className="text-xs">intent="primary"</code> per section maximum</li>
+              <li>Use <code className="text-xs">intent="secondary"</code> for supporting actions</li>
+              <li>Use <code className="text-xs">intent="ghost"</code> for toolbar and navigation</li>
+              <li>Use <code className="text-xs">intent="danger"</code> only for destructive operations</li>
+              <li>Icon-only buttons always need <code className="text-xs">aria-label</code></li>
+            </ul>
+          </div>
+          <div className="p-4 border border-border">
+            <h3 className="text-sm font-semibold mb-2">Badges</h3>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>Use <code className="text-xs">status</code> for health/state indicators</li>
+              <li>Use <code className="text-xs">category</code> for type classification</li>
+              <li>Never pick badge colors manually — use the semantic props</li>
+            </ul>
           </div>
         </TkCardContent>
       </TkCard>

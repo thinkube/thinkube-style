@@ -6,12 +6,30 @@
 import { Badge } from "@/components/ui/badge"
 import { ComponentProps } from "react"
 
-type TkBadgeProps = ComponentProps<typeof Badge>
+const statusMap = {
+  healthy: "success",
+  unhealthy: "destructive",
+  pending: "secondary",
+  warning: "warning",
+} as const
 
-/**
- * TkBadge - Thinkube wrapper for Badge
- * Thinkube-approved component from thinkube-style
- */
-export function TkBadge(props: TkBadgeProps) {
-  return <Badge {...props} />
+type TkBadgeStatus = keyof typeof statusMap
+
+type TkBadgeCategory = "core" | "optional" | "user"
+
+type TkBadgeProps = Omit<ComponentProps<typeof Badge>, "variant"> & {
+  status?: TkBadgeStatus
+  category?: TkBadgeCategory
+  /** @deprecated Use `status` or `category` instead */
+  variant?: ComponentProps<typeof Badge>["variant"]
+}
+
+export function TkBadge({ status, category, variant, ...props }: TkBadgeProps) {
+  const resolvedVariant = status
+    ? statusMap[status]
+    : category
+      ? "outline"
+      : variant
+
+  return <Badge variant={resolvedVariant} {...props} />
 }

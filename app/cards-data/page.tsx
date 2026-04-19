@@ -2,12 +2,14 @@
 
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardFooter, TkCardHeader, TkCardTitle } from "@/components/cards-data";
-import { TkBadge, TkSuccessBadge, TkErrorBadge } from "@/components/buttons-badges";
+import { TkBadge } from "@/components/buttons-badges";
 import { TkButton } from "@/components/buttons-badges";
 import { TkSeparator } from "@/components/utilities";
 import { TkTable, TkTableBody, TkTableCell, TkTableHead, TkTableHeader, TkTableRow } from "@/components/tables";
 import { TkAvatar } from "@/components/utilities";
-import { TkStatsCard, TkStatCard, TkHighlightCard } from "@/components/cards-data";
+import { TkStatCard } from "@/components/cards-data";
+import { TkStatusIndicator } from "@/components/feedback";
+import { TkGpuBadge } from "@/components/buttons-badges";
 import { Activity, Database, Cpu, HardDrive, Users, Server, Zap } from "lucide-react";
 
 export default function CardsDataPage() {
@@ -41,17 +43,22 @@ export default function CardsDataPage() {
               <p className="text-sm">Content goes here with some information.</p>
             </TkCardContent>
             <TkCardFooter className="flex gap-2">
-              <TkButton size="sm">Action</TkButton>
-              <TkButton size="sm" variant="outline">Cancel</TkButton>
+              <TkButton size="sm" intent="primary">Action</TkButton>
+              <TkButton size="sm" intent="secondary">Cancel</TkButton>
             </TkCardFooter>
           </TkCard>
 
-          <TkHighlightCard
-            icon={Activity}
-            title="Highlighted TkCard"
-          >
-            <p className="text-sm">TkCard with colored border and icon</p>
-          </TkHighlightCard>
+          <TkCard className="border-primary">
+            <TkCardHeader>
+              <div className="flex items-center gap-2">
+                <Activity className="h-5 w-5 text-primary" />
+                <TkCardTitle>Highlighted TkCard</TkCardTitle>
+              </div>
+            </TkCardHeader>
+            <TkCardContent>
+              <p className="text-sm">TkCard with primary border accent</p>
+            </TkCardContent>
+          </TkCard>
         </div>
       </div>
 
@@ -59,28 +66,28 @@ export default function CardsDataPage() {
       <div className="mb-8">
         <h2 className="text-2xl font-heading font-semibold mb-4">Stats Display</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <TkStatsCard
+          <TkStatCard
             title="Total Services"
             value="42"
             description="+12% from last month"
             icon={Database}
           />
 
-          <TkStatsCard
+          <TkStatCard
             title="CPU Usage"
             value="67%"
             description="Normal load"
             icon={Cpu}
           />
 
-          <TkStatsCard
+          <TkStatCard
             title="Memory"
             value="24 GB"
             description="of 32 GB used"
             icon={HardDrive}
           />
 
-          <TkStatsCard
+          <TkStatCard
             title="Active Users"
             value="156"
             description="+8 in last hour"
@@ -159,23 +166,23 @@ export default function CardsDataPage() {
                   <TkCardTitle className="text-lg">JupyterHub</TkCardTitle>
                   <TkCardDescription className="mt-1">Interactive notebooks</TkCardDescription>
                 </div>
-                <TkSuccessBadge>Healthy</TkSuccessBadge>
+                <TkBadge status="healthy">Healthy</TkBadge>
               </div>
             </TkCardHeader>
             <TkCardContent>
               <div className="flex flex-wrap gap-2 mb-3">
                 <TkBadge variant="outline">Python</TkBadge>
                 <TkBadge variant="outline">Jupyter</TkBadge>
-                <TkBadge className="border-[var(--color-warning)]/40 bg-[var(--color-warning)]/10 text-[var(--color-warning)] font-semibold">4 GPUs</TkBadge>
+                <TkGpuBadge gpuCount={4} size="sm" />
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
+                <TkStatusIndicator status="healthy" size="sm" />
                 <span>Running</span>
               </div>
             </TkCardContent>
             <TkCardFooter className="flex gap-2">
-              <TkButton size="sm" variant="outline" className="flex-1">Open</TkButton>
-              <TkButton size="sm" variant="outline" className="flex-1">Details</TkButton>
+              <TkButton size="sm" intent="secondary" className="flex-1">Open</TkButton>
+              <TkButton size="sm" intent="secondary" className="flex-1">Details</TkButton>
             </TkCardFooter>
           </TkCard>
 
@@ -186,7 +193,7 @@ export default function CardsDataPage() {
                   <TkCardTitle className="text-lg">PostgreSQL</TkCardTitle>
                   <TkCardDescription className="mt-1">Database service</TkCardDescription>
                 </div>
-                <TkSuccessBadge>Healthy</TkSuccessBadge>
+                <TkBadge status="healthy">Healthy</TkBadge>
               </div>
             </TkCardHeader>
             <TkCardContent>
@@ -195,13 +202,13 @@ export default function CardsDataPage() {
                 <TkBadge>Core</TkBadge>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
+                <TkStatusIndicator status="healthy" size="sm" />
                 <span>Running</span>
               </div>
             </TkCardContent>
             <TkCardFooter className="flex gap-2">
-              <TkButton size="sm" variant="outline" className="flex-1">Details</TkButton>
-              <TkButton size="sm" variant="destructive" className="flex-1">Stop</TkButton>
+              <TkButton size="sm" intent="secondary" className="flex-1">Details</TkButton>
+              <TkButton size="sm" intent="danger" className="flex-1">Stop</TkButton>
             </TkCardFooter>
           </TkCard>
 
@@ -212,7 +219,7 @@ export default function CardsDataPage() {
                   <TkCardTitle className="text-lg">Redis Cache</TkCardTitle>
                   <TkCardDescription className="mt-1">In-memory cache</TkCardDescription>
                 </div>
-                <TkErrorBadge>Unhealthy</TkErrorBadge>
+                <TkBadge status="unhealthy">Unhealthy</TkBadge>
               </div>
             </TkCardHeader>
             <TkCardContent>
@@ -221,13 +228,13 @@ export default function CardsDataPage() {
                 <TkBadge variant="secondary">Optional</TkBadge>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="h-2 w-2 rounded-full bg-destructive" />
+                <TkStatusIndicator status="unhealthy" size="sm" />
                 <span>Stopped</span>
               </div>
             </TkCardContent>
             <TkCardFooter className="flex gap-2">
               <TkButton size="sm" className="flex-1">Restart</TkButton>
-              <TkButton size="sm" variant="outline" className="flex-1">Logs</TkButton>
+              <TkButton size="sm" intent="secondary" className="flex-1">Logs</TkButton>
             </TkCardFooter>
           </TkCard>
         </div>
@@ -258,7 +265,7 @@ export default function CardsDataPage() {
                   <TkTableCell>192.168.1.10</TkTableCell>
                   <TkTableCell><TkBadge>Master</TkBadge></TkTableCell>
                   <TkTableCell>
-                    <TkSuccessBadge>Active</TkSuccessBadge>
+                    <TkBadge status="healthy">Active</TkBadge>
                   </TkTableCell>
                 </TkTableRow>
                 <TkTableRow>
@@ -266,7 +273,7 @@ export default function CardsDataPage() {
                   <TkTableCell>192.168.1.20</TkTableCell>
                   <TkTableCell><TkBadge variant="secondary">Worker</TkBadge></TkTableCell>
                   <TkTableCell>
-                    <TkSuccessBadge>Active</TkSuccessBadge>
+                    <TkBadge status="healthy">Active</TkBadge>
                   </TkTableCell>
                 </TkTableRow>
                 <TkTableRow>
@@ -274,7 +281,7 @@ export default function CardsDataPage() {
                   <TkTableCell>192.168.1.21</TkTableCell>
                   <TkTableCell><TkBadge variant="secondary">GPU Worker</TkBadge></TkTableCell>
                   <TkTableCell>
-                    <TkSuccessBadge>Active</TkSuccessBadge>
+                    <TkBadge status="healthy">Active</TkBadge>
                   </TkTableCell>
                 </TkTableRow>
               </TkTableBody>

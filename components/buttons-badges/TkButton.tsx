@@ -6,12 +6,25 @@
 import { Button } from "@/components/ui/button"
 import { ComponentProps } from "react"
 
-type TkButtonProps = ComponentProps<typeof Button>
+const intentMap = {
+  primary: "default",
+  secondary: "outline",
+  danger: "destructive",
+  ghost: "ghost",
+} as const
 
-/**
- * TkButton - Thinkube wrapper for Button
- * Thinkube-approved component from thinkube-style
- */
-export function TkButton(props: TkButtonProps) {
-  return <Button {...props} />
+type TkButtonIntent = keyof typeof intentMap
+
+type TkButtonProps = Omit<ComponentProps<typeof Button>, "variant"> & {
+  intent?: TkButtonIntent
+  /** @deprecated Use `intent` instead */
+  variant?: ComponentProps<typeof Button>["variant"]
+}
+
+export function TkButton({ intent, variant, ...props }: TkButtonProps) {
+  const resolvedVariant = intent
+    ? intentMap[intent]
+    : variant
+
+  return <Button variant={resolvedVariant} {...props} />
 }

@@ -28,7 +28,7 @@ export default function NavigationPage() {
             <TkCardContent>
               <TkDropdownMenu
                 trigger={
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     Open Menu
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </TkButton>
@@ -54,7 +54,7 @@ export default function NavigationPage() {
             <TkCardContent>
               <TkDropdownMenu
                 trigger={
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     <User className="mr-2 h-4 w-4" />
                     Account
                     <ChevronDown className="ml-2 h-4 w-4" />
@@ -122,7 +122,7 @@ export default function NavigationPage() {
             <TkCardContent>
               <TkDropdownMenu
                 trigger={
-                  <TkButton variant="outline">
+                  <TkButton intent="secondary">
                     Help
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </TkButton>

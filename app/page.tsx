@@ -1,69 +1,66 @@
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBadge } from "@/components/buttons-badges";
-import { CheckCircle2, Package, Palette, Zap } from "lucide-react";
+import { CheckCircle2, Palette, Shield, Layers } from "lucide-react";
 
 export default function Home() {
   const features = [
     {
       icon: Palette,
-      title: "Thinkube Branding",
-      description: "Custom color scheme with teal (#006680) and orange (#FF6B35) matching your existing design",
+      title: "Design Tokens",
+      description: "OKLch color palette with teal primary, warm backgrounds, and proven semantic colors for status indicators",
     },
     {
-      icon: Package,
-      title: "22+ Components",
-      description: "Complete inventory from DaisyUI v5 recreated with shadcn/ui and Radix primitives",
+      icon: Shield,
+      title: "Semantic APIs",
+      description: "Intent-based buttons, status-driven badges, and opinionated defaults that prevent UI inconsistency",
     },
     {
-      icon: Zap,
-      title: "Latest Tech Stack",
-      description: "Next.js 16, React 19.2, Tailwind CSS 4.1, and all 2025 current versions",
+      icon: Layers,
+      title: "Component Library",
+      description: "Cards, tables, alerts, modals, forms, progress indicators, and navigation — all dark-mode ready",
     },
     {
       icon: CheckCircle2,
-      title: "Interactive Showcase",
-      description: "All components fully functional with light/dark themes and realistic examples",
+      title: "Two Consumers",
+      description: "Shared between thinkube-control (dashboard) and thinkube-installer (Tauri app)",
     },
   ];
 
   const inventory = [
-    { category: "Buttons & TkBadges", count: "8+ variants" },
-    { category: "Forms & Inputs", count: "10+ types" },
-    { category: "TkCards & Data Display", count: "Multiple layouts" },
-    { category: "Navigation", count: "Responsive menus" },
-    { category: "Feedback", count: "Alerts, Progress, Loading" },
-    { category: "Modals & Overlays", count: "Dialogs, Tooltips" },
+    { category: "Buttons & Badges", count: "Intent + Status APIs" },
+    { category: "Forms & Inputs", count: "10+ input types" },
+    { category: "Cards & Data Display", count: "Cards, tables, stats" },
+    { category: "Navigation", count: "TkVerticalNav + layout" },
+    { category: "Feedback", count: "Alerts, toasts, status dots" },
+    { category: "Modals & Overlays", count: "Dialogs, tooltips, sheets" },
   ];
 
   return (
     <TkPageWrapper
       title="Thinkube Style Guide"
-      description="React + shadcn/ui component showcase for migrating from Vue + DaisyUI"
+      description="Design system reference for Thinkube applications"
     >
-      {/* Introduction */}
       <TkCard className="mb-8">
         <TkCardHeader>
-          <TkCardTitle>About This Project</TkCardTitle>
+          <TkCardTitle>About This Guide</TkCardTitle>
           <TkCardDescription>
-            Migration preview for Thinkube applications
+            Reference implementation for the Thinkube design system
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent className="space-y-4">
           <p>
-            This application showcases how all UI components from your three Thinkube applications
-            (thinkube-installer, thinkube-control, and tkt-webapp-vue-fastapi) will look when migrated
-            from <TkBadge variant="secondary">Vue + DaisyUI v5</TkBadge> to <TkBadge>React + shadcn/ui</TkBadge>.
+            This application documents the component library shared by
+            {" "}<TkBadge>thinkube-control</TkBadge> and <TkBadge>thinkube-installer</TkBadge>.
+            Every component shown here is the real component — the demo eats its own dog food.
           </p>
           <p>
-            Every component has been inventoried from your current applications and recreated here
-            with the same Thinkube branding, including your custom fonts (Poppins, Roboto Slab) and
-            color scheme.
+            Built on React 19, Tailwind CSS 4, shadcn/ui, and Radix UI primitives.
+            Fonts: Poppins (headings) and Noto Sans Mono (code).
           </p>
         </TkCardContent>
       </TkCard>
 
-      {/* Features Grid */}
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         {features.map((feature) => {
           const Icon = feature.icon;
@@ -71,7 +68,7 @@ export default function Home() {
             <TkCard key={feature.title}>
               <TkCardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
+                  <div className="p-2 bg-primary/10">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
                   <TkCardTitle className="text-lg">{feature.title}</TkCardTitle>
@@ -85,7 +82,6 @@ export default function Home() {
         })}
       </div>
 
-      {/* Component Inventory */}
       <TkCard>
         <TkCardHeader>
           <TkCardTitle>Component Inventory</TkCardTitle>
@@ -98,7 +94,7 @@ export default function Home() {
             {inventory.map((item) => (
               <div
                 key={item.category}
-                className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-hover/25 hover:border-primary transition-colors cursor-pointer"
+                className="flex items-center justify-between p-4 border border-border hover:bg-secondary/50 transition-colors"
               >
                 <span className="font-medium">{item.category}</span>
                 <TkBadge variant="outline">{item.count}</TkBadge>
@@ -108,27 +104,26 @@ export default function Home() {
         </TkCardContent>
       </TkCard>
 
-      {/* Next Steps */}
       <TkCard className="mt-8 border-primary/50">
         <TkCardHeader>
-          <TkCardTitle>How to Use This Guide</TkCardTitle>
+          <TkCardTitle>Usage Rules</TkCardTitle>
         </TkCardHeader>
         <TkCardContent className="space-y-3">
           <div className="flex items-start gap-3">
             <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-            <p>Browse each category in the navigation to see all component variants</p>
+            <p>Use <code className="text-xs bg-muted px-1 py-0.5">intent</code> on buttons — one primary per section, secondary for supporting, danger for destructive</p>
           </div>
           <div className="flex items-start gap-3">
             <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-            <p>Toggle between light and dark themes to see how components adapt</p>
+            <p>Use <code className="text-xs bg-muted px-1 py-0.5">status</code> on badges for health indicators — color is determined by meaning, not choice</p>
           </div>
           <div className="flex items-start gap-3">
             <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-            <p>Interact with all components - buttons click, modals open, forms work</p>
+            <p>Use TkAppLayout with TkVerticalNav for consistent app chrome across both applications</p>
           </div>
           <div className="flex items-start gap-3">
             <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-            <p>Check the Service TkCard Demo for a realistic example from your applications</p>
+            <p>Check the Colors page for the full token reference and icon color examples</p>
           </div>
         </TkCardContent>
       </TkCard>
