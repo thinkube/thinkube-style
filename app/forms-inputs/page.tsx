@@ -2,14 +2,15 @@
 
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
-import { TkInput, TkTextarea, TkLabel, TkCheckbox, TkRadioGroup, TkRadioGroupItem, TkSwitch, TkPasswordInput } from "@/components/forms-inputs";
+import { TkInput, TkTextarea, TkLabel, TkCheckbox, TkRadioGroup, TkRadioGroupItem, TkSwitch, TkPasswordInput, TkFileInput, TkDropZone } from "@/components/forms-inputs";
 import { TkSelect, TkSelectContent, TkSelectGroup, TkSelectItem, TkSelectLabel, TkSelectTrigger, TkSelectValue } from "@/components/forms-inputs";
 import { TkButton } from "@/components/buttons-badges";
-import { Upload } from "lucide-react";
 import { useState } from "react";
 
 export default function FormsInputsPage() {
   const [serviceEnabled, setServiceEnabled] = useState(true);
+  const [singleFiles, setSingleFiles] = useState<File[]>([]);
+  const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
 
   return (
     <TkPageWrapper
@@ -274,30 +275,62 @@ export default function FormsInputsPage() {
         </TkCardContent>
       </TkCard>
 
-      {/* File TkInput */}
+      {/* TkFileInput */}
       <TkCard className="mb-8">
         <TkCardHeader>
-          <TkCardTitle>File TkInput</TkCardTitle>
-          <TkCardDescription>File upload controls</TkCardDescription>
+          <TkCardTitle>TkFileInput</TkCardTitle>
+          <TkCardDescription>
+            Native file input styled like a TkInput. Use when a simple file picker is enough.
+          </TkCardDescription>
         </TkCardHeader>
         <TkCardContent className="space-y-4">
           <div className="space-y-2">
-            <TkLabel htmlFor="file">Upload File</TkLabel>
-            <div className="flex items-center gap-2">
-              <TkInput id="file" type="file" className="cursor-pointer" />
-            </div>
+            <TkLabel htmlFor="file">Upload file</TkLabel>
+            <TkFileInput id="file" className="cursor-pointer" />
           </div>
 
           <div className="space-y-2">
-            <TkLabel htmlFor="custom-file">Custom File TkButton</TkLabel>
-            <div className="flex items-center gap-2">
-              <TkButton variant="outline">
-                <Upload className="mr-2 h-4 w-4" />
-                Choose File
-              </TkButton>
-              <span className="text-sm text-muted-foreground">No file chosen</span>
-            </div>
+            <TkLabel htmlFor="file-accept">Restricted types (.pem, .crt, .key)</TkLabel>
+            <TkFileInput id="file-accept" accept=".pem,.crt,.key" className="cursor-pointer" />
           </div>
+
+          <div className="space-y-2">
+            <TkLabel htmlFor="file-multiple">Multiple files</TkLabel>
+            <TkFileInput id="file-multiple" multiple className="cursor-pointer" />
+          </div>
+        </TkCardContent>
+      </TkCard>
+
+      {/* TkDropZone */}
+      <TkCard className="mb-8">
+        <TkCardHeader>
+          <TkCardTitle>TkDropZone</TkCardTitle>
+          <TkCardDescription>
+            Drag-and-drop file upload area with file list, size, and remove control.
+          </TkCardDescription>
+        </TkCardHeader>
+        <TkCardContent className="space-y-6">
+          <TkDropZone
+            label="Single file upload"
+            accept=".pem,.crt,.key,.txt"
+            files={singleFiles}
+            onFilesChange={setSingleFiles}
+          />
+
+          <TkDropZone
+            label="Multiple files"
+            multiple
+            required
+            accept="*"
+            files={multipleFiles}
+            onFilesChange={setMultipleFiles}
+          />
+
+          <TkDropZone
+            label="Disabled"
+            disabled
+            files={[]}
+          />
         </TkCardContent>
       </TkCard>
 

@@ -5,16 +5,13 @@
 
 "use client"
 
-import { useNavigate } from "react-router-dom"
-import { TkCard, TkCardContent, TkCardFooter, TkCardHeader } from "thinkube-style/components/cards-data"
-import { TkAlert, TkAlertDescription } from "thinkube-style/components/feedback"
-import { TkButton } from "thinkube-style/components/buttons-badges"
-import { TkPageWrapper } from "thinkube-style/components/utilities"
+import { TkCard, TkCardContent, TkCardFooter, TkCardHeader } from "@/components/cards-data"
+import { TkAlert, TkAlertDescription } from "@/components/feedback"
+import { TkButton } from "@/components/buttons-badges"
+import { TkPageWrapper } from "@/components/utilities"
 import { Info, CheckCircle2, ChevronRight } from "lucide-react"
 
 export default function Welcome() {
-  const navigate = useNavigate()
-
   return (
     <TkPageWrapper title="Welcome">
       <div className="flex items-center justify-center">

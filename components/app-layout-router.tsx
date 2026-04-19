@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings, Activity, BarChart3, Wrench, Rocket } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { TkThemeToggle } from "./theme";
 
@@ -25,6 +25,9 @@ const navigationItems = [
       { id: "navigation", label: "Navigation", lucideIcon: Sliders, href: "/navigation" },
       { id: "feedback", label: "Feedback", lucideIcon: Bell, href: "/feedback" },
       { id: "modals-overlays", label: "Modals & Overlays", lucideIcon: Container, href: "/modals-overlays" },
+      { id: "progress", label: "Progress", lucideIcon: Activity, href: "/progress" },
+      { id: "data-viz", label: "Data Viz", lucideIcon: BarChart3, href: "/data-viz" },
+      { id: "utilities", label: "Utilities", lucideIcon: Wrench, href: "/utilities" },
     ],
   },
   {
@@ -37,6 +40,7 @@ const navigationItems = [
       { id: "service-card-demo", label: "Service Cards", lucideIcon: Layers, href: "/service-card-demo" },
       { id: "vertical-nav-demo", label: "Vertical Nav", lucideIcon: Sliders, href: "/vertical-nav-demo" },
       { id: "installation-progress", label: "Installation Progress", lucideIcon: Settings, href: "/installation-progress-demo" },
+      { id: "installer-welcome", label: "Installer Welcome", lucideIcon: Rocket, href: "/installer-welcome" },
     ],
   },
 ];

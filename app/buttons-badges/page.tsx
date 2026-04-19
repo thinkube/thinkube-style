@@ -2,13 +2,15 @@
 
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
-import { TkButton } from "@/components/buttons-badges";
-import { TkBadge, TkSuccessBadge, TkWarningBadge, TkErrorBadge } from "@/components/buttons-badges";
-import { Heart, Download, Trash2, Plus, Settings, Loader2 } from "lucide-react";
+import { TkButton, TkIconButton, TkLoadingButton } from "@/components/buttons-badges";
+import { TkBadge, TkSuccessBadge, TkWarningBadge, TkErrorBadge, TkGpuBadge } from "@/components/buttons-badges";
+import { Heart, Download, Trash2, Plus, Settings, Loader2, Save, RefreshCw, Pencil } from "lucide-react";
 import { useState } from "react";
 
 export default function ButtonsBadgesPage() {
   const [loadingButtons, setLoadingButtons] = useState<Set<string>>(new Set());
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [syncLoading, setSyncLoading] = useState(false);
 
   const handleClick = (id: string) => {
     setLoadingButtons(new Set(loadingButtons.add(id)));
@@ -17,6 +19,11 @@ export default function ButtonsBadgesPage() {
       newSet.delete(id);
       setLoadingButtons(newSet);
     }, 2000);
+  };
+
+  const triggerLoading = (setter: (v: boolean) => void) => {
+    setter(true);
+    setTimeout(() => setter(false), 2000);
   };
 
   return (
@@ -143,6 +150,65 @@ export default function ButtonsBadgesPage() {
         </TkCardContent>
       </TkCard>
 
+      {/* Specialized Buttons */}
+      <TkCard className="mb-8">
+        <TkCardHeader>
+          <TkCardTitle>Specialized Buttons</TkCardTitle>
+          <TkCardDescription>
+            TkIconButton (icon-only) and TkLoadingButton (built-in loading state)
+          </TkCardDescription>
+        </TkCardHeader>
+        <TkCardContent className="space-y-6">
+          <div>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkIconButton</h3>
+            <p className="text-xs text-muted-foreground mb-3">
+              Defaults to <code className="text-xs">size="icon"</code> so icon-only buttons stay consistent.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <TkIconButton variant="outline" aria-label="Edit">
+                <Pencil className="h-4 w-4" />
+              </TkIconButton>
+              <TkIconButton variant="ghost" aria-label="Settings">
+                <Settings className="h-4 w-4" />
+              </TkIconButton>
+              <TkIconButton variant="destructive" aria-label="Delete">
+                <Trash2 className="h-4 w-4" />
+              </TkIconButton>
+              <TkIconButton aria-label="Save">
+                <Save className="h-4 w-4" />
+              </TkIconButton>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkLoadingButton</h3>
+            <p className="text-xs text-muted-foreground mb-3">
+              Pass <code className="text-xs">loading</code> to show a spinner and auto-disable the button.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <TkLoadingButton
+                loading={saveLoading}
+                onClick={() => triggerLoading(setSaveLoading)}
+              >
+                <Save className="mr-2 h-4 w-4" />
+                Save changes
+              </TkLoadingButton>
+              <TkLoadingButton
+                variant="secondary"
+                loading={syncLoading}
+                onClick={() => triggerLoading(setSyncLoading)}
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Sync now
+              </TkLoadingButton>
+              <TkLoadingButton loading variant="outline">
+                Always loading
+              </TkLoadingButton>
+            </div>
+          </div>
+        </TkCardContent>
+      </TkCard>
+
       {/* TkBadges */}
       <TkCard className="mb-8">
         <TkCardHeader>
@@ -193,8 +259,20 @@ export default function ButtonsBadgesPage() {
               <TkErrorBadge>Unhealthy</TkErrorBadge>
               <TkBadge variant="outline">Vue.js</TkBadge>
               <TkBadge variant="outline">FastAPI</TkBadge>
-              <TkBadge variant="outline" className="border-[var(--color-warning)] text-[var(--color-warning)]">GPU</TkBadge>
-              <TkBadge className="text-sm px-3 py-1 border-[var(--color-warning)]/40 bg-[var(--color-warning)]/10 text-[var(--color-warning)] font-semibold">4 GPUs</TkBadge>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-medium mb-3 text-muted-foreground">TkGpuBadge</h3>
+            <p className="text-xs text-muted-foreground mb-3">
+              Specialized badge for GPU count with accent styling. Auto-pluralizes.
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <TkGpuBadge gpuCount={1} size="sm" />
+              <TkGpuBadge gpuCount={2} size="sm" />
+              <TkGpuBadge gpuCount={1} />
+              <TkGpuBadge gpuCount={4} />
+              <TkGpuBadge gpuCount={8} />
             </div>
           </div>
         </TkCardContent>

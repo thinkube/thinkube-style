@@ -14,6 +14,7 @@ import '@fontsource/noto-sans-mono/700.css';
 
 import { TkThemeProvider } from '@/components/theme/theme-provider';
 import { AppLayout } from '@/components/app-layout-router';
+import { TkToaster } from '@/components/feedback';
 
 // Import all pages
 import HomePage from './page';
@@ -24,6 +25,9 @@ import NavigationPage from './navigation/page';
 import FeedbackPage from './feedback/page';
 import ModalsOverlaysPage from './modals-overlays/page';
 import BrandIconsPage from './brand-icons/page';
+import ProgressPage from './progress/page';
+import DataVizPage from './data-viz/page';
+import UtilitiesPage from './utilities/page';
 import ServiceCardDemoPage from './service-card-demo/page';
 import VerticalNavDemoPage from './vertical-nav-demo/page';
 import InstallationProgressDemoPage from './installation-progress-demo/page';
@@ -48,6 +52,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/navigation" element={<NavigationPage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/modals-overlays" element={<ModalsOverlaysPage />} />
+            <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/data-viz" element={<DataVizPage />} />
+            <Route path="/utilities" element={<UtilitiesPage />} />
             <Route path="/brand-icons" element={<BrandIconsPage />} />
             <Route path="/service-card-demo" element={<ServiceCardDemoPage />} />
             <Route path="/vertical-nav-demo" element={<VerticalNavDemoPage />} />
@@ -56,6 +63,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/test-minimal" element={<TestMinimalPage />} />
           </Routes>
         </AppLayout>
+        <TkToaster />
       </BrowserRouter>
     </TkThemeProvider>
   </React.StrictMode>
