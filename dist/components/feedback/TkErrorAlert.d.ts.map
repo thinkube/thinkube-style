@@ -1,0 +1,1 @@
+{"version":3,"file":"TkErrorAlert.d.ts","sourceRoot":"","sources":["../../../components/feedback/TkErrorAlert.tsx"],"names":[],"mappings":"AAOA,OAAO,EAAE,SAAS,EAAE,MAAM,OAAO,CAAA;AAEjC,UAAU,iBAAiB;IACzB,KAAK,CAAC,EAAE,MAAM,CAAA;IACd,QAAQ,EAAE,SAAS,CAAA;IACnB,SAAS,CAAC,EAAE,MAAM,CAAA;CACnB;AAED;;;GAGG;AACH,wBAAgB,YAAY,CAAC,EAAE,KAAK,EAAE,QAAQ,EAAE,SAAc,EAAE,EAAE,iBAAiB,2CAqBlF"}

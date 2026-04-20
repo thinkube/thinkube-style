@@ -1,0 +1,1 @@
+{"version":3,"file":"TkIconButton.d.ts","sourceRoot":"","sources":["../../../components/buttons-badges/TkIconButton.tsx"],"names":[],"mappings":"AAKA,OAAO,EAAE,MAAM,EAAE,MAAM,wBAAwB,CAAA;AAC/C,OAAO,EAAE,cAAc,EAAE,MAAM,OAAO,CAAA;AAEtC,KAAK,iBAAiB,GAAG,cAAc,CAAC,OAAO,MAAM,CAAC,CAAA;AAEtD;;;GAGG;AACH,wBAAgB,YAAY,CAAC,EAAE,IAAa,EAAE,GAAG,KAAK,EAAE,EAAE,iBAAiB,2CAE1E"}

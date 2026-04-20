@@ -1,0 +1,1 @@
+{"version":3,"file":"TkFileInput.d.ts","sourceRoot":"","sources":["../../../components/forms-inputs/TkFileInput.tsx"],"names":[],"mappings":"AAKA,OAAO,EAAE,KAAK,EAAE,MAAM,uBAAuB,CAAA;AAC7C,OAAO,EAAE,cAAc,EAAE,MAAM,OAAO,CAAA;AAEtC,KAAK,gBAAgB,GAAG,IAAI,CAAC,cAAc,CAAC,OAAO,KAAK,CAAC,EAAE,MAAM,CAAC,CAAA;AAElE;;;GAGG;AACH,wBAAgB,WAAW,CAAC,KAAK,EAAE,gBAAgB,2CAElD"}

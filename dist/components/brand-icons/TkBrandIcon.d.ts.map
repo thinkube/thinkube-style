@@ -1,0 +1,1 @@
+{"version":3,"file":"TkBrandIcon.d.ts","sourceRoot":"","sources":["../../../components/brand-icons/TkBrandIcon.tsx"],"names":[],"mappings":"AAKA,UAAU,gBAAgB;IACxB,IAAI,EAAE,MAAM,CAAA;IACZ,GAAG,EAAE,MAAM,CAAA;IACX,IAAI,CAAC,EAAE,MAAM,CAAA;IACb,SAAS,CAAC,EAAE,MAAM,CAAA;CACnB;AAED;;;GAGG;AACH,wBAAgB,WAAW,CAAC,EAAE,IAAI,EAAE,GAAG,EAAE,IAAS,EAAE,SAAc,EAAE,EAAE,gBAAgB,2CAiBrF"}

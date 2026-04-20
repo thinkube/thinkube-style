@@ -1,0 +1,1 @@
+{"version":3,"file":"TkErrorBadge.js","sourceRoot":"","sources":["../../../components/buttons-badges/TkErrorBadge.tsx"],"names":[],"mappings":";AAAA;;;GAGG;AAEH,OAAO,EAAE,KAAK,EAAE,MAAM,uBAAuB,CAAA;AAQ7C;;;GAGG;AACH,MAAM,UAAU,YAAY,CAAC,EAAE,QAAQ,EAAE,SAAS,GAAG,EAAE,EAAqB;IAC1E,OAAO,CACL,KAAC,KAAK,IAAC,OAAO,EAAC,aAAa,EAAC,SAAS,EAAE,SAAS,YAC9C,QAAQ,GACH,CACT,CAAA;AACH,CAAC"}
