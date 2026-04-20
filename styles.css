@@ -39,9 +39,9 @@
 .dark {
   --background: oklch(12% 0.01 260);
   --foreground: oklch(93% 0.01 85);
-  --card: oklch(22% 0.01 260);
+  --card: oklch(25% 0.01 260);
   --card-foreground: oklch(93% 0.01 85);
-  --popover: oklch(22% 0.01 260);
+  --popover: oklch(25% 0.01 260);
   --popover-foreground: oklch(93% 0.01 85);
   --primary: oklch(62% 0.13 220);
   --primary-foreground: oklch(100% 0 0);
