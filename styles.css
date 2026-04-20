@@ -70,12 +70,12 @@
 
 /* Base styles */
 * {
-  border-color: var(--color-border);
+  border-color: var(--border);
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -122,6 +122,6 @@ select,
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--color-background);
+  background: var(--background);
   z-index: 11;
 }
