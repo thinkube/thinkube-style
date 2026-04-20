@@ -53,5 +53,21 @@ export { TkVerticalNav, TkBreadcrumbs, TkDropdownMenu, TkTabs } from "./navigati
 // Utilities
 export { TkSeparator, TkAvatar, TkPageWrapper } from "./utilities"
 
+// Service Cards
+export { TkServiceCard } from "./service-cards"
+export type { TkServiceData, TkServiceCardProps } from "./service-cards"
+
+// Component Cards
+export { TkComponentCard } from "./component-cards"
+export type { TkComponentData, TkComponentCardProps } from "./component-cards"
+
+// Data Visualization
+export { TkHealthChart, TkSemicircularGauge, TkMetricsCard } from "./data-viz"
+export type { TkHealthChartProps, HealthCheckData, TkSemicircularGaugeProps, TkMetricGauge, TkMetricItem, TkMetricsCardProps } from "./data-viz"
+
+// Playbook Executor
+export { TkPlaybookExecutor } from "./playbook-executor"
+export type { TkPlaybookExecutorProps, TkPlaybookExecutorHandle, TkPlaybookLogEntry, TkPlaybookTaskSummary, TkPlaybookResult } from "./playbook-executor"
+
 // Layout
 export { TkAppLayout, type TkNavItem } from "./TkAppLayout"
