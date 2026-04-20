@@ -15,19 +15,14 @@ export function TkPageWrapper({
   description?: string;
 }) {
   return (
-    <div className="container mx-auto px-6 py-8" style={{
-      willChange: 'transform',
-      transform: 'translateZ(0)',
-      backfaceVisibility: 'hidden' as const,
-      WebkitBackfaceVisibility: 'hidden' as const,
-      perspective: 1000,
-      WebkitPerspective: 1000
-    }}>
-      {title && (
-        <div className="mb-8">
-          <h1 className="text-2xl font-heading font-bold mb-2">{title}</h1>
+    <div className="space-y-6 p-8">
+      {(title || description) && (
+        <div>
+          {title && (
+            <h1 className="text-2xl font-heading font-bold">{title}</h1>
+          )}
           {description && (
-            <p className="text-sm text-muted-foreground">{description}</p>
+            <p className="text-muted-foreground mt-1">{description}</p>
           )}
         </div>
       )}
