@@ -30,42 +30,61 @@
 
   --success: oklch(55% 0.16 155);
   --success-foreground: oklch(100% 0 0);
-  --warning: oklch(70% 0.19 50);
+  --warning: oklch(53.9% 0.114 75);
   --warning-foreground: oklch(100% 0 0);
   --info: oklch(55% 0.20 260);
   --info-foreground: oklch(100% 0 0);
+
+  /*
+   * Secondary brand color: the orange of the Thinkube shell prompt (#FF6B35).
+   * --secondary above stays a neutral surface (progress tracks, nav hover,
+   * secondary buttons). Use --brand-secondary for orange fills and
+   * --brand-secondary-text where orange is text or a thin line.
+   */
+  --brand-secondary: oklch(70.5% 0.193 39);
+  --brand-secondary-foreground: oklch(25.9% 0.047 219);
+  --brand-secondary-text: oklch(55.3% 0.174 38);
 }
 
 .dark {
-  --background: oklch(12% 0.01 260);
-  --foreground: oklch(93% 0.01 85);
-  --card: oklch(25% 0.01 260);
-  --card-foreground: oklch(93% 0.01 85);
-  --popover: oklch(25% 0.01 260);
-  --popover-foreground: oklch(93% 0.01 85);
-  --primary: oklch(62% 0.13 220);
-  --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(28% 0.01 260);
-  --secondary-foreground: oklch(90% 0.01 85);
-  --muted: oklch(28% 0.01 260);
-  --muted-foreground: oklch(70% 0.01 260);
-  --accent: oklch(28% 0.01 260);
-  --accent-foreground: oklch(90% 0.01 85);
-  --destructive: oklch(63% 0.21 25);
+  /*
+   * Dark palette of the Thinkube IDE theme (thinkube-theme, Thinkube Dark):
+   * #002933 background, #003240 cards, #004051 muted surfaces, #005a6e hover,
+   * #40647d borders, #bbf2ff primary.
+   */
+  --background: oklch(25.9% 0.047 219);
+  --foreground: oklch(100% 0 0);
+  --card: oklch(29.4% 0.055 223);
+  --card-foreground: oklch(100% 0 0);
+  --popover: oklch(29.4% 0.055 223);
+  --popover-foreground: oklch(100% 0 0);
+  --primary: oklch(92.8% 0.058 214);
+  --primary-foreground: oklch(25.9% 0.047 219);
+  --secondary: oklch(34.5% 0.064 223);
+  --secondary-foreground: oklch(100% 0 0);
+  --muted: oklch(34.5% 0.064 223);
+  --muted-foreground: oklch(80.1% 0.031 221);
+  --accent: oklch(34.5% 0.064 223);
+  --accent-foreground: oklch(100% 0 0);
+  --destructive: oklch(54.3% 0.176 17);
   --destructive-foreground: oklch(100% 0 0);
-  --border: oklch(40% 0.01 260);
-  --input: oklch(28% 0.01 260);
-  --ring: oklch(62% 0.13 220);
+  --border: oklch(48.6% 0.058 240);
+  --input: oklch(25.9% 0.047 219);
+  --ring: oklch(92.8% 0.058 214);
 
-  --hover: oklch(32% 0.02 260);
+  --hover: oklch(43.2% 0.079 220);
   --hover-foreground: oklch(100% 0 0);
 
-  --success: oklch(65% 0.16 155);
-  --success-foreground: oklch(100% 0 0);
-  --warning: oklch(75% 0.18 50);
-  --warning-foreground: oklch(100% 0 0);
-  --info: oklch(65% 0.18 260);
-  --info-foreground: oklch(100% 0 0);
+  --success: oklch(73.9% 0.152 167);
+  --success-foreground: oklch(25.9% 0.047 219);
+  --warning: oklch(83.7% 0.164 84);
+  --warning-foreground: oklch(25.9% 0.047 219);
+  --info: oklch(87.2% 0.101 216);
+  --info-foreground: oklch(25.9% 0.047 219);
+
+  --brand-secondary: oklch(70.5% 0.193 39);
+  --brand-secondary-foreground: oklch(25.9% 0.047 219);
+  --brand-secondary-text: oklch(75.5% 0.154 42);
 }
 
 /* Base styles */
