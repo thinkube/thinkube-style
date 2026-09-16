@@ -36,13 +36,18 @@
   --info-foreground: oklch(100% 0 0);
 
   /*
-   * Secondary brand color: the orange of the Thinkube shell prompt (#FF6B35).
+   * Secondary brand color: the orange of the Thinkube shell prompt.
    * --secondary above stays a neutral surface (progress tracks, nav hover,
-   * secondary buttons). Use --brand-secondary for orange fills and
-   * --brand-secondary-text where orange is text or a thin line.
+   * secondary buttons).
+   *
+   * --brand-secondary is the fill that carries text (#C2410C): white reads
+   * at 5.2 on it and at 2.8 on the bright orange. --brand-secondary-bright
+   * (#FF6B35) is for marks with no text on them: bars, lines, dots.
+   * --brand-secondary-text is orange as text or a thin line.
    */
-  --brand-secondary: oklch(70.5% 0.193 39);
-  --brand-secondary-foreground: oklch(25.9% 0.047 219);
+  --brand-secondary: oklch(55.3% 0.174 38);
+  --brand-secondary-foreground: oklch(100% 0 0);
+  --brand-secondary-bright: oklch(70.5% 0.193 39);
   --brand-secondary-text: oklch(55.3% 0.174 38);
 }
 
@@ -82,8 +87,9 @@
   --info: oklch(87.2% 0.101 216);
   --info-foreground: oklch(25.9% 0.047 219);
 
-  --brand-secondary: oklch(70.5% 0.193 39);
-  --brand-secondary-foreground: oklch(25.9% 0.047 219);
+  --brand-secondary: oklch(55.3% 0.174 38);
+  --brand-secondary-foreground: oklch(100% 0 0);
+  --brand-secondary-bright: oklch(70.5% 0.193 39);
   --brand-secondary-text: oklch(75.5% 0.154 42);
 }
 

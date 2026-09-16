@@ -43,6 +43,7 @@
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
   --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-bright: var(--brand-secondary-bright);
   --color-brand-secondary-foreground: var(--brand-secondary-foreground);
   --color-brand-secondary-text: var(--brand-secondary-text);
 
