@@ -1,38 +1,41 @@
 # Thinkube Style
 
-A comprehensive React component library and style guide for Thinkube applications, built with Vite 5 and shadcn/ui.
+A React component library for Thinkube applications, and a style-guide app that shows every component. Built with Vite, Tailwind CSS and shadcn/ui.
 
-## 🎯 Purpose
+## What it does
 
-This repository serves two critical functions:
+- **Component library.** 65 React components, all named with the `Tk`
+  prefix, in category folders under `components/`. They are built on
+  shadcn/ui (`components/ui/`) and Radix UI primitives.
+- **Theme tokens.** `styles.css` defines the light and dark colour tokens
+  and the fonts. Every project that uses the library imports this file.
+- **Theme switch.** `TkThemeProvider`, `useTkTheme` and `TkThemeToggle`
+  (`components/theme/`) set the theme to light, dark or the system setting,
+  with the `light` or `dark` class on the root element.
+- **Style-guide app.** `app/` is a Vite app with one page per category and
+  live examples of each component. `npm run build` writes it to
+  `demo-dist/`, and `Containerfile.jinja` serves it with nginx.
+- **Migration documentation.** Guides for moving from Vue + DaisyUI to
+  React + shadcn/ui (see [Documentation](#documentation)).
 
-1. **Component Library**: 56+ Tk-prefixed React components for Thinkube applications
-2. **Migration Guide**: Complete documentation for migrating from Vue + DaisyUI to React + shadcn/ui
+## How it reaches a user
 
-## ✨ Features
+It reaches a user in two ways. It is not installed on its own.
 
-- **56+ Thinkube Components**: All prefixed with `Tk` for easy identification
-- **shadcn/ui Foundation**: Built on top of Radix UI primitives
-- **Direct Import Pattern**: Avoids barrel export issues for better tree-shaking
-- **Complete Demo Application**: Live examples of every component
-- **Migration Documentation**: Step-by-step guides for Vue to React conversion
-- **Apache 2.0 Licensed**: Open source and enterprise-friendly
+- **As a GitHub dependency.** thinkube-control, the Thinkube installer, and
+  the templates tkt-webapp-react-fastapi, tkt-docling and tkt-seaweedfs list
+  it in their `package.json` as `"thinkube-style": "github:thinkube/thinkube-style"`.
+  It is not published to a package registry. When a project installs its
+  dependencies, the `prepare` script builds the library into `dist/`.
+- **As a template.** The style-guide app is on the Templates page of
+  thinkube-control (`repositories.json` in thinkube-metadata, type
+  `application_template`). Deploying it builds the container from
+  `Containerfile.jinja` and serves the app on `/`, with `/health` for the
+  health check (`thinkube.yaml`, `nginx.conf`).
 
-## 📦 Installation
+See [Thinkube](https://github.com/thinkube/thinkube) for the platform.
 
-Install directly from GitHub in your Thinkube projects:
-
-```bash
-npm install github:thinkube/thinkube-style
-```
-
-Or using yarn:
-
-```bash
-yarn add github:thinkube/thinkube-style
-```
-
-## 🚀 Usage
+## Usage
 
 ### Important: Direct Imports Only
 
@@ -48,19 +51,29 @@ import { TkInput, TkLabel } from 'thinkube-style/components/forms-inputs'
 import { TkButton } from 'thinkube-style'
 ```
 
+`components/index.ts` still re-exports every component, and `package.json`
+maps `thinkube-style` to it. Do not import from it: use the category paths
+(`thinkube-style/components/<category>`).
+
 ### Component Categories
 
-- **buttons-badges**: Buttons, badges, loading states
-- **cards-data**: Cards, stats cards, highlight cards
-- **forms-inputs**: Inputs, selects, checkboxes, switches
+- **buttons-badges**: Buttons, badges, loading buttons, GPU badge
+- **cards-data**: Cards, stat cards
+- **component-cards**: Component card
+- **data-viz**: Health chart, semicircular gauge, metrics card
+- **forms-inputs**: Inputs, password input, textarea, selects, checkboxes, radio groups, switches, file input, drop zone
 - **tables**: Table components
-- **modals-overlays**: Dialogs, tooltips, overlays
-- **navigation**: Navigation components
-- **progress**: Progress bars, step indicators
-- **feedback**: Alerts, loaders, status messages
+- **modals-overlays**: Dialogs, confirm dialog, tooltips
+- **navigation**: Vertical navigation, breadcrumbs, dropdown menu, tabs, folder tabs
+- **progress**: Progress bars, subway progress, step list, dot progress
+- **feedback**: Alerts, loaders, status indicator, code block, toasts
 - **brand-icons**: Thinkube brand icons
-- **service-cards**: Complex service card components
-- **utilities**: Separators, avatars, helpers
+- **service-cards**: Service card
+- **playbook-executor**: Playbook executor with its log
+- **theme**: Theme provider and theme toggle
+- **utilities**: Separators, avatars, page wrapper, app header
+
+`TkAppLayout` is in `components/TkAppLayout.tsx`.
 
 ### Example Usage
 
@@ -82,27 +95,38 @@ export function MyComponent() {
 }
 ```
 
-## 🎨 Design System
+## Design System
 
 ### Colors
 
-All components use CSS variables for consistent theming:
+All components use the CSS variables in `styles.css`. Each has a light value
+(`:root`) and a dark value (`.dark`), and a `-foreground` variable for text
+on it:
 
 ```css
---color-primary: Thinkube teal
---color-accent: Thinkube orange
---color-success: Green states
---color-warning: Yellow states
---color-error: Red states
---color-info: Blue states
+--primary              /* Thinkube teal */
+--brand-secondary      /* Thinkube orange (#FF6B35), with white on it */
+--brand-secondary-text /* orange as text or a thin line */
+--success              /* green states */
+--warning              /* yellow states */
+--destructive          /* red states */
+--info                 /* blue states */
+--background, --foreground, --card, --popover, --secondary,
+--muted, --accent, --border, --input, --ring, --radius
 ```
+
+`--secondary` and `--accent` are neutral surfaces, not the orange. The dark
+values follow the Thinkube Dark theme of the IDE. The Tailwind theme
+(`app/globals.css`) maps each variable to a `--color-*` name, for example
+`--color-primary` and `--color-brand-secondary`, so Tailwind classes such as
+`bg-primary` use them.
 
 ### Typography
 
-- **Headings**: Roboto Slab
-- **Body**: Poppins
+- **All text**: Poppins (`--font-poppins`)
+- **Code**: Noto Sans Mono (`--font-noto-sans-mono`)
 
-## 📚 Documentation
+## Documentation
 
 ### Migration Guides
 
@@ -110,6 +134,35 @@ All components use CSS variables for consistent theming:
 - [Design Patterns](DESIGN_PATTERNS.md) - When to create Tk components
 - [Code Quality Rules](CODE_QUALITY_RULES.md) - Standards and best practices
 - [Migration Strategy](MIGRATION_STRATEGY.md) - Step-by-step migration process
+
+## Tech Stack
+
+- **Vite 7** - build tool and development server
+- **React 19** - UI library
+- **Tailwind CSS 4** - utility-first CSS
+- **shadcn/ui** - component primitives
+- **Radix UI** - accessible component foundation
+- **TypeScript 5** - type safety
+
+## Project Structure
+
+```
+thinkube-style/
+├── app/                   # Style-guide app: one folder per category page
+├── components/            # Component library
+│   ├── buttons-badges/    # Button components
+│   ├── cards-data/        # Card components
+│   ├── forms-inputs/      # Form components
+│   ├── ui/                # shadcn/ui primitives
+│   └── ...                # Other categories
+├── lib/                   # Utility functions
+├── public/                # Static files for the app
+├── styles.css             # Theme tokens and base styles
+├── Containerfile.jinja    # Container for the style-guide app
+└── thinkube.yaml          # Deployment of the style-guide app
+```
+
+## Working on it
 
 ### Running the Demo Application
 
@@ -127,34 +180,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to see all components in action.
 
-## 🏗️ Tech Stack
+### Other scripts
 
-- **Vite 5.0.1** - React framework with Turbopack
-- **React 19.2.0** - UI library
-- **Tailwind CSS 4.1** - Utility-first CSS
-- **shadcn/ui** - Component primitives
-- **Radix UI** - Accessible component foundation
-- **TypeScript 5** - Type safety
+- `npm run build:lib` - build the library into `dist/` (also run by `prepare`)
+- `npm run build` - build the style-guide app into `demo-dist/`
+- `npm run preview` - serve the built app
+- `npm run lint` - run ESLint
 
-## 📂 Project Structure
-
-```
-thinkube-style/
-├── src/                    # Demo application pages
-│   ├── [ComponentName].tsx           # Homepage
-│   ├── buttons-badges/    # Button demos
-│   ├── cards-data/        # Card demos
-│   └── ...                # Other demo pages
-├── components/            # Component library
-│   ├── buttons-badges/    # Button components
-│   ├── cards-data/        # Card components
-│   ├── forms-inputs/      # Form components
-│   └── ...                # Other categories
-├── lib/                   # Utility functions
-└── styles/               # Global styles
-```
-
-## 🤝 Contributing
+### Contributing
 
 This is a Thinkube internal project. For contributions:
 
@@ -163,23 +196,13 @@ This is a Thinkube internal project. For contributions:
 3. Ensure all components follow the Tk prefix convention
 4. Submit a pull request
 
-## 📄 License
+## Related Projects
+
+- [thinkube-installer](https://github.com/thinkube/thinkube-installer) - Thinkube installer application
+- [thinkube-control](https://github.com/thinkube/thinkube-control) - Thinkube control panel
+
+## License
 
 Copyright Alejandro Martínez Corriá and the Thinkube contributors
 
 Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) file for details.
-
-## 🔗 Related Projects
-
-- [thinkube-installer-react](https://github.com/thinkube/thinkube-installer-react) - Thinkube installer application
-- [thinkube-control](https://github.com/thinkube/thinkube-control) - Thinkube control panel
-
-## ⚠️ Important Notes
-
-### Barrel Export Issue
-
-The main `components/index.ts` file has barrel exports disabled to prevent circular dependency issues. Always import components directly from their category folders as shown in the usage examples.
-
----
-
-Built with ❤️ by the Thinkube team
