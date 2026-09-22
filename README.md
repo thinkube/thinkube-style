@@ -165,7 +165,7 @@ This is a Thinkube internal project. For contributions:
 
 ## 📄 License
 
-Copyright 2025 Alejandro Martínez Corriá and the Thinkube contributors
+Copyright Alejandro Martínez Corriá and the Thinkube contributors
 
 Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) file for details.
 
