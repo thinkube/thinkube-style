@@ -180,10 +180,6 @@ Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) file for 
 
 The main `components/index.ts` file has barrel exports disabled to prevent circular dependency issues. Always import components directly from their category folders as shown in the usage examples.
 
-### Version 0.1.0
-
-This is an initial release. The API may change in future versions as we refine the component library based on usage in production applications.
-
 ---
 
 Built with ❤️ by the Thinkube team
