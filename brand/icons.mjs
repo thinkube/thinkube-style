@@ -1,8 +1,9 @@
 // Copyright Alejandro Martínez Corriá and the Thinkube contributors
 // SPDX-License-Identifier: Apache-2.0
 
-// Thinkube service icons: one hexagon frame with a symbol cut out of it.
-// Symbols are described relative to the hexagon centre, in icon units.
+// Thinkube hexagon icons: one hexagon frame with a symbol cut out of it.
+// The symbol is a Thinkube drawing (below), a Lucide icon (lucideToSVG) or a
+// character (charToSVG). Symbols are drawn around the hexagon centre, in icon units.
 //
 // Rules shared by every symbol:
 //   - one line thickness W (12% of the hexagon radius, as the logo's chip);
@@ -188,19 +189,43 @@ export function framePath(cx, cy, R = FRAME.R, r = FRAME.r) {
   return rounded(hexPoints(cx, cy, R), r, true);
 }
 
-// Standalone SVG: the hexagon filled with `color`, the symbol cut out through a mask.
-export function toSVG(name, color, p = DEFAULTS[name]) {
+// Standalone SVG: the hexagon filled with `color`, with `symbol` (mask content drawn
+// around the origin, black = cut out) removed from it.
+function frameSVG(id, symbol, color) {
   // Rounding the top and bottom vertices lowers the hexagon's height by `trim` at each end.
   const w = FRAME.R * Math.sqrt(3), trim = FRAME.r / Math.sin(60 * D2R) - FRAME.r;
-  const h = 2 * FRAME.R - 2 * trim, cx = w / 2, cy = h / 2, id = `tk-${name}-symbol`;
+  const h = 2 * FRAME.R - 2 * trim, cx = w / 2, cy = h / 2;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${fmt(w)}pt" height="${fmt(h)}pt" viewBox="0 0 ${fmt(w)} ${fmt(h)}">`
+    + `<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${fmt(w)}" height="${fmt(h)}">`
+    + `<rect width="${fmt(w)}" height="${fmt(h)}" fill="#fff"/><g transform="translate(${fmt(cx)} ${fmt(cy)})">${symbol}</g></mask></defs>`
+    + `<path d="${framePath(cx, cy)}" fill="${color}" mask="url(#${id})"/></svg>\n`;
+}
+
+export function toSVG(name, color, p = DEFAULTS[name]) {
   const ops = build(name, p).map((o) => {
     const c = o.op === 'cut' ? '#000' : '#fff';
     return o.stroke
       ? `<path d="${o.d}" fill="none" stroke="${c}" stroke-width="${fmt(o.stroke)}" stroke-linecap="round" stroke-linejoin="round"/>`
       : `<path d="${o.d}" fill="${c}"/>`;
   }).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${fmt(w)}pt" height="${fmt(h)}pt" viewBox="0 0 ${fmt(w)} ${fmt(h)}">`
-    + `<defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${fmt(w)}" height="${fmt(h)}">`
-    + `<rect width="${fmt(w)}" height="${fmt(h)}" fill="#fff"/><g transform="translate(${fmt(cx)} ${fmt(cy)})">${ops}</g></mask></defs>`
-    + `<path d="${framePath(cx, cy)}" fill="${color}" mask="url(#${id})"/></svg>\n`;
+  return frameSVG(`tk-${name}-symbol`, ops, color);
+}
+
+// Lucide icons in the hexagon: the 24-unit Lucide grid is scaled by LUCIDE_SCALE
+// around the hexagon centre and stroked at W, the line thickness of every symbol.
+export const LUCIDE_SCALE = 7;
+
+export function lucideToSVG(name, source, color) {
+  const inner = source.replace(/<!--[\s\S]*?-->/g, '').replace(/^[\s\S]*?<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '').replace(/currentColor/g, '#000').replace(/\s+/g, ' ').trim();
+  const s = LUCIDE_SCALE;
+  const g = `<g transform="scale(${fmt(s)}) translate(-12 -12)" fill="none" stroke="#000" stroke-width="${fmt(W / s)}" `
+    + `stroke-linecap="round" stroke-linejoin="round">${inner}</g>`;
+  return frameSVG(`tk-lucide-${name}-symbol`, g, color);
+}
+
+// Characters in the hexagon: `d` is the character outline centred on the origin,
+// written by build_chars.py into chars.json.
+export function charToSVG(key, d, color) {
+  return frameSVG(`tk-char-${key}-symbol`, `<path d="${d}" fill="#000"/>`, color);
 }
