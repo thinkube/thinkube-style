@@ -12,28 +12,34 @@
   --font-poppins: "Poppins", system-ui, -apple-system, sans-serif;
   --font-noto-sans-mono: "Noto Sans Mono", "Courier New", monospace;
 
-  --background: oklch(98.5% 0.01 85);
-  --foreground: oklch(16% 0.01 260);
-  --card: oklch(99.5% 0.005 85);
-  --card-foreground: oklch(16% 0.01 260);
-  --popover: oklch(99.5% 0.005 85);
-  --popover-foreground: oklch(16% 0.01 260);
-  --primary: oklch(40% 0.12 220);
+  /*
+   * Light palette shared with the Thinkube IDE theme (Thinkube Light) and
+   * the JupyterLab theme: #fdfaf3 background, #ffffff cards, #212121 text,
+   * #f0ece4 muted surfaces, #d1cdc7 borders, #dad7d0 input borders.
+   * Primary is the logo teal #006680.
+   */
+  --background: oklch(98.5% 0.01 87);
+  --foreground: oklch(24.8% 0 0);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(24.8% 0 0);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(24.8% 0 0);
+  --primary: oklch(47.37% 0.0884 223.2);
   --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(95% 0.01 85);
+  --secondary: oklch(94.4% 0.012 85);
   --secondary-foreground: oklch(30% 0.01 260);
-  --muted: oklch(95% 0.01 85);
+  --muted: oklch(94.4% 0.012 85);
   --muted-foreground: oklch(55% 0.01 260);
-  --accent: oklch(95% 0.01 85);
+  --accent: oklch(94.4% 0.012 85);
   --accent-foreground: oklch(30% 0.01 260);
   --destructive: oklch(55% 0.22 27);
   --destructive-foreground: oklch(100% 0 0);
-  --border: oklch(92% 0.01 85);
-  --input: oklch(92% 0.01 85);
-  --ring: oklch(40% 0.12 220);
+  --border: oklch(85% 0.009 78);
+  --input: oklch(88% 0.01 87);
+  --ring: oklch(47.37% 0.0884 223.2);
   --radius: 0rem;
 
-  --success: oklch(55% 0.16 155);
+  --success: oklch(55.06% 0.1358 155.1);
   --success-foreground: oklch(100% 0 0);
   --warning: oklch(53.9% 0.114 75);
   --warning-foreground: oklch(100% 0 0);
@@ -41,98 +47,110 @@
   --info-foreground: oklch(100% 0 0);
 
   /*
-   * Secondary brand color: the orange of the Thinkube shell prompt.
+   * Brand mark color: the logo teal #006680 in the light theme, the icon
+   * cream #ede4d6 in the dark one, the colors of the brand icons.
    * --secondary above stays a neutral surface (progress tracks, nav hover,
    * secondary buttons).
    *
-   * --brand-secondary is the orange fill (#FF6B35), with white on it.
-   * --brand-secondary-text is orange as text or a thin line, on a light
-   * background.
+   * --brand-secondary is the mark fill, with --brand-secondary-foreground on
+   * it. It draws the line under the top bar, the bar of the selected menu
+   * item and the mark of the active tab.
+   * --brand-secondary-text is the mark color as text or a thin line.
    */
-  --brand-secondary: oklch(70.5% 0.193 39);
+  --brand-secondary: oklch(47.37% 0.0884 223.2);
   --brand-secondary-foreground: oklch(100% 0 0);
-  --brand-secondary-text: oklch(55.3% 0.174 38);
+  --brand-secondary-text: oklch(47.37% 0.0884 223.2);
 }
 
 .dark {
   /*
-   * Dark palette of the Thinkube IDE theme (thinkube-theme, Thinkube Dark):
-   * #002933 background, #003240 cards, #004051 muted surfaces, #005a6e hover,
-   * #40647d borders, #bbf2ff primary.
+   * Dark palette shared with the Thinkube IDE theme (Thinkube Dark) and the
+   * JupyterLab theme: #004051 background (editor, notebook area), #003240
+   * cards (side bar, cells), #005a6e muted surfaces, #00718e hover,
+   * #002933 inputs, #40647d borders. Primary is the icon cream #ede4d6,
+   * with #002933 text on it. State colors are light so they read as text on
+   * these surfaces, with #002933 text on their fills.
    */
-  --background: oklch(25.9% 0.047 219);
+  --background: oklch(34.5% 0.064 223);
   --foreground: oklch(100% 0 0);
   --card: oklch(29.4% 0.055 223);
   --card-foreground: oklch(100% 0 0);
   --popover: oklch(29.4% 0.055 223);
   --popover-foreground: oklch(100% 0 0);
-  --primary: oklch(92.8% 0.058 214);
+  --primary: oklch(92.2% 0.0211 79.1);
   --primary-foreground: oklch(25.9% 0.047 219);
-  --secondary: oklch(34.5% 0.064 223);
+  --secondary: oklch(43.2% 0.079 220);
   --secondary-foreground: oklch(100% 0 0);
-  --muted: oklch(34.5% 0.064 223);
+  --muted: oklch(43.2% 0.079 220);
   --muted-foreground: oklch(80.1% 0.031 221);
-  --accent: oklch(34.5% 0.064 223);
+  --accent: oklch(43.2% 0.079 220);
   --accent-foreground: oklch(100% 0 0);
-  --destructive: oklch(54.3% 0.176 17);
-  --destructive-foreground: oklch(100% 0 0);
+  --destructive: oklch(73.36% 0.1646 17.5);
+  --destructive-foreground: oklch(25.9% 0.047 219);
   --border: oklch(48.6% 0.058 240);
   --input: oklch(25.9% 0.047 219);
-  --ring: oklch(92.8% 0.058 214);
+  --ring: oklch(92.2% 0.0211 79.1);
 
-  --hover: oklch(43.2% 0.079 220);
+  --hover: oklch(50.95% 0.0954 223.7);
   --hover-foreground: oklch(100% 0 0);
 
   --success: oklch(73.9% 0.152 167);
   --success-foreground: oklch(25.9% 0.047 219);
-  --warning: oklch(83.7% 0.164 84);
+  --warning: oklch(83.69% 0.1644 84.4);
   --warning-foreground: oklch(25.9% 0.047 219);
   --info: oklch(87.2% 0.101 216);
   --info-foreground: oklch(25.9% 0.047 219);
 
-  --brand-secondary: oklch(70.5% 0.193 39);
-  --brand-secondary-foreground: oklch(100% 0 0);
-  --brand-secondary-text: oklch(75.5% 0.154 42);
+  --brand-secondary: oklch(92.2% 0.0211 79.1);
+  --brand-secondary-foreground: oklch(25.9% 0.047 219);
+  --brand-secondary-text: oklch(92.2% 0.0211 79.1);
 }
 
-/* Base styles */
-* {
-  border-color: var(--border);
-}
+/*
+ * Base styles live in Tailwind's base layer so that utility classes
+ * (border-l-foreground, font-semibold, ...) override them. Consumers import
+ * this file after Tailwind, so within the base layer these rules follow
+ * Tailwind's preflight reset.
+ */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-code, pre {
-  font-family: var(--font-noto-sans-mono), monospace;
-}
+  code, pre {
+    font-family: var(--font-noto-sans-mono), monospace;
+  }
 
-button,
-[role="button"],
-label,
-.badge,
-nav,
-[role="navigation"],
-[role="menu"],
-[role="menuitem"],
-[role="tab"],
-[role="tablist"],
-th,
-thead,
-dt,
-legend,
-.alert-title,
-input[type="submit"],
-input[type="button"],
-select,
-[role="combobox"] {
-  font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
-  font-weight: 500;
+  button,
+  [role="button"],
+  label,
+  .badge,
+  nav,
+  [role="navigation"],
+  [role="menu"],
+  [role="menuitem"],
+  [role="tab"],
+  [role="tablist"],
+  th,
+  thead,
+  dt,
+  legend,
+  .alert-title,
+  input[type="submit"],
+  input[type="button"],
+  select,
+  [role="combobox"] {
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+  }
 }
 
 /* Folder tabs - remove bottom border on active tab */
