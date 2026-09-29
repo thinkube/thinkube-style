@@ -6,6 +6,9 @@
 // Written by brand/build_icons.mjs; change the brand scripts, not this file.
 // The name of every icon in public/icons/, as <TkBrandIcon icon="..."> takes it.
 
+/** Fingerprint of the icon files; TkBrandIcon adds it to each icon address. */
+export const iconVersion = "790668b96b24"
+
 export const logoIcons = [
   "tk_full_logo",
   "tk_logo",

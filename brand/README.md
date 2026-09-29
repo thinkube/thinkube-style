@@ -12,8 +12,12 @@ scripts in this folder, not the SVG files in `public/icons/`.
 | `lucide/<name>.svg` | `build_icons.mjs`, `add_lucide.mjs` | Lucide icons stored in `lucide/` |
 | `chars/number-<n>.svg`, `chars/lower-<x>.svg`, `chars/upper-<x>.svg` | `build_icons.mjs` | outlines in `chars.json`, from `build_chars.py` |
 
-`build_icons.mjs` also writes `lib/brand-icons.ts`, the name of every icon in
-`public/icons/`; the Icons page of the style guide lists them from it.
+`build_icons.mjs` also writes `lib/brand-icons.ts`: the name of every icon in
+`public/icons/`, which the Icons page lists, and `iconVersion`, a fingerprint
+of all the files there. `TkBrandIcon` loads each icon at
+`/icons/<name>.svg?v=<iconVersion>`, so a changed drawing has a new address and
+browsers load it instead of a cached copy. Run `build_icons.mjs` after
+`build_logo.py` too, so the fingerprint covers the logos.
 
 The colour palette is generated too: `build_palette.mjs` writes the palette
 block in `styles.css`, `tailwind-palette.css` and `lib/palette.ts` from the

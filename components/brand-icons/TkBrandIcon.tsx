@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { iconVersion } from "@/lib/brand-icons"
+
 interface TkBrandIconProps {
   icon: string
   alt: string
@@ -21,8 +23,8 @@ export function TkBrandIcon({ icon, alt, size = 20, className = "", color }: TkB
         width: size,
         height: size,
         backgroundColor: color || "currentColor",
-        maskImage: `url(/icons/${icon}.svg)`,
-        WebkitMaskImage: `url(/icons/${icon}.svg)`,
+        maskImage: `url(/icons/${icon}.svg?v=${iconVersion})`,
+        WebkitMaskImage: `url(/icons/${icon}.svg?v=${iconVersion})`,
         maskSize: "contain",
         WebkitMaskSize: "contain",
         maskRepeat: "no-repeat",

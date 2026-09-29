@@ -12,7 +12,8 @@
 // a program that needs a file in another colour gets one from --color.
 //
 // Usage: node brand/build_icons.mjs [--color #rrggbb] [--out DIR]
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -52,6 +53,22 @@ function main() {
   }
 }
 
+// A fingerprint of every file in the folder, logos included. Pages load
+// icons at /icons/<name>.svg?v=<fingerprint>, so a changed drawing has a new
+// address and no browser keeps showing a cached old one.
+function iconFingerprint(dir) {
+  const hash = createHash('sha256');
+  const walk = (d) => {
+    for (const name of readdirSync(d).sort()) {
+      const path = join(d, name);
+      if (statSync(path).isDirectory()) walk(path);
+      else hash.update(path.slice(dir.length)).update(readFileSync(path));
+    }
+  };
+  walk(dir);
+  return hash.digest('hex').slice(0, 12);
+}
+
 // The logos are drawn by build_logo.py into the same folder.
 function iconList(lucide, chars) {
   const logos = readdirSync(DEFAULT_OUT).filter((f) => /^tk_.*logo\.svg$/.test(f)).map((f) => f.slice(0, -4)).sort();
@@ -63,6 +80,9 @@ function iconList(lucide, chars) {
 
 // Written by brand/build_icons.mjs; change the brand scripts, not this file.
 // The name of every icon in public/icons/, as <TkBrandIcon icon="..."> takes it.
+
+/** Fingerprint of the icon files; TkBrandIcon adds it to each icon address. */
+export const iconVersion = "${iconFingerprint(DEFAULT_OUT)}"
 
 export const logoIcons = ${list(logos)} as const
 
