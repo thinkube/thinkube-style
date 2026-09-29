@@ -22,7 +22,7 @@ import { TkAppLayout } from '@/components/TkAppLayout';
 import type { TkNavItem } from '@/components/TkAppLayout';
 import { TkThemeToggle } from '@/components/theme';
 import { TkToaster } from '@/components/feedback';
-import { LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings, Activity, BarChart3, Wrench, Rocket, Droplets, Ruler } from 'lucide-react';
+import { LayoutDashboard, Component, Shield, Palette, FileText, Bell, Layers, Container, Sliders, Settings, Activity, BarChart3, Wrench, Rocket, Droplets, Ruler, Shapes } from 'lucide-react';
 
 import HomePage from './page';
 import ButtonsBadgesPage from './buttons-badges/page';
@@ -39,6 +39,7 @@ import VerticalNavDemoPage from './vertical-nav-demo/page';
 import InstallationProgressDemoPage from './installation-progress-demo/page';
 import InstallerWelcomePage from './installer-welcome/page';
 import ColorsPage from './colors/page';
+import IconsPage from './icons/page';
 import TestMinimalPage from './test-minimal/page';
 
 const navigationItems: TkNavItem[] = [
@@ -64,6 +65,7 @@ const navigationItems: TkNavItem[] = [
       { id: "data-viz", label: "Data Viz", lucideIcon: BarChart3, href: "/data-viz" },
       { id: "utilities", label: "Utilities", lucideIcon: Wrench, href: "/utilities" },
       { id: "colors", label: "Colors", lucideIcon: Droplets, href: "/colors" },
+      { id: "icons", label: "Icons", lucideIcon: Shapes, href: "/icons" },
     ],
   },
   {
@@ -135,6 +137,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/data-viz" element={<DataVizPage />} />
             <Route path="/utilities" element={<UtilitiesPage />} />
             <Route path="/colors" element={<ColorsPage />} />
+            <Route path="/icons" element={<IconsPage />} />
             <Route path="/brand-icons" element={<BrandIconsPage />} />
             <Route path="/vertical-nav-demo" element={<VerticalNavDemoPage />} />
             <Route path="/installation-progress-demo" element={<InstallationProgressDemoPage />} />

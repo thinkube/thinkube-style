@@ -5,6 +5,8 @@
 //   tk_<name>.svg            service icons drawn in icons.mjs
 //   lucide/<name>.svg        every Lucide icon stored in brand/lucide/
 //   chars/<key>.svg          every character in brand/chars.json
+// and, when writing to public/icons/, lib/brand-icons.ts: the name of every
+// icon there, as TkBrandIcon takes it, for pages that list them.
 //
 // The files are one colour. Web pages tint them with a CSS mask (TkBrandIcon);
 // a program that needs a file in another colour gets one from --color.
@@ -42,6 +44,34 @@ function main() {
   for (const [key, d] of Object.entries(chars)) writeFileSync(join(out, 'chars', `${key}.svg`), charToSVG(key, d, color));
 
   console.log(`wrote ${NAMES.length} service icons, ${lucide.length} Lucide icons and ${Object.keys(chars).length} characters to ${out}`);
+
+  if (out === DEFAULT_OUT) {
+    const listPath = join(here, '..', 'lib', 'brand-icons.ts');
+    writeFileSync(listPath, iconList(lucide, Object.keys(chars)));
+    console.log(`wrote the icon names to ${listPath}`);
+  }
+}
+
+// The logos are drawn by build_logo.py into the same folder.
+function iconList(lucide, chars) {
+  const logos = readdirSync(DEFAULT_OUT).filter((f) => /^tk_.*logo\.svg$/.test(f)).map((f) => f.slice(0, -4)).sort();
+  const list = (names) => JSON.stringify(names, null, 2);
+  return `/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+// Written by brand/build_icons.mjs; change the brand scripts, not this file.
+// The name of every icon in public/icons/, as <TkBrandIcon icon="..."> takes it.
+
+export const logoIcons = ${list(logos)} as const
+
+export const serviceIcons = ${list(NAMES.map((n) => `tk_${n}`))} as const
+
+export const lucideIcons = ${list([...lucide].sort().map((n) => `lucide/${n}`))} as const
+
+export const charIcons = ${list(chars.map((k) => `chars/${k}`))} as const
+`;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) main();
