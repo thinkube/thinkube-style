@@ -15,7 +15,7 @@ export function TkPageWrapper({
   description?: string;
 }) {
   return (
-    <div className="space-y-6 p-8">
+    <div className="space-y-6 p-4 md:p-8">
       {(title || description) && (
         <div>
           {title && (
