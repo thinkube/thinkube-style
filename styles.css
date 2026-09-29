@@ -80,7 +80,7 @@
    * Dark palette shared with the Thinkube IDE theme (Thinkube Dark) and the
    * JupyterLab theme: #004051 background (editor, notebook area), #003240
    * cards (side bar, cells), #005a6e muted surfaces, #00718e hover,
-   * #002933 inputs, #40647d borders. Primary is the icon cream #ede4d6,
+   * #658d9d field borders, #40647d borders. Primary is the icon cream #ede4d6,
    * with #002933 text on it.
    *
    * Headings are cream, like the logo; body text is white and descriptions
@@ -108,7 +108,7 @@
   --destructive-foreground: oklch(100% 0 0);
   --destructive-fill: oklch(50.54% 0.1905 27.5);
   --border: oklch(48.6% 0.058 240);
-  --input: oklch(25.9% 0.047 219);
+  --input: oklch(61.98% 0.0503 224.7);
   --ring: oklch(92.2% 0.0211 79.1);
 
   --hover: oklch(50.95% 0.0954 223.7);
