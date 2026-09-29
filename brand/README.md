@@ -12,6 +12,10 @@ scripts in this folder, not the SVG files in `public/icons/`.
 | `lucide/<name>.svg` | `build_icons.mjs`, `add_lucide.mjs` | Lucide icons stored in `lucide/` |
 | `chars/number-<n>.svg`, `chars/lower-<x>.svg`, `chars/upper-<x>.svg` | `build_icons.mjs` | outlines in `chars.json`, from `build_chars.py` |
 
+The colour palette is generated too: `build_palette.mjs` writes the palette
+block in `styles.css`, `tailwind-palette.css` and `lib/palette.ts` from the
+logo teal and the icon cream (see the Palette section of the main README).
+
 Every icon is a hexagon with a symbol cut out of it, and all share one set of
 rules: the same hexagon, one line thickness, round line ends.
 
@@ -31,6 +35,9 @@ node brand/add_lucide.mjs git-branch cloud-upload
 
 # Character outlines, only after changing build_chars.py or its font
 python3 brand/build_chars.py && node brand/build_icons.mjs
+
+# Colour palette (needs Node)
+node brand/build_palette.mjs
 ```
 
 `add_lucide.mjs` downloads the icons at the `lucide-react` version in

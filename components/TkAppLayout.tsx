@@ -51,10 +51,10 @@ export function TkAppLayout({
       />
 
       <main className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-16 border-b border-border bg-card flex items-center justify-between px-6">
+        <header className="h-16 shadow-lg bg-background border-b border-border flex items-center justify-between px-6">
           <div className="flex items-center gap-4">
             {topBarLeftContent}
-            <h1 className="text-lg font-semibold">{topBarTitle}</h1>
+            <h1 className="text-xl font-bold">{topBarTitle}</h1>
           </div>
           <div className="flex items-center gap-2">
             {topBarContent}

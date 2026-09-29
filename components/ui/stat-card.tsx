@@ -41,10 +41,10 @@ const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
   ) => {
     const variantStyles = {
       default: "",
-      primary: "border-primary/50 bg-primary/5",
-      success: "border-success/50 bg-success/5",
-      warning: "border-warning/50 bg-warning/5",
-      destructive: "border-destructive/50 bg-destructive/5",
+      primary: "border-primary/40 border-l-4 border-l-primary bg-primary/5",
+      success: "border-success/40 border-l-4 border-l-success bg-success/10",
+      warning: "border-warning/60 border-l-4 border-l-warning bg-warning/25",
+      destructive: "border-destructive/40 border-l-4 border-l-destructive bg-destructive/10",
     };
 
     const iconColorStyles = {

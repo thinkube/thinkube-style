@@ -217,7 +217,7 @@ export default function CardsDataPage() {
             </TkCardFooter>
           </TkCard>
 
-          <TkCard className="border-destructive/50">
+          <TkCard className="border-destructive/40 border-l-4 border-l-destructive">
             <TkCardHeader>
               <div className="flex items-start justify-between">
                 <div>

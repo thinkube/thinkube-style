@@ -134,7 +134,7 @@ export function TkComponentCard<T extends TkComponentData>({
               onClick={() => onUninstall(component)}
               intent="secondary"
               size="sm"
-              className="gap-2 text-destructive hover:bg-destructive hover:text-destructive-foreground"
+              className="gap-2 text-destructive hover:bg-[var(--destructive-fill)] hover:text-destructive-foreground"
             >
               <Trash2 className="w-4 h-4" />
               Uninstall

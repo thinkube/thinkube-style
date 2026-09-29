@@ -32,19 +32,19 @@ export type AnsibleLogType =
 export function getAnsibleLogClassName(type: AnsibleLogType): string {
   switch (type) {
     case 'task':
-      return 'text-info font-semibold';
+      return 'text-foreground font-semibold border-l-4 border-info pl-2';
     case 'play':
       return 'text-primary font-semibold';
     case 'ok':
-      return 'text-success';
+      return 'text-foreground border-l-4 border-success pl-2';
     case 'changed':
-      return 'text-warning';
+      return 'text-foreground border-l-4 border-warning pl-2';
     case 'skipped':
       return 'text-muted-foreground opacity-60';
     case 'failed':
-      return 'text-destructive';
+      return 'text-foreground border-l-4 border-destructive pl-2';
     case 'error':
-      return 'text-destructive font-semibold';
+      return 'text-foreground font-semibold border-l-4 border-destructive pl-2';
     case 'start':
     case 'complete':
       return 'text-primary font-semibold';

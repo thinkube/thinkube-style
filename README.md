@@ -104,22 +104,51 @@ All components use the CSS variables in `styles.css`. Each has a light value
 on it:
 
 ```css
---primary              /* Thinkube teal */
---brand-secondary      /* Thinkube orange (#FF6B35), with white on it */
---brand-secondary-text /* orange as text or a thin line */
+--primary              /* logo teal #006680 in light, icon cream #ede4d6 in dark */
+--brand-secondary      /* brand marks: selected menu bar, active tab */
+--heading              /* headings: text colour in light, cream in dark */
 --success              /* green states */
 --warning              /* yellow states */
---destructive          /* red states */
+--destructive          /* red states; --destructive-fill for a red fill with white text */
 --info                 /* blue states */
 --background, --foreground, --card, --popover, --secondary,
---muted, --accent, --border, --input, --ring, --radius
+--muted, --accent, --hover, --border, --input, --ring, --radius
 ```
 
-`--secondary` and `--accent` are neutral surfaces, not the orange. The dark
-values follow the Thinkube Dark theme of the IDE. The Tailwind theme
-(`app/globals.css`) maps each variable to a `--color-*` name, for example
-`--color-primary` and `--color-brand-secondary`, so Tailwind classes such as
-`bg-primary` use them.
+State colours are never used for text. They draw tints, bars, borders,
+icons, dots and button fills; the text beside them keeps the normal text
+colour. The Tailwind theme (`app/globals.css`) maps each variable to a
+`--color-*` name, so classes such as `bg-primary` use them.
+
+### Palette
+
+`brand/build_palette.mjs` builds the palette from the logo teal and the icon
+cream and writes it to three places: a block in `styles.css`,
+`tailwind-palette.css` and `lib/palette.ts`. Change the script and run it;
+do not edit the generated values.
+
+| Tokens | Theme | Use |
+|---|---|---|
+| `--tk-teal-50` … `--tk-teal-950` | fixed | tints and shades of the logo teal |
+| `--tk-sand-50` … `--tk-sand-950` | fixed | the icon cream through caramel to brown |
+| `--tk-tide-1` … `7`, `--tk-dusk-1` … `7` | fixed | gradients from the teal to yellow, and to pink |
+| `--chart-1` … `--chart-8` | light / dark | chart series, in a fixed order |
+| `--seq-1` … `--seq-7` | light / dark | amounts, low to high |
+| `--div-1` … `--div-7` | light / dark | two sides of a baseline, grey middle |
+
+Use them from CSS (`var(--chart-3)`), from Tailwind after importing
+`thinkube-style/tailwind-palette.css` next to `tailwindcss` (`bg-tk-teal-500`,
+`fill-chart-3`), or from code:
+
+```ts
+import { chartVars, seqVars } from "thinkube-style/lib/palette"
+// <Bar fill={chartVars[0]} /> follows the light and dark themes
+```
+
+Chart series take the slots in order, never skipping or cycling; a ninth
+series goes into "Other". The script checks the chart colours (lightness,
+colour strength, 3:1 on the card, and neighbours apart for colour-blind
+readers) and writes nothing if a check fails.
 
 ### Typography
 

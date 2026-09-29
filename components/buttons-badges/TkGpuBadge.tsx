@@ -23,7 +23,7 @@ export function TkGpuBadge({ gpuCount, size = "base", className = "" }: TkGpuBad
 
   return (
     <TkBadge
-      className={`${sizeClasses[size]} border-warning/40 bg-warning/15 text-warning font-semibold ${className}`}
+      className={`${sizeClasses[size]} border-warning bg-warning/25 text-foreground font-semibold ${className}`}
     >
       {gpuCount} GPU{gpuCount > 1 ? "s" : ""}
     </TkBadge>

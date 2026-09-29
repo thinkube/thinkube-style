@@ -16,6 +16,7 @@
 @import "@fontsource/noto-sans-mono/700.css";
 
 @import "../styles.css";
+@import "../tailwind-palette.css";
 
 @variant dark (.dark &);
 

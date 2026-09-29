@@ -154,7 +154,7 @@ export default function ModalsOverlaysPage() {
                     </div>
                     <div>
                       <TkLabel className="text-sm font-medium">Status</TkLabel>
-                      <p className="text-sm text-[var(--color-success)]">Healthy</p>
+                      <p className="text-sm inline-flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-[var(--color-success)]" />Healthy</p>
                     </div>
                     <div>
                       <TkLabel className="text-sm font-medium">Type</TkLabel>
@@ -290,7 +290,7 @@ export default function ModalsOverlaysPage() {
                       <TooltipTrigger asChild>
                         <span className="inline-flex items-center gap-1 cursor-help">
                           <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
-                          <span className="text-[var(--color-success)]">Healthy</span>
+                          <span>Healthy</span>
                         </span>
                       </TooltipTrigger>
                       <TooltipContent>

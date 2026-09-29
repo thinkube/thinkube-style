@@ -93,7 +93,7 @@ export function TkVerticalNav({
     }
   }
 
-  const activeClass = "bg-secondary text-foreground font-semibold border-l-4 border-l-foreground"
+  const activeClass = "bg-secondary text-foreground font-semibold border-l-4 border-l-[color:var(--brand-secondary)]"
   const inactiveClass = "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
 
   const renderNavItem = (item: TkNavItem, isChild = false) => {
@@ -134,7 +134,7 @@ export function TkVerticalNav({
         {!isCollapsed && (
           <div className="flex items-center gap-2">
             <TkBrandIcon icon={logoIcon} alt={logoText} size={32} />
-            <span className="font-semibold">{logoText}</span>
+            <span className="font-semibold text-[color:var(--heading)]">{logoText}</span>
           </div>
         )}
         {isCollapsed && <TkBrandIcon icon={logoIcon} alt={logoText} size={32} className="mx-auto" />}

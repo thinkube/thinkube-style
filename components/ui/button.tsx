@@ -15,14 +15,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/80",
+          "bg-primary text-primary-foreground shadow hover:bg-[color-mix(in_oklab,var(--primary)_85%,black)]",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
+          "bg-[var(--destructive-fill)] text-destructive-foreground shadow-sm hover:bg-[color-mix(in_oklab,var(--destructive-fill)_85%,black)]",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-hover/30 hover:text-primary hover:border-primary",
+          "border border-input bg-background shadow-sm hover:bg-secondary",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/70",
-        ghost: "text-foreground hover:bg-hover/30 hover:text-primary",
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-[color-mix(in_oklab,var(--secondary)_85%,black)]",
+        ghost: "text-foreground hover:bg-secondary",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

@@ -15,13 +15,13 @@ const alertVariants = cva(
       variant: {
         default: "bg-background text-foreground",
         destructive:
-          "border-destructive/50 bg-destructive/5 text-destructive [&>svg]:text-destructive",
+          "border-destructive/40 border-l-4 border-l-destructive bg-destructive/10 text-foreground [&>svg]:text-destructive",
         info:
-          "border-info/50 bg-info/5 text-info [&>svg]:text-info",
+          "border-info/40 border-l-4 border-l-info bg-info/10 text-foreground [&>svg]:text-info",
         warning:
-          "border-warning/50 bg-warning/5 text-warning [&>svg]:text-warning",
+          "border-warning/60 border-l-4 border-l-warning bg-warning/25 text-foreground [&>svg]:text-warning",
         success:
-          "border-success/50 bg-success/5 text-success [&>svg]:text-success",
+          "border-success/40 border-l-4 border-l-success bg-success/10 text-foreground [&>svg]:text-success",
       },
     },
     defaultVariants: {

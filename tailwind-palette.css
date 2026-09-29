@@ -1,0 +1,65 @@
+/*
+ * Written by brand/build_palette.mjs; change the script, not this file.
+ * Tailwind colour names for the palette tokens in styles.css: import it
+ * after tailwindcss to write bg-tk-teal-500, text-chart-3, fill-seq-7, ...
+ */
+@theme inline {
+  --color-tk-teal-50: var(--tk-teal-50);
+  --color-tk-teal-100: var(--tk-teal-100);
+  --color-tk-teal-200: var(--tk-teal-200);
+  --color-tk-teal-300: var(--tk-teal-300);
+  --color-tk-teal-400: var(--tk-teal-400);
+  --color-tk-teal-500: var(--tk-teal-500);
+  --color-tk-teal-600: var(--tk-teal-600);
+  --color-tk-teal-700: var(--tk-teal-700);
+  --color-tk-teal-800: var(--tk-teal-800);
+  --color-tk-teal-900: var(--tk-teal-900);
+  --color-tk-teal-950: var(--tk-teal-950);
+  --color-tk-sand-50: var(--tk-sand-50);
+  --color-tk-sand-100: var(--tk-sand-100);
+  --color-tk-sand-200: var(--tk-sand-200);
+  --color-tk-sand-300: var(--tk-sand-300);
+  --color-tk-sand-400: var(--tk-sand-400);
+  --color-tk-sand-500: var(--tk-sand-500);
+  --color-tk-sand-600: var(--tk-sand-600);
+  --color-tk-sand-700: var(--tk-sand-700);
+  --color-tk-sand-800: var(--tk-sand-800);
+  --color-tk-sand-900: var(--tk-sand-900);
+  --color-tk-sand-950: var(--tk-sand-950);
+  --color-tk-tide-1: var(--tk-tide-1);
+  --color-tk-tide-2: var(--tk-tide-2);
+  --color-tk-tide-3: var(--tk-tide-3);
+  --color-tk-tide-4: var(--tk-tide-4);
+  --color-tk-tide-5: var(--tk-tide-5);
+  --color-tk-tide-6: var(--tk-tide-6);
+  --color-tk-tide-7: var(--tk-tide-7);
+  --color-tk-dusk-1: var(--tk-dusk-1);
+  --color-tk-dusk-2: var(--tk-dusk-2);
+  --color-tk-dusk-3: var(--tk-dusk-3);
+  --color-tk-dusk-4: var(--tk-dusk-4);
+  --color-tk-dusk-5: var(--tk-dusk-5);
+  --color-tk-dusk-6: var(--tk-dusk-6);
+  --color-tk-dusk-7: var(--tk-dusk-7);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-seq-1: var(--seq-1);
+  --color-seq-2: var(--seq-2);
+  --color-seq-3: var(--seq-3);
+  --color-seq-4: var(--seq-4);
+  --color-seq-5: var(--seq-5);
+  --color-seq-6: var(--seq-6);
+  --color-seq-7: var(--seq-7);
+  --color-div-1: var(--div-1);
+  --color-div-2: var(--div-2);
+  --color-div-3: var(--div-3);
+  --color-div-4: var(--div-4);
+  --color-div-5: var(--div-5);
+  --color-div-6: var(--div-6);
+  --color-div-7: var(--div-7);
+}

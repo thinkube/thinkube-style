@@ -146,7 +146,7 @@ export function TkServiceCard<T extends TkServiceData>({
     healthStatus === "healthy"
       ? "border-primary/20"
       : healthStatus === "unhealthy"
-        ? "border-destructive/50"
+        ? "border-destructive/40 border-l-4 border-l-destructive"
         : ""
 
   // Resolve icon
@@ -336,13 +336,12 @@ export function TkServiceCard<T extends TkServiceData>({
           <div className="space-y-2 text-sm text-muted-foreground">
             <div className="flex justify-between">
               <span>Pods:</span>
-              <span
-                className={
-                  service.podStatus.includes("Running")
-                    ? "text-[var(--color-success)]"
-                    : "text-[var(--color-error)]"
-                }
-              >
+              <span className="inline-flex items-center gap-1 text-foreground">
+                <span
+                  className={`h-2 w-2 rounded-full ${
+                    service.podStatus.includes("Running") ? "bg-success" : "bg-destructive"
+                  }`}
+                />
                 {service.podStatus}
               </span>
             </div>

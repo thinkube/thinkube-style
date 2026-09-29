@@ -298,10 +298,10 @@ export default function FeedbackPage() {
             </TkAlertDescription>
           </TkAlert>
 
-          <TkAlert className="border-primary/40 bg-primary/5">
+          <TkAlert className="border-primary/40 border-l-4 border-l-primary bg-primary/5">
             <Sparkles className="h-4 w-4 text-primary" />
-            <TkAlertTitle className="text-primary">Custom branded alert</TkAlertTitle>
-            <TkAlertDescription className="text-primary">
+            <TkAlertTitle>Custom branded alert</TkAlertTitle>
+            <TkAlertDescription>
               You can override colors when none of the semantic variants fits.
             </TkAlertDescription>
           </TkAlert>

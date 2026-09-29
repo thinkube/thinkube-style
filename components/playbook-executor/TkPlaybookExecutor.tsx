@@ -545,23 +545,23 @@ Timestamp: ${new Date().toISOString()}
                       <div className="text-lg font-bold">{taskSummary.totalTasks}</div>
                     </TkCardContent>
                   </TkCard>
-                  <TkCard>
+                  <TkCard className="border-l-4 border-l-success">
                     <TkCardContent className="text-center py-2"> {/* @allowed-inline */}
                       <div className="text-xs text-muted-foreground">OK</div>
-                      <div className="text-lg font-bold text-success">{taskSummary.ok}</div>
+                      <div className="text-lg font-bold">{taskSummary.ok}</div>
                     </TkCardContent>
                   </TkCard>
-                  <TkCard>
+                  <TkCard className="border-l-4 border-l-warning">
                     <TkCardContent className="text-center py-2"> {/* @allowed-inline */}
                       <div className="text-xs text-muted-foreground">Changed</div>
-                      <div className="text-lg font-bold text-warning">{taskSummary.changed}</div>
+                      <div className="text-lg font-bold">{taskSummary.changed}</div>
                     </TkCardContent>
                   </TkCard>
                   {taskSummary.failed > 0 && (
-                    <TkCard>
+                    <TkCard className="border-l-4 border-l-destructive">
                       <TkCardContent className="text-center py-2"> {/* @allowed-inline */}
                         <div className="text-xs text-muted-foreground">Failed</div>
-                        <div className="text-lg font-bold text-destructive">{taskSummary.failed}</div>
+                        <div className="text-lg font-bold">{taskSummary.failed}</div>
                       </TkCardContent>
                     </TkCard>
                   )}
@@ -629,9 +629,9 @@ Timestamp: ${new Date().toISOString()}
                   <p className="text-sm text-muted-foreground mb-2">Execution Summary:</p>
                   <div className="text-sm">
                     <p>Total Tasks: {taskSummary.totalTasks}</p>
-                    <p className="text-success">Completed: {taskSummary.completedTasks}</p>
+                    <p className="border-l-4 border-success pl-2">Completed: {taskSummary.completedTasks}</p>
                     {taskSummary.failedTasks > 0 && (
-                      <p className="text-destructive">Failed: {taskSummary.failedTasks}</p>
+                      <p className="border-l-4 border-destructive pl-2">Failed: {taskSummary.failedTasks}</p>
                     )}
                   </div>
                 </div>

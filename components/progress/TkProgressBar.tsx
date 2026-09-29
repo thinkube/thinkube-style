@@ -52,7 +52,7 @@ export function TkProgressBar({
           ) : (
             <Check className="h-4 w-4 text-[var(--color-success)]" />
           )}
-          <span className={isRunning ? "text-foreground" : "text-[var(--color-success)]"}>
+          <span className="text-foreground">
             {currentLabel}
           </span>
         </div>

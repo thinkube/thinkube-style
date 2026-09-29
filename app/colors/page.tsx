@@ -8,6 +8,7 @@
 import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBrandIcon } from "@/components/brand-icons";
+import { PaletteSections } from "./PaletteSections";
 
 interface ColorSwatchProps {
   label: string;
@@ -106,6 +107,8 @@ export default function ColorsPage() {
         </TkCardContent>
       </TkCard>
 
+      <PaletteSections />
+
       {/* Typography colors in context */}
       <TkCard className="mb-8">
         <TkCardHeader>
@@ -116,10 +119,10 @@ export default function ColorsPage() {
             <h3 className="text-lg font-semibold text-foreground">Heading — foreground</h3>
             <p className="text-sm text-muted-foreground mt-1">Body text — muted-foreground</p>
             <p className="text-sm text-primary mt-1">Link or accent — primary</p>
-            <p className="text-sm text-destructive mt-1">Error message — destructive</p>
-            <p className="text-sm text-success mt-1">Success message — success</p>
-            <p className="text-sm text-warning mt-1">Warning message — warning</p>
-            <p className="text-sm text-info mt-1">Info message — info</p>
+            <p className="text-sm mt-1 border-l-4 border-destructive bg-destructive/10 pl-2">Error message — destructive</p>
+            <p className="text-sm mt-1 border-l-4 border-success bg-success/10 pl-2">Success message — success</p>
+            <p className="text-sm mt-1 border-l-4 border-warning bg-warning/25 pl-2">Warning message — warning</p>
+            <p className="text-sm mt-1 border-l-4 border-info bg-info/10 pl-2">Info message — info</p>
           </div>
         </TkCardContent>
       </TkCard>

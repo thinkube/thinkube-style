@@ -26,10 +26,21 @@ export function TkAppHeader({
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
-            <img
-              src={logo}
-              alt={logoAlt}
-              className="h-8 w-8"
+            <div
+              role="img"
+              aria-label={logoAlt}
+              className="h-8 w-8 text-[#006680] dark:text-[#ede4d6]"
+              style={{
+                backgroundColor: "currentColor",
+                maskImage: `url(${logo})`,
+                WebkitMaskImage: `url(${logo})`,
+                maskSize: "contain",
+                WebkitMaskSize: "contain",
+                maskRepeat: "no-repeat",
+                WebkitMaskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskPosition: "center",
+              }}
             />
             <h1 className="text-xl font-bold">{title}</h1>
           </div>

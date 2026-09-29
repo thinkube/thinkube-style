@@ -66,7 +66,7 @@ const TkFolderTabsTrigger = React.forwardRef<
       // Active state
       "data-[state=active]:bg-background data-[state=active]:text-foreground",
       "data-[state=active]:z-10",
-      "data-[state=active]:shadow-sm",
+      "data-[state=active]:shadow-[inset_0_2px_0_var(--brand-secondary)]",
       // Position to overlap with content border
       "mb-[-1px]",
       className

@@ -9,6 +9,7 @@ import { TkCard, TkCardContent, TkCardFooter, TkCardHeader } from "@/components/
 import { TkAlert, TkAlertDescription } from "@/components/feedback"
 import { TkButton } from "@/components/buttons-badges"
 import { TkPageWrapper } from "@/components/utilities"
+import { TkBrandIcon } from "@/components/brand-icons"
 import { Info, CheckCircle2, ChevronRight } from "lucide-react"
 
 export default function Welcome() {
@@ -18,11 +19,7 @@ export default function Welcome() {
         <TkCard className="max-w-2xl shadow-xl">
           <TkCardHeader className="text-center">
             <div className="flex justify-center mb-6">
-              <img
-                src="/tk_full_logo.svg"
-                alt="Thinkube"
-                className="h-32 w-auto"
-              />
+              <TkBrandIcon icon="tk_full_logo" alt="Thinkube" size={128} />
             </div>
 
             <p className="text-lg text-muted-foreground mb-8">
@@ -31,7 +28,7 @@ export default function Welcome() {
           </TkCardHeader>
 
           <TkCardContent className="space-y-8">
-            <TkAlert className="bg-info/10 text-info border-info/20">
+            <TkAlert variant="info">
               <Info className="h-4 w-4" />
               <TkAlertDescription>
                 This installer will guide you through configuring and deploying Thinkube on your Ubuntu systems.
