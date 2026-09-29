@@ -120,6 +120,12 @@ icons, dots and button fills; the text beside them keeps the normal text
 colour. The Tailwind theme (`app/globals.css`) maps each variable to a
 `--color-*` name, so classes such as `bg-primary` use them.
 
+The names are roles: a component asks for `--card` or `--ring`, never for
+a colour. Several roles share one colour in each theme; `styles.css` writes
+each colour once and the other roles point to it (`--ring: var(--primary)`).
+The Colors page of the style guide lists every colour with the roles that
+use it.
+
 ### Palette
 
 `brand/build_palette.mjs` builds the palette from the logo teal and the icon
@@ -133,22 +139,25 @@ do not edit the generated values.
 | `--tk-sand-50` … `--tk-sand-950` | fixed | the icon cream through caramel to brown |
 | `--tk-tide-1` … `7`, `--tk-dusk-1` … `7` | fixed | gradients from the teal to yellow, and to pink |
 | `--chart-1` … `--chart-8` | light / dark | chart series, in a fixed order |
-| `--seq-1` … `--seq-7` | light / dark | amounts, low to high |
-| `--div-1` … `--div-7` | light / dark | two sides of a baseline, grey middle |
+| `--seq-<name>-1` … `7` | light / dark | amounts, low to high: `tide`, `dusk`, `teal`, `sand` |
+| `--div-<name>-1` … `7` | light / dark | two sides of a baseline, grey middle: `brand` (teal and sand), `temperature` (blue and red), `growth` (violet and green) |
+| `--seq-1` … `7`, `--div-1` … `7` | light / dark | the default scales, `tide` and `brand` |
 
 Use them from CSS (`var(--chart-3)`), from Tailwind after importing
 `thinkube-style/tailwind-palette.css` next to `tailwindcss` (`bg-tk-teal-500`,
 `fill-chart-3`), or from code:
 
 ```ts
-import { chartVars, seqVars } from "thinkube-style/lib/palette"
+import { chartVars, seqScales, divScales } from "thinkube-style/lib/palette"
 // <Bar fill={chartVars[0]} /> follows the light and dark themes
+// seqScales.dusk, divScales.temperature: a named scale, low to high
 ```
 
 Chart series take the slots in order, never skipping or cycling; a ninth
 series goes into "Other". The script checks the chart colours (lightness,
 colour strength, 3:1 on the card, and neighbours apart for colour-blind
-readers) and writes nothing if a check fails.
+readers), that every amount scale moves one way in lightness, and that
+every diverging scale has a grey middle; it writes nothing if a check fails.
 
 ### Typography
 

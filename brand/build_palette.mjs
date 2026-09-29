@@ -13,9 +13,12 @@
 //                                        green to yellow, and through blue
 //                                        and violet to pink
 // Roles change with the theme:
-//   --chart-<n>   eight series colours, in a fixed order
-//   --seq-<n>     amounts, low (1) to high (7), on the tide gradient
-//   --div-<n>     two sides of a baseline, teal (1) to sand (7), grey middle
+//   --chart-<n>          eight series colours, in a fixed order
+//   --seq-<name>-<n>     amounts, low (1) to high (7): tide, dusk, teal, sand
+//   --div-<name>-<n>     two sides of a baseline, grey middle (4): brand
+//                        (teal and sand), temperature (blue and red),
+//                        growth (violet and green)
+//   --seq-<n>, --div-<n> the default scales, tide and brand
 //
 // The chart sets are checked before anything is written; a set that fails
 // a check stops the script with the reason.
@@ -147,9 +150,18 @@ function gradient(from, to, n, turn) {
 }
 
 // Tide: teal through green to a light yellow. Dusk: teal through blue and
-// violet to pink. Both start at the logo teal.
+// violet to a light pink. Both start at the logo teal and end light, so
+// either one can show amounts.
 export const tide = gradient(BRAND.teal, '#f9f871', 7, 'down');
-export const dusk = gradient(BRAND.teal, '#d1749c', 7, 'up');
+export const dusk = gradient(BRAND.teal, oklchToHex(0.87, 0.07, 355), 7, 'up');
+
+// Ramps for the arms of the diverging scales that are not brand families.
+// Chroma peaks in the middle steps and fades towards both ends.
+function ramp(hue, peak) {
+  const chroma = [[0.975, 0.015], [0.89, 0.045], [0.74, peak * 0.7], [0.565, peak], [0.39, peak * 0.85], [0.26, peak * 0.6]];
+  return Object.fromEntries(STEPS.map((step, i) => [step, oklchToHex(LIGHTNESS[i], along(chroma, LIGHTNESS[i]), hue)]));
+}
+const blue = ramp(262, 0.16), red = ramp(27, 0.18), violet = ramp(305, 0.15), green = ramp(150, 0.13);
 
 // ---- roles ----
 
@@ -196,16 +208,60 @@ export function checkChart(mode) {
   return faults;
 }
 
-// Amounts: light to dark on a light page, dark to light on a dark one, so
-// the highest value always stands out most.
-const tideLowToHigh = [...tide].reverse();
-export const SEQUENTIAL = { light: tideLowToHigh, dark: tide };
-
-// Two sides of a baseline: teal below, sand above, a neutral grey between.
-export const DIVERGING = {
-  light: [teal[800], teal[600], teal[300], oklchToHex(0.86, 0, 0), sand[300], sand[600], sand[800]],
-  dark: [teal[200], teal[400], teal[600], oklchToHex(0.5, 0, 0), sand[600], sand[400], sand[200]],
+// Amounts, low to high. On a light page low is light and high is dark; on
+// a dark page the other way round, so the highest value always stands out.
+// The first set is the default, also written as --seq-1 … --seq-7.
+const rev = (a) => [...a].reverse();
+const steps = (f, list) => list.map((k) => f[k]);
+export const SEQUENTIAL = {
+  tide: { light: rev(tide), dark: tide },
+  dusk: { light: rev(dusk), dark: dusk },
+  teal: { light: steps(teal, [200, 300, 400, 500, 600, 700, 800]), dark: steps(teal, [800, 700, 600, 500, 400, 300, 200]) },
+  sand: { light: steps(sand, [200, 300, 400, 500, 600, 700, 800]), dark: steps(sand, [800, 700, 600, 500, 400, 300, 200]) },
 };
+
+// Two sides of a baseline with a neutral grey between; each side gets
+// stronger away from the middle. The first set is the default, also
+// written as --div-1 … --div-7.
+function diverging(a, b) {
+  return {
+    light: [a[800], a[600], a[300], oklchToHex(0.86, 0, 0), b[300], b[600], b[800]],
+    dark: [a[200], a[400], a[600], oklchToHex(0.5, 0, 0), b[600], b[400], b[200]],
+  };
+}
+export const DIVERGING = {
+  brand: diverging(teal, sand),
+  temperature: diverging(blue, red),
+  growth: diverging(violet, green),
+};
+
+// A scale for amounts moves one way in lightness, in clear steps.
+const SEQ_STEP_MIN = 0.04;
+export function checkSequential(name, mode) {
+  const L = SEQUENTIAL[name][mode].map((h) => hexToOklch(h)[0]);
+  const faults = [];
+  for (let i = 0; i + 1 < L.length; i++) {
+    const d = mode === 'light' ? L[i] - L[i + 1] : L[i + 1] - L[i];
+    if (d < SEQ_STEP_MIN) faults.push(`sequential ${name} ${mode}: step ${i + 1} to ${i + 2} changes lightness by ${d.toFixed(3)}, less than ${SEQ_STEP_MIN}`);
+  }
+  return faults;
+}
+
+// A diverging scale has a colourless middle, and each side moves away
+// from the middle's lightness step by step.
+export function checkDiverging(name, mode) {
+  const set = DIVERGING[name][mode], mid = (set.length - 1) / 2;
+  const faults = [];
+  if (hexToOklch(set[mid])[1] > 0.005) faults.push(`diverging ${name} ${mode}: the middle ${set[mid]} is not grey`);
+  const Lm = hexToOklch(set[mid])[0];
+  for (const side of [-1, 1]) {
+    for (let k = 1; k <= mid; k++) {
+      const near = Math.abs(hexToOklch(set[mid + side * (k - 1)])[0] - Lm), far = Math.abs(hexToOklch(set[mid + side * k])[0] - Lm);
+      if (k > 1 && far <= near) faults.push(`diverging ${name} ${mode}: ${set[mid + side * k]} is not further from the middle than ${set[mid + side * (k - 1)]}`);
+    }
+  }
+  return faults;
+}
 
 // ---- output ----
 
@@ -213,6 +269,24 @@ const decl = (name, hex) => {
   const [L, C, H] = hexToOklch(hex);
   return `  --${name}: oklch(${(L * 100).toFixed(2)}% ${C.toFixed(4)} ${C < 0.0005 ? 0 : H.toFixed(1)}); /* ${hex} */`;
 };
+const alias = (name, target) => `  --${name}: var(--${target});`;
+
+const SEQ_DEFAULT = Object.keys(SEQUENTIAL)[0], DIV_DEFAULT = Object.keys(DIVERGING)[0];
+const count = (sets) => Object.values(sets)[0].light.length;
+const range = (n) => Array.from({ length: n }, (_, i) => i + 1);
+
+// Every token name, in the order it is written.
+function tokenNames() {
+  return [
+    ...STEPS.map((s) => `tk-teal-${s}`), ...STEPS.map((s) => `tk-sand-${s}`),
+    ...range(tide.length).map((i) => `tk-tide-${i}`), ...range(dusk.length).map((i) => `tk-dusk-${i}`),
+    ...range(CHART.length).map((i) => `chart-${i}`),
+    ...range(count(SEQUENTIAL)).map((i) => `seq-${i}`),
+    ...Object.keys(SEQUENTIAL).flatMap((n) => range(count(SEQUENTIAL)).map((i) => `seq-${n}-${i}`)),
+    ...range(count(DIVERGING)).map((i) => `div-${i}`),
+    ...Object.keys(DIVERGING).flatMap((n) => range(count(DIVERGING)).map((i) => `div-${n}-${i}`)),
+  ];
+}
 
 function cssBlock() {
   const fixed = [
@@ -221,25 +295,24 @@ function cssBlock() {
     ...tide.map((h, i) => decl(`tk-tide-${i + 1}`, h)),
     ...dusk.map((h, i) => decl(`tk-dusk-${i + 1}`, h)),
   ];
+  const defaults = [
+    ...range(count(SEQUENTIAL)).map((i) => alias(`seq-${i}`, `seq-${SEQ_DEFAULT}-${i}`)),
+    ...range(count(DIVERGING)).map((i) => alias(`div-${i}`, `div-${DIV_DEFAULT}-${i}`)),
+  ];
   const roles = (mode) => [
     ...CHART.map((s, i) => decl(`chart-${i + 1}`, s[mode])),
-    ...SEQUENTIAL[mode].map((h, i) => decl(`seq-${i + 1}`, h)),
-    ...DIVERGING[mode].map((h, i) => decl(`div-${i + 1}`, h)),
+    ...Object.entries(SEQUENTIAL).flatMap(([n, set]) => set[mode].map((h, i) => decl(`seq-${n}-${i + 1}`, h))),
+    ...Object.entries(DIVERGING).flatMap(([n, set]) => set[mode].map((h, i) => decl(`div-${n}-${i + 1}`, h))),
   ];
   return [
     '/* palette:begin — written by brand/build_palette.mjs; change the script, not this block */',
-    ':root {', ...fixed, '', ...roles('light'), '}', '',
+    ':root {', ...fixed, '', ...defaults, '', ...roles('light'), '}', '',
     '.dark {', ...roles('dark'), '}',
     '/* palette:end */',
   ].join('\n');
 }
 
 function tailwindFile() {
-  const names = [
-    ...STEPS.map((s) => `tk-teal-${s}`), ...STEPS.map((s) => `tk-sand-${s}`),
-    ...tide.map((_, i) => `tk-tide-${i + 1}`), ...dusk.map((_, i) => `tk-dusk-${i + 1}`),
-    ...CHART.map((_, i) => `chart-${i + 1}`), ...SEQUENTIAL.light.map((_, i) => `seq-${i + 1}`), ...DIVERGING.light.map((_, i) => `div-${i + 1}`),
-  ];
   return [
     '/*',
     ' * Written by brand/build_palette.mjs; change the script, not this file.',
@@ -247,7 +320,7 @@ function tailwindFile() {
     ' * after tailwindcss to write bg-tk-teal-500, text-chart-3, fill-seq-7, ...',
     ' */',
     '@theme inline {',
-    ...names.map((n) => `  --color-${n}: var(--${n});`),
+    ...tokenNames().map((n) => `  --color-${n}: var(--${n});`),
     '}',
     '',
   ].join('\n');
@@ -255,6 +328,7 @@ function tailwindFile() {
 
 function tsModule() {
   const obj = (o) => JSON.stringify(o, null, 2);
+  const vars = (sets, prefix) => Object.fromEntries(Object.keys(sets).map((n) => [n, range(count(sets)).map((i) => `var(--${prefix}-${n}-${i})`)]));
   return `/*
  * Copyright Alejandro Martínez Corriá and the Thinkube contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -280,24 +354,36 @@ export const dusk = ${obj(dusk)} as const
 /** Chart series colours in their fixed order; slot 1 is chart[0]. */
 export const chart = ${obj(CHART)} as const
 
-/** Amounts, low to high, per theme. */
+/** Scales for amounts, low to high, per theme. The first is the default. */
 export const sequential = ${obj(SEQUENTIAL)} as const
 
-/** Two sides of a baseline, teal side first, grey middle, per theme. */
+/** Scales for two sides of a baseline, grey middle, per theme. The first is the default. */
 export const diverging = ${obj(DIVERGING)} as const
 
-export const chartVars = ${obj(CHART.map((_, i) => `var(--chart-${i + 1})`))} as const
+export const chartVars = ${obj(range(CHART.length).map((i) => `var(--chart-${i})`))} as const
 
-export const seqVars = ${obj(SEQUENTIAL.light.map((_, i) => `var(--seq-${i + 1})`))} as const
+/** The default scale for amounts (${SEQ_DEFAULT}), low to high. */
+export const seqVars = ${obj(range(count(SEQUENTIAL)).map((i) => `var(--seq-${i})`))} as const
 
-export const divVars = ${obj(DIVERGING.light.map((_, i) => `var(--div-${i + 1})`))} as const
+/** Every scale for amounts by name, low to high. */
+export const seqScales = ${obj(vars(SEQUENTIAL, 'seq'))} as const
+
+/** The default diverging scale (${DIV_DEFAULT}). */
+export const divVars = ${obj(range(count(DIVERGING)).map((i) => `var(--div-${i})`))} as const
+
+/** Every diverging scale by name. */
+export const divScales = ${obj(vars(DIVERGING, 'div'))} as const
 `;
 }
 
 function main() {
-  const faults = ['light', 'dark'].flatMap((mode) => checkChart(mode).map((f) => `${mode}: ${f}`));
+  const faults = [
+    ...['light', 'dark'].flatMap((mode) => checkChart(mode).map((f) => `chart ${mode}: ${f}`)),
+    ...Object.keys(SEQUENTIAL).flatMap((n) => ['light', 'dark'].flatMap((mode) => checkSequential(n, mode))),
+    ...Object.keys(DIVERGING).flatMap((n) => ['light', 'dark'].flatMap((mode) => checkDiverging(n, mode))),
+  ];
   if (faults.length) {
-    console.error('The chart colours fail these checks; nothing was written:\n  ' + faults.join('\n  '));
+    console.error('The palette fails these checks; nothing was written:\n  ' + faults.join('\n  '));
     process.exit(1);
   }
 

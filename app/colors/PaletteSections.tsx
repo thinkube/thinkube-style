@@ -4,7 +4,7 @@
  */
 
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
-import { teal, sand, tide, dusk, chart, chartVars, seqVars, divVars } from "@/lib/palette";
+import { teal, sand, tide, dusk, chart, chartVars, seqScales, divScales } from "@/lib/palette";
 
 function Strip({ label, colors, names }: { label: string; colors: readonly string[]; names: readonly string[] }) {
   return (
@@ -72,8 +72,8 @@ export function PaletteSections() {
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent>
-          <RoleBar label="Tide — teal, green, yellow" vars={tide} note="heatmaps and amounts" />
-          <RoleBar label="Dusk — teal, blue, violet, pink" vars={dusk} note="a second scale" />
+          <RoleBar label="Tide — teal, green, yellow" vars={tide} note="--tk-tide-1 … 7" />
+          <RoleBar label="Dusk — teal, blue, violet, pink" vars={dusk} note="--tk-dusk-1 … 7" />
         </TkCardContent>
       </TkCard>
 
@@ -81,14 +81,41 @@ export function PaletteSections() {
         <TkCardHeader>
           <TkCardTitle>Chart Roles</TkCardTitle>
           <TkCardDescription>
-            These follow the theme — toggle it to compare. Series colours keep their fixed order;
-            amounts run low to high; a diverging scale has a grey middle.
+            These follow the theme — toggle it to compare. Series colours keep their fixed order.
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent>
           <RoleBar label="Series" vars={chartVars} note={chart.map((s) => s.name).join(" · ")} />
-          <RoleBar label="Sequential" vars={seqVars} note="low → high" />
-          <RoleBar label="Diverging" vars={divVars} note="below ← baseline → above" />
+        </TkCardContent>
+      </TkCard>
+
+      <TkCard className="mb-8">
+        <TkCardHeader>
+          <TkCardTitle>Sequential Scales</TkCardTitle>
+          <TkCardDescription>
+            Amounts, low to high: --seq-&lt;name&gt;-1 … 7. The first is the default, also written as
+            --seq-1 … 7. Low is light on a light page and dark on a dark page.
+          </TkCardDescription>
+        </TkCardHeader>
+        <TkCardContent>
+          {Object.entries(seqScales).map(([name, vars], i) => (
+            <RoleBar key={name} label={i === 0 ? `${name} (default)` : name} vars={vars} note="low → high" />
+          ))}
+        </TkCardContent>
+      </TkCard>
+
+      <TkCard className="mb-8">
+        <TkCardHeader>
+          <TkCardTitle>Diverging Scales</TkCardTitle>
+          <TkCardDescription>
+            Two sides of a baseline with a grey middle: --div-&lt;name&gt;-1 … 7. The first is the
+            default, also written as --div-1 … 7.
+          </TkCardDescription>
+        </TkCardHeader>
+        <TkCardContent>
+          {Object.entries(divScales).map(([name, vars], i) => (
+            <RoleBar key={name} label={i === 0 ? `${name} (default)` : name} vars={vars} note="below ← baseline → above" />
+          ))}
         </TkCardContent>
       </TkCard>
     </>

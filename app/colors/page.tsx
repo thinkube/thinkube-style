@@ -9,6 +9,7 @@ import { TkPageWrapper } from "@/components/utilities";
 import { TkCard, TkCardContent, TkCardDescription, TkCardHeader, TkCardTitle } from "@/components/cards-data";
 import { TkBrandIcon } from "@/components/brand-icons";
 import { PaletteSections } from "./PaletteSections";
+import { TokenMap } from "./TokenMap";
 
 interface ColorSwatchProps {
   label: string;
@@ -132,18 +133,17 @@ export default function ColorsPage() {
         <TkCardHeader>
           <TkCardTitle>Dark Mode Icon Color Options</TkCardTitle>
           <TkCardDescription>
-            Switch to dark mode to compare these options. Current default uses the foreground token (near-white).
+            Switch to dark mode to compare these options. The icons use the logo teal in light mode and Soft Parchment (#ede4d6) in dark mode.
           </TkCardDescription>
         </TkCardHeader>
         <TkCardContent>
           {(() => {
             const icons = ["tk_logo", "tk_ai", "tk_dashboard", "tk_code", "tk_data", "tk_devops"];
             const options = [
-              { label: "Current (foreground)", color: undefined, hex: "currentColor" },
+              { label: "Current (teal / Soft Parchment)", color: undefined, hex: "#006680 / #ede4d6" },
               { label: "Warm Cream", color: "#f2ebe0", hex: "#f2ebe0" },
               { label: "Soft Parchment", color: "#ede4d6", hex: "#ede4d6" },
               { label: "Light Sand", color: "#f5efe6", hex: "#f5efe6" },
-              { label: "Old (cyan — for reference)", color: "#d5f6ff", hex: "#d5f6ff" },
             ];
             return (
               <div className="space-y-6">
@@ -175,51 +175,7 @@ export default function ColorsPage() {
         </TkCardContent>
       </TkCard>
 
-      {/* Combined view: all tokens side by side */}
-      <TkCard>
-        <TkCardHeader>
-          <TkCardTitle>All Tokens</TkCardTitle>
-        </TkCardHeader>
-        <TkCardContent>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-            {[
-              { label: "background", v: "--background" },
-              { label: "foreground", v: "--foreground" },
-              { label: "card", v: "--card" },
-              { label: "card-fg", v: "--card-foreground" },
-              { label: "popover", v: "--popover" },
-              { label: "popover-fg", v: "--popover-foreground" },
-              { label: "primary", v: "--primary" },
-              { label: "primary-fg", v: "--primary-foreground" },
-              { label: "secondary", v: "--secondary" },
-              { label: "secondary-fg", v: "--secondary-foreground" },
-              { label: "muted", v: "--muted" },
-              { label: "muted-fg", v: "--muted-foreground" },
-              { label: "accent", v: "--accent" },
-              { label: "accent-fg", v: "--accent-foreground" },
-              { label: "destructive", v: "--destructive" },
-              { label: "destructive-fg", v: "--destructive-foreground" },
-              { label: "border", v: "--border" },
-              { label: "input", v: "--input" },
-              { label: "ring", v: "--ring" },
-              { label: "success", v: "--success" },
-              { label: "success-fg", v: "--success-foreground" },
-              { label: "warning", v: "--warning" },
-              { label: "warning-fg", v: "--warning-foreground" },
-              { label: "info", v: "--info" },
-              { label: "info-fg", v: "--info-foreground" },
-            ].map((token) => (
-              <div key={token.v} className="flex flex-col gap-1">
-                <div
-                  className="h-12 w-full border border-border"
-                  style={{ backgroundColor: `var(${token.v})` }}
-                />
-                <span className="text-[10px] font-medium truncate">{token.label}</span>
-              </div>
-            ))}
-          </div>
-        </TkCardContent>
-      </TkCard>
+      <TokenMap />
     </TkPageWrapper>
   );
 }

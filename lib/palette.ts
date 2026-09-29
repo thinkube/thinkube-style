@@ -55,12 +55,12 @@ export const tide = [
 
 export const dusk = [
   "#006680",
-  "#306a98",
-  "#546ca9",
-  "#766db4",
-  "#976eb4",
-  "#b670ac",
-  "#d1749c"
+  "#41739d",
+  "#6c80b4",
+  "#948ec4",
+  "#ba9dce",
+  "#ddaed3",
+  "#fbc2d6"
 ] as const
 
 /** Chart series colours in their fixed order; slot 1 is chart[0]. */
@@ -107,48 +107,152 @@ export const chart = [
   }
 ] as const
 
-/** Amounts, low to high, per theme. */
+/** Scales for amounts, low to high, per theme. The first is the default. */
 export const sequential = {
-  "light": [
-    "#f9f871",
-    "#bae87b",
-    "#7ed388",
-    "#46bb91",
-    "#05a093",
-    "#00828c",
-    "#006680"
-  ],
-  "dark": [
-    "#006680",
-    "#00828c",
-    "#05a093",
-    "#46bb91",
-    "#7ed388",
-    "#bae87b",
-    "#f9f871"
-  ]
+  "tide": {
+    "light": [
+      "#f9f871",
+      "#bae87b",
+      "#7ed388",
+      "#46bb91",
+      "#05a093",
+      "#00828c",
+      "#006680"
+    ],
+    "dark": [
+      "#006680",
+      "#00828c",
+      "#05a093",
+      "#46bb91",
+      "#7ed388",
+      "#bae87b",
+      "#f9f871"
+    ]
+  },
+  "dusk": {
+    "light": [
+      "#fbc2d6",
+      "#ddaed3",
+      "#ba9dce",
+      "#948ec4",
+      "#6c80b4",
+      "#41739d",
+      "#006680"
+    ],
+    "dark": [
+      "#006680",
+      "#41739d",
+      "#6c80b4",
+      "#948ec4",
+      "#ba9dce",
+      "#ddaed3",
+      "#fbc2d6"
+    ]
+  },
+  "teal": {
+    "light": [
+      "#c3e0ec",
+      "#a1ccdd",
+      "#79b5cb",
+      "#539cb5",
+      "#22829f",
+      "#006680",
+      "#004d61"
+    ],
+    "dark": [
+      "#004d61",
+      "#006680",
+      "#22829f",
+      "#539cb5",
+      "#79b5cb",
+      "#a1ccdd",
+      "#c3e0ec"
+    ]
+  },
+  "sand": {
+    "light": [
+      "#e6d9c5",
+      "#d7c1a0",
+      "#c6a575",
+      "#b3884b",
+      "#9b6b23",
+      "#7f5100",
+      "#613c00"
+    ],
+    "dark": [
+      "#613c00",
+      "#7f5100",
+      "#9b6b23",
+      "#b3884b",
+      "#c6a575",
+      "#d7c1a0",
+      "#e6d9c5"
+    ]
+  }
 } as const
 
-/** Two sides of a baseline, teal side first, grey middle, per theme. */
+/** Scales for two sides of a baseline, grey middle, per theme. The first is the default. */
 export const diverging = {
-  "light": [
-    "#004d61",
-    "#22829f",
-    "#a1ccdd",
-    "#d1d1d1",
-    "#d7c1a0",
-    "#9b6b23",
-    "#613c00"
-  ],
-  "dark": [
-    "#c3e0ec",
-    "#79b5cb",
-    "#22829f",
-    "#636363",
-    "#9b6b23",
-    "#c6a575",
-    "#e6d9c5"
-  ]
+  "brand": {
+    "light": [
+      "#004d61",
+      "#22829f",
+      "#a1ccdd",
+      "#d1d1d1",
+      "#d7c1a0",
+      "#9b6b23",
+      "#613c00"
+    ],
+    "dark": [
+      "#c3e0ec",
+      "#79b5cb",
+      "#22829f",
+      "#636363",
+      "#9b6b23",
+      "#c6a575",
+      "#e6d9c5"
+    ]
+  },
+  "temperature": {
+    "light": [
+      "#183f8c",
+      "#3f71d3",
+      "#a9c5f6",
+      "#d1d1d1",
+      "#f5b0a7",
+      "#ca3c36",
+      "#84090e"
+    ],
+    "dark": [
+      "#cbdcf9",
+      "#84abf2",
+      "#3f71d3",
+      "#636363",
+      "#ca3c36",
+      "#f08a7f",
+      "#f7d0cb"
+    ]
+  },
+  "growth": {
+    "light": [
+      "#552e7a",
+      "#8b5bbc",
+      "#cfb9eb",
+      "#d1d1d1",
+      "#a6d1ae",
+      "#2f8b4b",
+      "#005423"
+    ],
+    "dark": [
+      "#e1d4f3",
+      "#ba9ae0",
+      "#8b5bbc",
+      "#636363",
+      "#2f8b4b",
+      "#81bb8c",
+      "#c7e4cb"
+    ]
+  }
 } as const
 
 export const chartVars = [
@@ -162,6 +266,7 @@ export const chartVars = [
   "var(--chart-8)"
 ] as const
 
+/** The default scale for amounts (tide), low to high. */
 export const seqVars = [
   "var(--seq-1)",
   "var(--seq-2)",
@@ -172,6 +277,47 @@ export const seqVars = [
   "var(--seq-7)"
 ] as const
 
+/** Every scale for amounts by name, low to high. */
+export const seqScales = {
+  "tide": [
+    "var(--seq-tide-1)",
+    "var(--seq-tide-2)",
+    "var(--seq-tide-3)",
+    "var(--seq-tide-4)",
+    "var(--seq-tide-5)",
+    "var(--seq-tide-6)",
+    "var(--seq-tide-7)"
+  ],
+  "dusk": [
+    "var(--seq-dusk-1)",
+    "var(--seq-dusk-2)",
+    "var(--seq-dusk-3)",
+    "var(--seq-dusk-4)",
+    "var(--seq-dusk-5)",
+    "var(--seq-dusk-6)",
+    "var(--seq-dusk-7)"
+  ],
+  "teal": [
+    "var(--seq-teal-1)",
+    "var(--seq-teal-2)",
+    "var(--seq-teal-3)",
+    "var(--seq-teal-4)",
+    "var(--seq-teal-5)",
+    "var(--seq-teal-6)",
+    "var(--seq-teal-7)"
+  ],
+  "sand": [
+    "var(--seq-sand-1)",
+    "var(--seq-sand-2)",
+    "var(--seq-sand-3)",
+    "var(--seq-sand-4)",
+    "var(--seq-sand-5)",
+    "var(--seq-sand-6)",
+    "var(--seq-sand-7)"
+  ]
+} as const
+
+/** The default diverging scale (brand). */
 export const divVars = [
   "var(--div-1)",
   "var(--div-2)",
@@ -181,3 +327,34 @@ export const divVars = [
   "var(--div-6)",
   "var(--div-7)"
 ] as const
+
+/** Every diverging scale by name. */
+export const divScales = {
+  "brand": [
+    "var(--div-brand-1)",
+    "var(--div-brand-2)",
+    "var(--div-brand-3)",
+    "var(--div-brand-4)",
+    "var(--div-brand-5)",
+    "var(--div-brand-6)",
+    "var(--div-brand-7)"
+  ],
+  "temperature": [
+    "var(--div-temperature-1)",
+    "var(--div-temperature-2)",
+    "var(--div-temperature-3)",
+    "var(--div-temperature-4)",
+    "var(--div-temperature-5)",
+    "var(--div-temperature-6)",
+    "var(--div-temperature-7)"
+  ],
+  "growth": [
+    "var(--div-growth-1)",
+    "var(--div-growth-2)",
+    "var(--div-growth-3)",
+    "var(--div-growth-4)",
+    "var(--div-growth-5)",
+    "var(--div-growth-6)",
+    "var(--div-growth-7)"
+  ]
+} as const
