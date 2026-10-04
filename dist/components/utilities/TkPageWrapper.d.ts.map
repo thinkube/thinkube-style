@@ -1,0 +1,1 @@
+{"version":3,"file":"TkPageWrapper.d.ts","sourceRoot":"","sources":["../../../components/utilities/TkPageWrapper.tsx"],"names":[],"mappings":"AAKA,OAAO,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AAElC,wBAAgB,aAAa,CAAC,EAC5B,QAAQ,EACR,KAAK,EACL,WAAW,GACZ,EAAE;IACD,QAAQ,EAAE,SAAS,CAAC;IACpB,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,WAAW,CAAC,EAAE,MAAM,CAAC;CACtB,2CAqBA"}

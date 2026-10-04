@@ -1,0 +1,24 @@
+/*
+ * Copyright Alejandro Martínez Corriá and the Thinkube contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { Button } from "@/components/ui/button"
+import { ComponentProps } from "react"
+
+const intentMap = {
+  primary: "default",
+  secondary: "outline",
+  danger: "destructive",
+  ghost: "ghost",
+} as const
+
+export type TkButtonIntent = keyof typeof intentMap
+
+type TkButtonProps = Omit<ComponentProps<typeof Button>, "variant"> & {
+  intent?: TkButtonIntent
+}
+
+export function TkButton({ intent = "primary", ...props }: TkButtonProps) {
+  return <Button variant={intentMap[intent]} {...props} />
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"TkWarningBadge.js","sourceRoot":"","sources":["../../../components/buttons-badges/TkWarningBadge.tsx"],"names":[],"mappings":";AAAA;;;GAGG;AAEH,OAAO,EAAE,KAAK,EAAE,MAAM,uBAAuB,CAAA;AAQ7C;;;GAGG;AACH,MAAM,UAAU,cAAc,CAAC,EAAE,QAAQ,EAAE,SAAS,GAAG,EAAE,EAAuB;IAC9E,OAAO,CACL,KAAC,KAAK,IAAC,OAAO,EAAC,SAAS,EAAC,SAAS,EAAE,SAAS,YAC1C,QAAQ,GACH,CACT,CAAA;AACH,CAAC"}
