@@ -72,7 +72,14 @@ export const DEFAULTS = {
     a2y: -21.9, b2x: -47.5, b2y: 0.1, c2x: -26.6, c2y: -0.3, a3x: -4.9, a3y: 25.8, b3x: -32.8, b3y: 29.8,
     c3x: -29.1, c3y: 49.3, a4x: 26.6, a4y: -56.2, b4x: 25, b4y: -28.6, c4x: 49.4, c4y: -26.5, d4x: 46.5, d4y: -5.8,
     r4a: 4, r4b: 14, a5x: 11.1, a5y: 2.9, b5x: 29, b5y: 5.1, c5x: 30.1, c5y: 29.8 },
+  llebre: { ex: 70, ey: 0, er: 5 },
 };
+
+// Leaping hare facing right, from the nose clockwise: ear swept back, tail, hind leg, front legs.
+const HARE = 'M90 10C90 -4 78 -14 62 -15C46 -32 18 -58 -2 -68C-12 -72 -16 -62 -8 -56C12 -40 28 -26 40 -16'
+  + 'C18 -22 -14 -26 -40 -20C-62 -14 -76 -4 -80 8C-92 2 -102 14 -94 22C-92 25 -88 26 -86 26'
+  + 'C-92 36 -100 44 -110 50C-118 56 -112 66 -102 62C-86 56 -68 48 -54 40C-36 44 -8 44 14 36'
+  + 'C34 42 60 56 84 62C94 64 96 54 88 50C70 42 56 32 52 24C64 24 80 22 86 18C92 15 92 12 90 10Z';
 
 const BUILD = {
   dashboard: (p) => chip(p.a, p.L),
@@ -179,6 +186,8 @@ const BUILD = {
     ops.push(addLine(rounded([[p.a4x, p.a4y], [p.b4x, p.b4y], [p.c4x, p.c4y], [p.d4x, p.d4y]], [0, p.r4a, p.r4b, 0], false), FINE));
     return ops;
   },
+
+  llebre: (p) => [cut(HARE), add(circle(p.ex, p.ey, p.er))],
 };
 
 export const NAMES = Object.keys(BUILD);

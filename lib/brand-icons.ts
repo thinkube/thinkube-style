@@ -7,7 +7,7 @@
 // The name of every icon in public/icons/, as <TkBrandIcon icon="..."> takes it.
 
 /** Fingerprint of the icon files; TkBrandIcon adds it to each icon address. */
-export const iconVersion = "2f362ea9c0f0"
+export const iconVersion = "bc202a5613c7"
 
 export const logoIcons = [
   "tk_full_logo",
@@ -27,7 +27,8 @@ export const serviceIcons = [
   "tk_vector",
   "tk_artifact",
   "tk_design",
-  "tk_ai"
+  "tk_ai",
+  "tk_llebre"
 ] as const
 
 export const lucideIcons = [
